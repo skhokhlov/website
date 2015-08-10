@@ -21,7 +21,7 @@ app.set('port', 3000 || process.env.PORT);
 
 app.get('/books', function (req, res) {
 
-    feed('books').then(function(response){
+    feed('books', null, function (response) {
         res.send(response);
     });
 });
@@ -31,8 +31,13 @@ app.get('/books/:book', function (req, res) {
         if (err) {
             return res.status(404).send('404');
         }
+        marked(data, {renderer: renderer}, function (err, data) {
+            if (err) {
+                return res.status(500).send('500');
+            }
+            res.status(200).send(data);
+        })
 
-        res.status(200).send(marked(data, {renderer: renderer}));
     });
 });
 
@@ -42,22 +47,19 @@ http.createServer(app).listen(app.get('port'), function () {
     console.log('Server listening on port ' + app.get('port'));
 });
 
+function feed(name, reject, resolve) {
+    var path = './feeds/' + name;
+    var response = {};
+    fs.readdir(path, function (err, files) {
+        if (err) {
+            return reject(err);
+        }
 
-function feed(name) {
-    new Promise(function (resolve, reject) {
-        var path = './feeds/' + name;
-        var response = {};
-        fs.readdir(path, function (err, files) {
-            if (err) {
-                return reject(err);
-            }
-
-            files.forEach(function (element, index) {
-                response[element] = {};
-                response[element].index = index;
-            });
-            resolve(response);
-
+        files.forEach(function (element, index) {
+            response[element] = {};
+            response[element].index = index;
         });
-    })
+        resolve(response);
+
+    });
 }
