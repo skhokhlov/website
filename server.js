@@ -3,6 +3,7 @@ var http = require('http');
 var express = require('express');
 var app = express();
 var marked = require('marked');
+var yaml = require('js-yaml');
 
 var renderer = new marked.Renderer();
 
@@ -27,17 +28,12 @@ app.get('/books', function (req, res) {
 });
 
 app.get('/books/:book', function (req, res) {
-    fs.readFile('./feeds/books/' + req.params.book + '.md', {encoding: 'utf-8'}, function (err, data) {
+    fs.readFile('./build/feeds/books/' + req.params.book + '.md.json', {encoding: 'utf-8'}, function (err, data) {
         if (err) {
             return res.status(404).send('404');
         }
-        marked(data, {renderer: renderer}, function (err, data) {
-            if (err) {
-                return res.status(500).send('500');
-            }
-            res.status(200).send(data);
-        })
 
+        res.send(JSON.parse(data).pageContent);
     });
 });
 
