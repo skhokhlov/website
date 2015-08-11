@@ -1,7 +1,7 @@
 var fs = require('fs');
 var gulp = require('gulp');
-var markdown = require('gulp-markdown');
 
+var jscs = require('gulp-jscs');
 var marked = require('marked');
 var yaml = require('js-yaml');
 
@@ -35,9 +35,9 @@ gulp.task('pages', function () {
                     throw new Error(subErr);
                 }
 
-                //var listOfPages = [];
+                var listOfPages = [];
 
-                subFiles.forEach(function (subElement) {
+                subFiles.forEach(function (subElement, index) {
                     /**
                      * Разборка страницы ленты
                      */
@@ -80,34 +80,46 @@ gulp.task('pages', function () {
                         }
 
                         var build = yaml.safeLoad(params);
-                        //listOfPages.push(JSON.stringify(build));
+                        listOfPages.push(JSON.stringify(build));
                         build.pageContent = marked(content, {renderer: renderer});
 
                         /**
                          * Сохрание скомпилированного файла страницы
                          */
-                        fs.writeFile('./build/feeds/' + element + '/' + subElement + '.json', JSON.stringify(build), {encoding: 'utf-8'}, function (err) {
-                            if (err) {
-                                throw new Error(err);
-                            }
-                        });
+                        fs.writeFile('./build/feeds/' + element + '/' + subElement + '.json', JSON.stringify(build),
+                            {encoding: 'utf-8'}, function (err) {
+                                if (err) {
+                                    throw new Error(err);
+                                }
+                            });
+
+                        /**
+                         * Сохрание массива с параметрами страниц ленты
+                         */
+                        if (listOfPages.length === subFiles.length) {
+                            fs.writeFile('./build/feeds/' + element + '.json', '[' + listOfPages.join() + ']',
+                                {encoding: 'utf-8'}, function (err) {
+                                    if (err) {
+                                        throw new Error(err);
+                                    }
+                                });
+                        }
 
                     });
                 });
-
-                //fs.writeFile('./build/feeds/' + element + '.json', listOfPages.join(), {encoding: 'utf-8'}, function (err) {
-                //    if (err) {
-                //        throw new Error(err);
-                //    }
-                //});
-
             });
         });
     });
 });
 
+gulp.task('js', function () {
+    gulp.src('./**')
+        .pipe(jscs({
+            fix: false,
+            preset: 'yandex',
+            excludeFiles: ['node_modules/**']
+        }));
+});
+
 gulp.task('default', function () {
-    //return gulp.src('feeds/books/*.md')
-    //    .pipe(markdown())
-    //    .pipe(gulp.dest('build/feeds/books'));
 });

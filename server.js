@@ -2,21 +2,6 @@ var fs = require('fs');
 var http = require('http');
 var express = require('express');
 var app = express();
-var marked = require('marked');
-var yaml = require('js-yaml');
-
-var renderer = new marked.Renderer();
-
-renderer.heading = function (text, level) {
-    var escapedText = text.toLowerCase();
-
-    return '<h' + level + '><a name="' +
-        escapedText +
-        '" class="anchor" href="#' +
-        escapedText +
-        '"><span class="header-link"></span></a>' +
-        text + '</h' + level + '>';
-};
 
 app.set('port', 3000 || process.env.PORT);
 
