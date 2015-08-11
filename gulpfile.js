@@ -43,11 +43,11 @@ renderer.image = function (href, title, text) {
     return '<img src="' + href + '" class="image" ' + titleAtr + altAtr + '/>';
 };
 
-gulp.task('pages', function () {
+gulp.task('feeds', function () {
     /**
      * Перебирает ленты
      */
-    fs.readdir('./feeds', function (err, files) {
+    fs.readdir('./pages/feeds', function (err, files) {
         if (err) {
             throw new Error(err);
         }
@@ -56,7 +56,7 @@ gulp.task('pages', function () {
             /**
              * Перебирает страницы в ленте
              */
-            fs.readdir('./feeds/' + element, function (subErr, subFiles) {
+            fs.readdir('./pages/feeds/' + element, function (subErr, subFiles) {
                 if (subErr) {
                     throw new Error(subErr);
                 }
@@ -67,7 +67,7 @@ gulp.task('pages', function () {
                     /**
                      * Разборка страницы ленты
                      */
-                    fs.readFile('./feeds/' + element + '/' + subElement, {encoding: 'utf-8'}, function (ssErr, ssData) {
+                    fs.readFile('./pages/feeds/' + element + '/' + subElement, {encoding: 'utf-8'}, function (ssErr, ssData) {
                         if (ssErr) {
                             throw new Error(ssErr);
                         }
@@ -116,7 +116,7 @@ gulp.task('pages', function () {
                             /**
                              * Сохрание скомпилированного файла страницы
                              */
-                            fs.writeFile('./build/feeds/' + element + '/' + subElement + '.json', JSON.stringify(build),
+                            fs.writeFile('./build/pages/feeds/' + element + '/' + subElement + '.json', JSON.stringify(build),
                                 {encoding: 'utf-8'}, function (err) {
                                     if (err) {
                                         throw new Error(err);
@@ -132,13 +132,13 @@ gulp.task('pages', function () {
                                 pages: listOfPages,
                                 name: element
                             };
-                            fs.readFile('./feeds/' + element + '/_' + element + '.md',
+                            fs.readFile('./pages/feeds/' + element + '/_' + element + '.md',
                                 {encoding: 'utf-8'}, function (err, sssData) {
                                     if (err) {
                                         throw new Error(err);
                                     }
                                     feed.pageContent = marked(sssData, {renderer: renderer});
-                                    fs.writeFile('./build/feeds/' + element + '.json', JSON.stringify(feed),
+                                    fs.writeFile('./build/pages/feeds/' + element + '.json', JSON.stringify(feed),
                                         {encoding: 'utf-8'}, function (err) {
                                             if (err) {
                                                 throw new Error(err);
@@ -164,5 +164,5 @@ gulp.task('js', function () {
         }));
 });
 
-gulp.task('default', ['js', 'pages'], function () {
+gulp.task('default', ['js', 'feeds'], function () {
 });

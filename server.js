@@ -6,7 +6,7 @@ var app = express();
 app.set('port', 3000 || process.env.PORT);
 
 app.get('/books', function (req, res) {
-    fs.readFile('./build/feeds/books.json', {encoding: 'utf-8'}, function (err, data) {
+    fs.readFile('./build/pages/feeds/books.json', {encoding: 'utf-8'}, function (err, data) {
         if (err) {
             return res.status(404).send('404');
         }
@@ -18,7 +18,7 @@ app.get('/books', function (req, res) {
 });
 
 app.get('/books/:book', function (req, res) {
-    fs.readFile('./build/feeds/books/' + req.params.book + '.md.json', {encoding: 'utf-8'}, function (err, data) {
+    fs.readFile('./build/pages/feeds/books/' + req.params.book + '.md.json', {encoding: 'utf-8'}, function (err, data) {
         if (err) {
             return res.status(404).send('404');
         }
