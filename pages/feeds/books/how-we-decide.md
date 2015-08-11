@@ -6,4 +6,6 @@ original:
     author: Jonah Lerer
 ---
 
-## How we decide
+## Как мы принимаем решения
+
+Интересная книго о работе мозга.

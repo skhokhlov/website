@@ -4,16 +4,17 @@ var gulp = require('gulp');
 var jscs = require('gulp-jscs');
 var marked = require('marked');
 var yaml = require('js-yaml');
+var minify = require('html-minifier').minify;
 
 var renderer = new marked.Renderer();
 renderer.heading = function (text, level) {
     var escapedText = text.toLowerCase().replace(/ /g, '-');
 
-    return '<h' + level + '><a name="' +
+    return '<h' + level + ' class="title title_h' + level + '"><a name="' +
         escapedText +
-        '" class="anchor" href="#' +
+        '" class="title__anchor" href="#' +
         escapedText +
-        '"><span class="header-link"></span></a>' +
+        '"><span class="title__link title__link_anchor"></span></a>' +
         text + '</h' + level + '>';
 };
 renderer.link = function (href, title, text) {
@@ -43,6 +44,12 @@ renderer.image = function (href, title, text) {
     return '<img src="' + href + '" class="image" ' + titleAtr + altAtr + '/>';
 };
 
+var minifyOptions = {
+    removeComments: true,
+    collapseWhitespace: true,
+    keepClosingSlash: true
+};
+
 gulp.task('feeds', function () {
     /**
      * Перебирает ленты
@@ -67,88 +74,89 @@ gulp.task('feeds', function () {
                     /**
                      * Разборка страницы ленты
                      */
-                    fs.readFile('./pages/feeds/' + element + '/' + subElement, {encoding: 'utf-8'}, function (ssErr, ssData) {
-                        if (ssErr) {
-                            throw new Error(ssErr);
-                        }
-
-                        /**
-                         * Проверка на технический файл ленты
-                         */
-                        if (!/^_/.test(subElement)) {
-                            /**
-                             * Разделение файла по строкам
-                             */
-                            var splited = ssData.split('\n');
-
-                            /**
-                             * На странице должна быть обязательная часть с параметрами,
-                             * начинающаяся и завершающаяся с помошью ---
-                             */
-                            if (splited[0] !== '---') {
-                                throw new Error('Missing ---');
+                    fs.readFile('./pages/feeds/' + element + '/' + subElement,
+                        {encoding: 'utf-8'}, function (ssErr, ssData) {
+                            if (ssErr) {
+                                throw new Error(ssErr);
                             }
 
-                            var endOfParams = false;
-                            var params = ''; // Часть страницы с параметрами в YAML
-                            var content = ''; // Основная чать странцы
+                            /**
+                             * Проверка на технический файл ленты
+                             */
+                            if (!/^_/.test(subElement)) {
+                                /**
+                                 * Разделение файла по строкам
+                                 */
+                                var splited = ssData.split('\n');
 
-                            for (var i = 1; i < splited.length; ++i) {
-                                if (splited[i] === '---') {
-                                    endOfParams = true;
-
-                                } else if (endOfParams) {
-                                    content += splited[i] + '\n';
-
-                                } else {
-                                    params += splited[i] + '\n';
+                                /**
+                                 * На странице должна быть обязательная часть с параметрами,
+                                 * начинающаяся и завершающаяся с помошью ---
+                                 */
+                                if (splited[0] !== '---') {
+                                    throw new Error('Missing ---');
                                 }
-                            }
 
-                            if (!endOfParams) {
-                                throw new Error('Missing second ---');
-                            }
+                                var endOfParams = false;
+                                var params = ''; // Часть страницы с параметрами в YAML
+                                var content = ''; // Основная чать странцы
 
-                            var build = yaml.safeLoad(params);
-                            listOfPages.push(build);
-                            build.pageContent = marked(content, {renderer: renderer});
+                                for (var i = 1; i < splited.length; ++i) {
+                                    if (splited[i] === '---') {
+                                        endOfParams = true;
+
+                                    } else if (endOfParams) {
+                                        content += splited[i] + '\n';
+
+                                    } else {
+                                        params += splited[i] + '\n';
+                                    }
+                                }
+
+                                if (!endOfParams) {
+                                    throw new Error('Missing second ---');
+                                }
+
+                                var build = yaml.safeLoad(params);
+                                listOfPages.push(build);
+                                build.pageContent = minify(marked(content, {renderer: renderer}), minifyOptions);
+
+                                /**
+                                 * Сохрание скомпилированного файла страницы
+                                 */
+                                fs.writeFile('./build/pages/feeds/' + element + '/' + subElement + '.json',
+                                    JSON.stringify(build), {encoding: 'utf-8'}, function (err) {
+                                        if (err) {
+                                            throw new Error(err);
+                                        }
+                                    });
+                            }
 
                             /**
-                             * Сохрание скомпилированного файла страницы
+                             * Сохрание массива с параметрами страниц ленты
                              */
-                            fs.writeFile('./build/pages/feeds/' + element + '/' + subElement + '.json', JSON.stringify(build),
-                                {encoding: 'utf-8'}, function (err) {
-                                    if (err) {
-                                        throw new Error(err);
-                                    }
-                                });
-                        }
+                            if (listOfPages.length === (subFiles.length - 1)) {
+                                var feed = {
+                                    pages: listOfPages,
+                                    name: element
+                                };
+                                fs.readFile('./pages/feeds/' + element + '/_' + element + '.md',
+                                    {encoding: 'utf-8'}, function (err, sssData) {
+                                        if (err) {
+                                            throw new Error(err);
+                                        }
+                                        feed.pageContent = marked(sssData, {renderer: renderer});
+                                        fs.writeFile('./build/pages/feeds/' + element + '.json', JSON.stringify(feed),
+                                            {encoding: 'utf-8'}, function (err) {
+                                                if (err) {
+                                                    throw new Error(err);
+                                                }
+                                            });
+                                    });
 
-                        /**
-                         * Сохрание массива с параметрами страниц ленты
-                         */
-                        if (listOfPages.length === (subFiles.length - 1)) {
-                            var feed = {
-                                pages: listOfPages,
-                                name: element
-                            };
-                            fs.readFile('./pages/feeds/' + element + '/_' + element + '.md',
-                                {encoding: 'utf-8'}, function (err, sssData) {
-                                    if (err) {
-                                        throw new Error(err);
-                                    }
-                                    feed.pageContent = marked(sssData, {renderer: renderer});
-                                    fs.writeFile('./build/pages/feeds/' + element + '.json', JSON.stringify(feed),
-                                        {encoding: 'utf-8'}, function (err) {
-                                            if (err) {
-                                                throw new Error(err);
-                                            }
-                                        });
-                                });
+                            }
 
-                        }
-
-                    });
+                        });
                 });
             });
         });

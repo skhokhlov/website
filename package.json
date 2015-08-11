@@ -4,8 +4,7 @@
   "description": "Вебсайт",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.13.3",
-    "marked": "^0.3.5"
+    "express": "^4.13.3"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
@@ -16,7 +15,9 @@
     "gulp-markdown": "^1.0.0",
     "gulp-stylus": "^2.0.6",
     "gulp-uglify": "^1.2.0",
-    "js-yaml": "^3.3.1"
+    "html-minifier": "^0.7.2",
+    "js-yaml": "^3.3.1",
+    "marked": "^0.3.5"
   },
   "scripts": {
     "test": "echo \"no test specified\" && exit 0"
