@@ -6,9 +6,14 @@ var app = express();
 app.set('port', 3000 || process.env.PORT);
 
 app.get('/books', function (req, res) {
+    fs.readFile('./build/feeds/books.json', {encoding: 'utf-8'}, function (err, data) {
+        if (err) {
+            return res.status(404).send('404');
+        }
 
-    feed('books', null, function (response) {
-        res.send(response);
+        var feed = JSON.parse(data);
+
+        res.send(feed.pageContent)
     });
 });
 
@@ -27,20 +32,3 @@ http.createServer(app).listen(app.get('port'), function () {
     (Boolean((process.env.DEBUG === 'true') || (process.env.DEBUG == null))));
     console.log('Server listening on port ' + app.get('port'));
 });
-
-function feed(name, reject, resolve) {
-    var path = './feeds/' + name;
-    var response = {};
-    fs.readdir(path, function (err, files) {
-        if (err) {
-            return reject(err);
-        }
-
-        files.forEach(function (element, index) {
-            response[element] = {};
-            response[element].index = index;
-        });
-        resolve(response);
-
-    });
-}
