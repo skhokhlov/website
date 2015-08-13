@@ -154,6 +154,8 @@ gulp.task('js', function () {
 });
 
 gulp.task('default', ['js', 'pages'], function () {
+//TODO: сделать рекурсивно для поддерки неограниченной вложенности
+
     fs.readdir('./bundles/pages/', function (err, data) {
         if (err) {
             throw new Error(err);
