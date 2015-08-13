@@ -54,7 +54,7 @@ gulp.task('feeds', function () {
     /**
      * Перебирает ленты
      */
-    fs.readdir('./pages/feeds', function (err, files) {
+    fs.readdir('./bundles/feeds', function (err, files) {
         if (err) {
             throw new Error(err);
         }
@@ -63,18 +63,18 @@ gulp.task('feeds', function () {
             /**
              * Перебирает страницы в ленте
              */
-            fs.readdir('./pages/feeds/' + element, function (subErr, subFiles) {
+            fs.readdir('./bundles/feeds/' + element, function (subErr, subFiles) {
                 if (subErr) {
                     throw new Error(subErr);
                 }
 
                 var listOfPages = [];
 
-                subFiles.forEach(function (subElement, index) {
+                subFiles.forEach(function (subElement) {
                     /**
                      * Разборка страницы ленты
                      */
-                    fs.readFile('./pages/feeds/' + element + '/' + subElement,
+                    fs.readFile('./bundles/feeds/' + element + '/' + subElement,
                         {encoding: 'utf-8'}, function (ssErr, ssData) {
                             if (ssErr) {
                                 throw new Error(ssErr);
@@ -84,52 +84,27 @@ gulp.task('feeds', function () {
                              * Проверка на технический файл ленты
                              */
                             if (!/^_/.test(subElement)) {
-                                /**
-                                 * Разделение файла по строкам
-                                 */
-                                var splited = ssData.split('\n');
-
-                                /**
-                                 * На странице должна быть обязательная часть с параметрами,
-                                 * начинающаяся и завершающаяся с помошью ---
-                                 */
-                                if (splited[0] !== '---') {
-                                    throw new Error('Missing ---');
-                                }
-
-                                var endOfParams = false;
-                                var params = ''; // Часть страницы с параметрами в YAML
-                                var content = ''; // Основная чать странцы
-
-                                for (var i = 1; i < splited.length; ++i) {
-                                    if (splited[i] === '---') {
-                                        endOfParams = true;
-
-                                    } else if (endOfParams) {
-                                        content += splited[i] + '\n';
-
-                                    } else {
-                                        params += splited[i] + '\n';
+                                parsePage(ssData, function (err, params, html) {
+                                    if (err) {
+                                        throw new Error(err);
                                     }
-                                }
 
-                                if (!endOfParams) {
-                                    throw new Error('Missing second ---');
-                                }
+                                    listOfPages.push(params);
 
-                                var build = yaml.safeLoad(params);
-                                listOfPages.push(build);
-                                build.pageContent = minify(marked(content, {renderer: renderer}), minifyOptions);
+                                    var build = params;
+                                    build.pageContent = html;
 
-                                /**
-                                 * Сохрание скомпилированного файла страницы
-                                 */
-                                fs.writeFile('./build/pages/feeds/' + element + '/' + subElement + '.json',
-                                    JSON.stringify(build), {encoding: 'utf-8'}, function (err) {
-                                        if (err) {
-                                            throw new Error(err);
-                                        }
-                                    });
+                                    /**
+                                     * Сохрание скомпилированного файла страницы
+                                     */
+                                    fs.writeFile('./build/bundles/feeds/' + element + '/' + subElement + '.json',
+                                        JSON.stringify(build), {encoding: 'utf-8'}, function (err) {
+                                            if (err) {
+                                                throw new Error(err);
+                                            }
+                                        });
+
+                                });
                             }
 
                             /**
@@ -140,13 +115,15 @@ gulp.task('feeds', function () {
                                     pages: listOfPages,
                                     name: element
                                 };
-                                fs.readFile('./pages/feeds/' + element + '/_' + element + '.md',
+                                fs.readFile('./bundles/feeds/' + element + '/_' + element + '.md',
                                     {encoding: 'utf-8'}, function (err, sssData) {
                                         if (err) {
                                             throw new Error(err);
                                         }
+
                                         feed.pageContent = marked(sssData, {renderer: renderer});
-                                        fs.writeFile('./build/pages/feeds/' + element + '.json', JSON.stringify(feed),
+
+                                        fs.writeFile('./build/bundles/feeds/' + element + '.json', JSON.stringify(feed),
                                             {encoding: 'utf-8'}, function (err) {
                                                 if (err) {
                                                     throw new Error(err);
@@ -155,12 +132,15 @@ gulp.task('feeds', function () {
                                     });
 
                             }
-
                         });
                 });
             });
         });
     });
+});
+
+gulp.task('pages', ['feeds'], function () {
+
 });
 
 gulp.task('js', function () {
@@ -172,5 +152,123 @@ gulp.task('js', function () {
         }));
 });
 
-gulp.task('default', ['js', 'feeds'], function () {
+gulp.task('default', ['js', 'pages'], function () {
+    fs.readdir('./bundles/pages/', function (err, data) {
+        if (err) {
+            throw new Error(err);
+        }
+
+        data.forEach(function (element) {
+            if (fs.lstatSync('./bundles/pages/' + element).isDirectory()) {
+                fs.readdir('./bundles/pages/' + element, function (err, sData) {
+                    if (err) {
+                        throw new Error(err);
+                    }
+
+                    sData.forEach(function (el) {
+                        fs.readFile('./bundles/pages/' + element + '/' + el, {encoding: 'utf-8'}, function (err, ssData) {
+                            if (err) {
+                                throw new Error(err);
+                            }
+
+                            if(/\.md/.test(element)) {
+                                parsePage(ssData, function (err, params, html) {
+                                    if (err) {
+                                        throw new Error(err);
+                                    }
+
+                                    var build = params;
+                                    build.pageContent = html;
+
+                                    /**
+                                     * Сохрание скомпилированного файла страницы
+                                     */
+                                    fs.writeFile('./build/bundles/pages/' + element + '/' + el + '.json',
+                                        JSON.stringify(build), {encoding: 'utf-8'}, function (err) {
+                                            if (err) {
+                                                throw new Error(err);
+                                            }
+                                        });
+                                });
+                            }
+                        });
+                    });
+                });
+
+            } else {
+                fs.readFile('./bundles/pages/' + element, {encoding: 'utf-8'}, function (err, ssData) {
+                    if (err) {
+                        throw new Error(err);
+                    }
+
+                    if(/\.md/.test(element)){
+                        parsePage(ssData, function (err, params, html) {
+                            if (err) {
+                                throw new Error(err);
+                            }
+
+                            var build = params;
+                            build.pageContent = html;
+
+                            /**
+                             * Сохрание скомпилированного файла страницы
+                             */
+                            fs.writeFile('./build/bundles/pages/' + element + '.json',
+                                JSON.stringify(build), {encoding: 'utf-8'}, function (err) {
+                                    if (err) {
+                                        throw new Error(err);
+                                    }
+                                });
+                        });
+                    }
+                });
+            }
+        });
+    });
 });
+
+/**
+ * sync page parsing and building
+ * @param data
+ * @param callback
+ */
+function parsePage(data, callback) {
+    /**
+     * Разделение файла по строкам
+     */
+    var splitted = data.split('\n');
+
+    /**
+     * На странице должна быть обязательная часть с параметрами,
+     * начинающаяся и завершающаяся с помошью ---
+     */
+    if (splitted[0] !== '---') {
+        callback('Missing ---');
+    }
+
+    var endOfParams = false;
+    var params = ''; // Часть страницы с параметрами в YAML
+    var content = ''; // Основная чать странцы
+
+    for (var i = 1; i < splitted.length; ++i) {
+        if (splitted[i] === '---') {
+            endOfParams = true;
+
+        } else if (endOfParams) {
+            content += splitted[i] + '\n';
+
+        } else {
+            params += splitted[i] + '\n';
+        }
+    }
+
+    if (!endOfParams) {
+        callback('Missing second ---');
+    }
+
+    callback(null, yaml.safeLoad(params), minify(marked(content, {renderer: renderer}), minifyOptions));
+
+    //setTimeout(function () {
+    //    callback(null, yaml.safeLoad(params), minify(marked(content, {renderer: renderer}), minifyOptions));
+    //}, 0);
+}

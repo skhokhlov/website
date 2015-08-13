@@ -1,3 +1,5 @@
 .idea
 archive
 node_modules
+*.obj
+.DS_Store

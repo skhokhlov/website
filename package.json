@@ -4,7 +4,8 @@
   "description": "Вебсайт",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "yate": "0.0.78"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

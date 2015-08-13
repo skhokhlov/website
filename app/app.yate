@@ -1,0 +1,66 @@
+module "app"
+
+params = /.page.page-params
+page = params._page
+content = /.page.page-content
+
+match / {
+    apply .page
+
+    <div class="i-stat">
+        <noscript><img src="//mc.yandex.ru/watch/206275" style="position:absolute; left:-9999px;" /></noscript>
+    </div>
+}
+
+match .page {
+    <div class="page__content">
+        apply .page-blocks.* block
+    </div>
+}
+
+match .* block {
+    apply . block-content
+}
+
+match .* block-content {
+    apply .* block
+}
+
+match .footer block-content {
+    <div>
+    @class=(
+        "footer"
+    )
+
+    <p>© Сергей Хохлов</p>
+    </div>
+}
+
+match .body block {
+    <div class="body">
+        apply . block-content
+    </div>
+}
+
+match .body block-content {
+    <div class="body__content">html(  {content.content}  ) name()</div>
+}
+
+
+match .pages block-content {
+    apply content.pages
+}
+
+match .pages {
+    <div class="list">
+        apply . list
+    </div>
+}
+
+match .pages list {
+    apply .list.pagelist
+}
+
+match .pagelist {
+    <p>{ .title }</p>
+}
