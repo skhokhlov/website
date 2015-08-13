@@ -1,3 +1,5 @@
+'use strict';
+
 var fs = require('fs');
 var gulp = require('gulp');
 
@@ -147,8 +149,7 @@ gulp.task('js', function () {
     gulp.src('./**')
         .pipe(jscs({
             fix: false,
-            preset: 'yandex',
-            excludeFiles: ['node_modules/**']
+            preset: 'yandex'
         }));
 });
 
@@ -166,32 +167,33 @@ gulp.task('default', ['js', 'pages'], function () {
                     }
 
                     sData.forEach(function (el) {
-                        fs.readFile('./bundles/pages/' + element + '/' + el, {encoding: 'utf-8'}, function (err, ssData) {
-                            if (err) {
-                                throw new Error(err);
-                            }
+                        fs.readFile('./bundles/pages/' + element + '/' + el,
+                            {encoding: 'utf-8'}, function (err, ssData) {
+                                if (err) {
+                                    throw new Error(err);
+                                }
 
-                            if(/\.md/.test(element)) {
-                                parsePage(ssData, function (err, params, html) {
-                                    if (err) {
-                                        throw new Error(err);
-                                    }
+                                if (/\.md/.test(element)) {
+                                    parsePage(ssData, function (err, params, html) {
+                                        if (err) {
+                                            throw new Error(err);
+                                        }
 
-                                    var build = params;
-                                    build.pageContent = html;
+                                        var build = params;
+                                        build.pageContent = html;
 
-                                    /**
-                                     * Сохрание скомпилированного файла страницы
-                                     */
-                                    fs.writeFile('./build/bundles/pages/' + element + '/' + el + '.json',
-                                        JSON.stringify(build), {encoding: 'utf-8'}, function (err) {
-                                            if (err) {
-                                                throw new Error(err);
-                                            }
-                                        });
-                                });
-                            }
-                        });
+                                        /**
+                                         * Сохрание скомпилированного файла страницы
+                                         */
+                                        fs.writeFile('./build/bundles/pages/' + element + '/' + el + '.json',
+                                            JSON.stringify(build), {encoding: 'utf-8'}, function (err) {
+                                                if (err) {
+                                                    throw new Error(err);
+                                                }
+                                            });
+                                    });
+                                }
+                            });
                     });
                 });
 
@@ -201,7 +203,7 @@ gulp.task('default', ['js', 'pages'], function () {
                         throw new Error(err);
                     }
 
-                    if(/\.md/.test(element)){
+                    if (/\.md/.test(element)) {
                         parsePage(ssData, function (err, params, html) {
                             if (err) {
                                 throw new Error(err);
@@ -243,7 +245,7 @@ function parsePage(data, callback) {
      * начинающаяся и завершающаяся с помошью ---
      */
     if (splitted[0] !== '---') {
-        callback('Missing ---');
+        return callback('Missing ---');
     }
 
     var endOfParams = false;
@@ -263,12 +265,8 @@ function parsePage(data, callback) {
     }
 
     if (!endOfParams) {
-        callback('Missing second ---');
+        return callback('Missing second ---');
     }
 
-    callback(null, yaml.safeLoad(params), minify(marked(content, {renderer: renderer}), minifyOptions));
-
-    //setTimeout(function () {
-    //    callback(null, yaml.safeLoad(params), minify(marked(content, {renderer: renderer}), minifyOptions));
-    //}, 0);
+    return callback(null, yaml.safeLoad(params), minify(marked(content, {renderer: renderer}), minifyOptions));
 }

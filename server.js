@@ -1,3 +1,5 @@
+'use strict';
+
 var fs = require('fs');
 var http = require('http');
 var express = require('express');
@@ -34,18 +36,19 @@ app.get('/books', function (req, res) {
                     pages: feed.pages
                 }
             }
-        }))
+        }));
     });
 });
 
 app.get('/books/:book', function (req, res) {
-    fs.readFile('./build/bundles/feeds/books/' + req.params.book + '.md.json', {encoding: 'utf-8'}, function (err, data) {
-        if (err) {
-            return res.status(404).send('404');
-        }
+    fs.readFile('./build/bundles/feeds/books/' + req.params.book + '.md.json',
+        {encoding: 'utf-8'}, function (err, data) {
+            if (err) {
+                return res.status(404).send('404');
+            }
 
-        res.send(JSON.parse(data).pageContent);
-    });
+            res.send(JSON.parse(data).pageContent);
+        });
 });
 
 http.createServer(app).listen(app.get('port'), function () {
