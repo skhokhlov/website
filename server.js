@@ -28,8 +28,8 @@ app.get('/feed/:feed', function (req, res) {
                     footer: true
                 },
                 'page-params': {
-                    _page: 'home',
-                    title: 'Homepage of World Fly'
+                    _page: 'feed',
+                    title: feed.title
                 },
                 'page-content': {
                     content: feed.pageContent,
@@ -47,7 +47,26 @@ app.get('/feed/:feed/:book', function (req, res) {
                 return res.status(404).send('404');
             }
 
-            res.send(JSON.parse(data).pageContent);
+            var page = JSON.parse(data);
+
+            res.send(yr.run('app', {
+                page: {
+                    'page-blocks': {
+                        header: {
+                            logo: true,
+                            body: true
+                        },
+                        footer: true
+                    },
+                    'page-params': {
+                        _page: page.type || 'page',
+                        title: page.title
+                    },
+                    'page-content': {
+                        content: page.pageContent
+                    }
+                }
+            }));
         });
 });
 
@@ -69,8 +88,37 @@ app.get('/:page', function (req, res) {
                     footer: true
                 },
                 'page-params': {
-                    _page: 'home',
-                    title: 'Homepage of World Fly'
+                    _page: page.type || 'page',
+                    title: page.title
+                },
+                'page-content': {
+                    content: page.pageContent
+                }
+            }
+        }));
+    });
+});
+
+app.get('/', function (req, res) {
+    fs.readFile('./build/bundles/pages/index.json', {encoding: 'utf-8'}, function (err, data) {
+        if (err) {
+            return res.status(404).send('404');
+        }
+
+        var page = JSON.parse(data);
+
+        res.send(yr.run('app', {
+            page: {
+                'page-blocks': {
+                    header: {
+                        logo: true,
+                        body: true
+                    },
+                    footer: true
+                },
+                'page-params': {
+                    _page: page.type || 'page',
+                    title: page.title
                 },
                 'page-content': {
                     content: page.pageContent
