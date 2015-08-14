@@ -42,38 +42,50 @@ var yr = yr || require('yate/lib/runtime.js');
 
     var j3 = [ ];
 
-    var j4 = [ 0, 'page' ];
+    var j4 = [ 0, 'title' ];
 
-    var j5 = [ 0, 'page-blocks', 0, '*' ];
+    var j5 = [ 0, 'page' ];
 
-    var j6 = [ 0, '*' ];
+    var j6 = [ 0, 'page-blocks', 0, '*' ];
 
-    var j7 = [ 1, 0 ];
+    var j7 = [ 0, '*' ];
 
-    var j8 = [ 0, 'footer' ];
+    var j8 = [ 1, 0 ];
 
-    var j9 = [ 0, 'body' ];
+    var j9 = [ 0, 'footer' ];
 
-    var j10 = [ 0, 'content' ];
+    var j10 = [ 0, 'body' ];
 
-    var j11 = [ 0, 'pages' ];
+    var j11 = [ 0, 'content' ];
 
-    var j12 = [ 0, 'list', 0, 'pagelist' ];
+    var j12 = [ 0, 'pages' ];
 
-    var j13 = [ 0, 'pagelist' ];
+    var j13 = [ 0, 'list', 0, 'pagelist' ];
 
-    var j14 = [ 0, 'title' ];
+    var j14 = [ 0, 'pagelist' ];
 
     // match /
     M.t0 = function t0(m, c0, i0, l0, a0) {
         var r0 = '';
         var current = [ c0 ];
 
+        r0 += closeAttrs(a0);
+        r0 += "<!DOCTYPE html>";
+        r0 += "<html>";
+        r0 += "<head>";
+        r0 += "<title>" + nodeset2xml( ( m.n(j4, m.v('v0', c0.doc.root)) ) ) + "</title>";
+        r0 += "</head>";
+        r0 += "<body";
+        a0.a = {
+        };
+        a0.s = 'body';
         r0 += m.a(m, 0, selectNametest('page', c0, []), '', a0)
         r0 += closeAttrs(a0);
         r0 += "<div class=\"" + "i-stat" + "\">";
         r0 += "<noscript><img src=\"" + "//mc.yandex.ru/watch/206275" + "\" style=\"" + "position:absolute; left:-9999px;" + "\"/></noscript>";
         r0 += "</div>";
+        r0 += "</body>";
+        r0 += "</html>";
 
         return r0;
     };
@@ -91,13 +103,13 @@ var yr = yr || require('yate/lib/runtime.js');
             'class': new yr.scalarAttr("page__content")
         };
         a0.s = 'div';
-        r0 += m.a(m, 0, m.s(j5, c0), 'block', a0)
+        r0 += m.a(m, 0, m.s(j6, c0), 'block', a0)
         r0 += closeAttrs(a0);
         r0 += "</div>";
 
         return r0;
     };
-    M.t1.j = j4;
+    M.t1.j = j5;
     M.t1.a = 0;
 
     // match .* : block
@@ -105,11 +117,11 @@ var yr = yr || require('yate/lib/runtime.js');
         var r0 = '';
         var current = [ c0 ];
 
-        r0 += m.a(m, 0, m.s(j7, c0), 'block-content', a0)
+        r0 += m.a(m, 0, m.s(j8, c0), 'block-content', a0)
 
         return r0;
     };
-    M.t2.j = j6;
+    M.t2.j = j7;
     M.t2.a = 0;
 
     // match .* : block-content
@@ -121,7 +133,7 @@ var yr = yr || require('yate/lib/runtime.js');
 
         return r0;
     };
-    M.t3.j = j6;
+    M.t3.j = j7;
     M.t3.a = 0;
 
     // match .footer : block-content
@@ -144,7 +156,7 @@ var yr = yr || require('yate/lib/runtime.js');
 
         return r0;
     };
-    M.t4.j = j8;
+    M.t4.j = j9;
     M.t4.a = 0;
 
     // match .body : block
@@ -158,13 +170,13 @@ var yr = yr || require('yate/lib/runtime.js');
             'class': new yr.scalarAttr("body")
         };
         a0.s = 'div';
-        r0 += m.a(m, 0, m.s(j7, c0), 'block-content', a0)
+        r0 += m.a(m, 0, m.s(j8, c0), 'block-content', a0)
         r0 += closeAttrs(a0);
         r0 += "</div>";
 
         return r0;
     };
-    M.t5.j = j9;
+    M.t5.j = j10;
     M.t5.a = 0;
 
     // match .body : block-content
@@ -173,11 +185,13 @@ var yr = yr || require('yate/lib/runtime.js');
         var current = [ c0 ];
 
         r0 += closeAttrs(a0);
-        r0 += "<div class=\"" + "body__content" + "\">" + "html(  " + nodeset2xml( ( m.n(j10, m.v('v2', c0.doc.root)) ) ) + "  ) name()" + "</div>";
+        r0 += "<div class=\"" + "body__content" + "\">";
+        r0 += nodeset2scalar( m.n(j11, m.v('v2', c0.doc.root)) );
+        r0 += "</div>";
 
         return r0;
     };
-    M.t6.j = j9;
+    M.t6.j = j10;
     M.t6.a = 0;
 
     // match .pages : block-content
@@ -185,11 +199,11 @@ var yr = yr || require('yate/lib/runtime.js');
         var r0 = '';
         var current = [ c0 ];
 
-        r0 += m.a(m, 0, m.n(j11, m.v('v2', c0.doc.root)), '', a0)
+        r0 += m.a(m, 0, m.n(j12, m.v('v2', c0.doc.root)), '', a0)
 
         return r0;
     };
-    M.t7.j = j11;
+    M.t7.j = j12;
     M.t7.a = 0;
 
     // match .pages
@@ -203,13 +217,13 @@ var yr = yr || require('yate/lib/runtime.js');
             'class': new yr.scalarAttr("list")
         };
         a0.s = 'div';
-        r0 += m.a(m, 0, m.s(j7, c0), 'list', a0)
+        r0 += m.a(m, 0, m.s(j8, c0), 'list', a0)
         r0 += closeAttrs(a0);
         r0 += "</div>";
 
         return r0;
     };
-    M.t8.j = j11;
+    M.t8.j = j12;
     M.t8.a = 0;
 
     // match .pages : list
@@ -217,11 +231,11 @@ var yr = yr || require('yate/lib/runtime.js');
         var r0 = '';
         var current = [ c0 ];
 
-        r0 += m.a(m, 0, m.s(j12, c0), '', a0)
+        r0 += m.a(m, 0, m.s(j13, c0), '', a0)
 
         return r0;
     };
-    M.t9.j = j11;
+    M.t9.j = j12;
     M.t9.a = 0;
 
     // match .pagelist
@@ -234,7 +248,7 @@ var yr = yr || require('yate/lib/runtime.js');
 
         return r0;
     };
-    M.t10.j = j13;
+    M.t10.j = j14;
     M.t10.a = 0;
 
     M.matcher = {

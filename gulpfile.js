@@ -8,6 +8,7 @@ var marked = require('marked');
 var yaml = require('js-yaml');
 var minify = require('html-minifier').minify;
 var jshint = require('gulp-jshint');
+var exec = require('child_process').exec;
 
 var renderer = new marked.Renderer();
 renderer.heading = function (text, level) {
@@ -100,7 +101,7 @@ gulp.task('feeds', function () {
                                     /**
                                      * Сохрание скомпилированного файла страницы
                                      */
-                                    fs.writeFile('./build/bundles/feeds/' + element + '/' + subElement + '.json',
+                                    fs.writeFile('./build/bundles/feeds/' + element + '/' + subElement.replace('.md', '') + '.json',
                                         JSON.stringify(build), {encoding: 'utf-8'}, function (err) {
                                             if (err) {
                                                 throw new Error(err);
@@ -126,7 +127,7 @@ gulp.task('feeds', function () {
 
                                         feed.pageContent = marked(sssData, {renderer: renderer});
 
-                                        fs.writeFile('./build/bundles/feeds/' + element + '.json', JSON.stringify(feed),
+                                        fs.writeFile('./build/bundles/feeds/' + element.replace('.md', '') + '.json', JSON.stringify(feed),
                                             {encoding: 'utf-8'}, function (err) {
                                                 if (err) {
                                                     throw new Error(err);
@@ -171,7 +172,7 @@ gulp.task('pages', ['feeds'], function () {
                                 /**
                                  * Сохрание скомпилированного файла страницы
                                  */
-                                fs.writeFile('./build/bundles/pages/' + path + element + '.json',
+                                fs.writeFile('./build/bundles/pages/' + path + element.replace('.md', '') + '.json',
                                     JSON.stringify(build), {encoding: 'utf-8'}, function (err) {
                                         if (err) {
                                             throw new Error(err);
@@ -197,6 +198,15 @@ gulp.task('js', function () {
     gulp.src(['./*.js', './app/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
+
+});
+
+gulp.task('yate', function(){
+    exec('./node_modules/.bin/yate app/app.yate > build/app/app.yate.js', function (err, stdout, stderr) {
+        if (err || stderr) {
+            throw new Error(err);
+        }
+    });
 
 });
 
