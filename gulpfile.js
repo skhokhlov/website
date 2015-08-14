@@ -142,7 +142,48 @@ gulp.task('feeds', function () {
 });
 
 gulp.task('pages', ['feeds'], function () {
+    (function parseDir(path){
+        fs.readdir('./bundles/pages/' + path, function (err, data) {
+            if (err) {
+                throw new Error(err);
+            }
 
+            data.forEach(function (element) {
+                if (fs.lstatSync('./bundles/pages/' + path + element).isDirectory()) {
+                    parseDir(path + element + '/');
+
+                } else {
+                    fs.readFile('./bundles/pages/' + path + element, {encoding: 'utf-8'}, function (err, ssData) {
+                        if (err) {
+                            throw new Error(err);
+                        }
+
+                        if (/\.md/.test(element)) {
+                            parsePage(ssData, function (err, params, html) {
+                                if (err) {
+                                    throw new Error(err);
+                                }
+
+                                var build = params;
+                                build.pageContent = html;
+
+                                /**
+                                 * Сохрание скомпилированного файла страницы
+                                 */
+                                fs.writeFile('./build/bundles/pages/' + path + element + '.json',
+                                    JSON.stringify(build), {encoding: 'utf-8'}, function (err) {
+                                        if (err) {
+                                            throw new Error(err);
+                                        }
+                                    });
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+    })('/');
 });
 
 gulp.task('js', function () {
@@ -154,81 +195,6 @@ gulp.task('js', function () {
 });
 
 gulp.task('default', ['js', 'pages'], function () {
-//TODO: сделать рекурсивно для поддерки неограниченной вложенности
-
-    fs.readdir('./bundles/pages/', function (err, data) {
-        if (err) {
-            throw new Error(err);
-        }
-
-        data.forEach(function (element) {
-            if (fs.lstatSync('./bundles/pages/' + element).isDirectory()) {
-                fs.readdir('./bundles/pages/' + element, function (err, sData) {
-                    if (err) {
-                        throw new Error(err);
-                    }
-
-                    sData.forEach(function (el) {
-                        fs.readFile('./bundles/pages/' + element + '/' + el,
-                            {encoding: 'utf-8'}, function (err, ssData) {
-                                if (err) {
-                                    throw new Error(err);
-                                }
-
-                                if (/\.md/.test(element)) {
-                                    parsePage(ssData, function (err, params, html) {
-                                        if (err) {
-                                            throw new Error(err);
-                                        }
-
-                                        var build = params;
-                                        build.pageContent = html;
-
-                                        /**
-                                         * Сохрание скомпилированного файла страницы
-                                         */
-                                        fs.writeFile('./build/bundles/pages/' + element + '/' + el + '.json',
-                                            JSON.stringify(build), {encoding: 'utf-8'}, function (err) {
-                                                if (err) {
-                                                    throw new Error(err);
-                                                }
-                                            });
-                                    });
-                                }
-                            });
-                    });
-                });
-
-            } else {
-                fs.readFile('./bundles/pages/' + element, {encoding: 'utf-8'}, function (err, ssData) {
-                    if (err) {
-                        throw new Error(err);
-                    }
-
-                    if (/\.md/.test(element)) {
-                        parsePage(ssData, function (err, params, html) {
-                            if (err) {
-                                throw new Error(err);
-                            }
-
-                            var build = params;
-                            build.pageContent = html;
-
-                            /**
-                             * Сохрание скомпилированного файла страницы
-                             */
-                            fs.writeFile('./build/bundles/pages/' + element + '.json',
-                                JSON.stringify(build), {encoding: 'utf-8'}, function (err) {
-                                    if (err) {
-                                        throw new Error(err);
-                                    }
-                                });
-                        });
-                    }
-                });
-            }
-        });
-    });
 });
 
 /**
