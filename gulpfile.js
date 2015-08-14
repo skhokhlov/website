@@ -7,6 +7,7 @@ var jscs = require('gulp-jscs');
 var marked = require('marked');
 var yaml = require('js-yaml');
 var minify = require('html-minifier').minify;
+var jshint = require('gulp-jshint');
 
 var renderer = new marked.Renderer();
 renderer.heading = function (text, level) {
@@ -142,7 +143,7 @@ gulp.task('feeds', function () {
 });
 
 gulp.task('pages', ['feeds'], function () {
-    (function parseDir(path){
+    (function parseDir(path) {
         fs.readdir('./bundles/pages/' + path, function (err, data) {
             if (err) {
                 throw new Error(err);
@@ -187,11 +188,16 @@ gulp.task('pages', ['feeds'], function () {
 });
 
 gulp.task('js', function () {
-    gulp.src('./**')
+    gulp.src(['./**'])
         .pipe(jscs({
             fix: false,
             preset: 'yandex'
         }));
+
+    gulp.src(['./*.js', './app/*.js'])
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'));
+
 });
 
 gulp.task('default', ['js', 'pages'], function () {
