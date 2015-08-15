@@ -8,7 +8,7 @@ var app = express();
 var yr = require('./node_modules/yate/lib/runtime.js');
 require('./build/app/app.yate.js');
 
-app.set('port', 3000 || process.env.PORT);
+app.set('port', process.env.VCAP_APP_PORT || process.env.PORT || 3000);
 
 app.get('/feed/:feed', function (req, res) {
     fs.readFile('./build/bundles/feeds/' + req.params.feed + '.json', {encoding: 'utf-8'}, function (err, data) {
