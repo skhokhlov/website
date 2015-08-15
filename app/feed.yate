@@ -1,0 +1,17 @@
+module "feed"
+
+match / {
+<section class="feed feed_preview">
+    <div class="list list_inline">
+        for .pages {
+            <div class="list__item feed__item">
+                <img class="image list__image feed__image feed__image_preview" src="{ .image }" />
+                <article>
+                    <p>{ .author }</p>
+                    <p>{ .caption }</p>
+                </article>
+            </div>
+        }
+    </div>
+</section>
+}

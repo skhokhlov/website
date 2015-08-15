@@ -65,7 +65,7 @@ app.get('/feed/:feed/:book', function (req, res) {
                         title: page.title
                     },
                     'page-content': {
-                        content: page.pageContent
+                        body: page.pageContent
                     }
                 }
             }));
@@ -79,6 +79,8 @@ app.get('/:page', function (req, res) {
         }
 
         var page = JSON.parse(data);
+
+        console.log(page);
 
         res.send(yr.run('app', {
             page: {
@@ -94,7 +96,7 @@ app.get('/:page', function (req, res) {
                     title: page.title
                 },
                 'page-content': {
-                    content: page.pageContent
+                    body: page.pageContent
                 }
             }
         }));
@@ -123,7 +125,7 @@ app.get('/', function (req, res) {
                     title: page.title
                 },
                 'page-content': {
-                    content: page.pageContent
+                    body: page.pageContent
                 }
             }
         }));

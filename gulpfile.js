@@ -9,6 +9,7 @@ var yaml = require('js-yaml');
 var minify = require('html-minifier').minify;
 var jshint = require('gulp-jshint');
 var execSync = require('child_process').execSync;
+var yr = require('./node_modules/yate/lib/runtime.js');
 
 var renderer = new marked.Renderer();
 renderer.heading = function (text, level) {
@@ -54,7 +55,7 @@ var minifyOptions = {
     keepClosingSlash: true
 };
 
-gulp.task('feeds', function () {
+gulp.task('feeds', ['yate'], function () {
     /**
      * Перебирает ленты
      */
@@ -102,7 +103,8 @@ gulp.task('feeds', function () {
                                     /**
                                      * Сохрание скомпилированного файла страницы
                                      */
-                                    fs.writeFile('./build/bundles/feeds/' + element + '/' + subElement.replace('.md', '') + '.json',
+                                    fs.writeFile('./build/bundles/feeds/' +
+                                        element + '/' + subElement.replace('.md', '') + '.json',
                                         JSON.stringify(build), {encoding: 'utf-8'}, function (err) {
                                             if (err) {
                                                 throw new Error(err);
@@ -120,6 +122,12 @@ gulp.task('feeds', function () {
                                     pages: listOfPages,
                                     name: element
                                 };
+
+                                require('./build/app/feed.yate.js');
+                                feed.render = yr.run('feed', {
+                                    pages: listOfPages
+                                });
+
                                 fs.readFile('./bundles/feeds/' + element + '/_' + element + '.md',
                                     {encoding: 'utf-8'}, function (err, sssData) {
                                         if (err) {
@@ -128,8 +136,8 @@ gulp.task('feeds', function () {
 
                                         feed.pageContent = marked(sssData, {renderer: renderer});
 
-                                        fs.writeFile('./build/bundles/feeds/' + element.replace('.md', '') + '.json', JSON.stringify(feed),
-                                            {encoding: 'utf-8'}, function (err) {
+                                        fs.writeFile('./build/bundles/feeds/' + element.replace('.md', '') + '.json',
+                                            JSON.stringify(feed), {encoding: 'utf-8'}, function (err) {
                                                 if (err) {
                                                     throw new Error(err);
                                                 }
@@ -168,7 +176,10 @@ gulp.task('pages', ['feeds'], function () {
                                 }
 
                                 var build = params;
-                                build.pageContent = html;
+                                build.pageContent = html
+                                    .replace(new RegExp('{ feeds.books }', 'g'),
+                                    JSON.parse(fs.readFileSync('build/bundles/feeds/books.json',
+                                        {encoding: 'utf-8'})).render);
 
                                 /**
                                  * Сохрание скомпилированного файла страницы
@@ -202,11 +213,12 @@ gulp.task('js', function () {
 
 });
 
-gulp.task('yate', function(){
+gulp.task('yate', function () {
     yate('app/app.yate', 'build/app/app.yate.js');
+    yate('app/feed.yate', 'build/app/feed.yate.js');
 });
 
-gulp.task('default', ['js', 'pages', 'yate'], function () {
+gulp.task('default', ['js', 'pages'], function () {
 });
 
 /**
@@ -257,6 +269,6 @@ function parsePage(data, callback) {
  * @param output
  * @returns {*}
  */
-function yate(input, output){
+function yate(input, output) {
     return execSync('./node_modules/.bin/yate ' + input + ' > ' + output);
 }
