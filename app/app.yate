@@ -13,9 +13,6 @@ html('<!DOCTYPE html>')
 <body>
     apply .page
 
-    <div class="i-stat">
-        <noscript><img src="//mc.yandex.ru/watch/206275" style="position:absolute; left:-9999px;" /></noscript>
-    </div>
     </body>
     </html>
 }
@@ -52,10 +49,9 @@ match .body block {
 
 match .body block-content {
     <div class="body__content">
-    html( content.content )
+    html( content.body )
     </div>
 }
-
 
 match .pages block-content {
     apply content.pages

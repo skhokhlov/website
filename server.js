@@ -23,7 +23,9 @@ app.get('/feed/:feed', function (req, res) {
                 'page-blocks': {
                     header: {
                         logo: true,
-                        body: true
+                        body: {
+                            pages: true
+                        }
                     },
                     footer: true
                 },
@@ -32,7 +34,7 @@ app.get('/feed/:feed', function (req, res) {
                     title: feed.title
                 },
                 'page-content': {
-                    content: feed.pageContent,
+                    body: feed.pageContent,
                     pages: feed.pages
                 }
             }

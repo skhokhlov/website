@@ -56,13 +56,11 @@ var yr = yr || require('yate/lib/runtime.js');
 
     var j10 = [ 0, 'body' ];
 
-    var j11 = [ 0, 'content' ];
+    var j11 = [ 0, 'pages' ];
 
-    var j12 = [ 0, 'pages' ];
+    var j12 = [ 0, 'list', 0, 'pagelist' ];
 
-    var j13 = [ 0, 'list', 0, 'pagelist' ];
-
-    var j14 = [ 0, 'pagelist' ];
+    var j13 = [ 0, 'pagelist' ];
 
     // match /
     M.t0 = function t0(m, c0, i0, l0, a0) {
@@ -81,9 +79,6 @@ var yr = yr || require('yate/lib/runtime.js');
         a0.s = 'body';
         r0 += m.a(m, 0, selectNametest('page', c0, []), '', a0)
         r0 += closeAttrs(a0);
-        r0 += "<div class=\"" + "i-stat" + "\">";
-        r0 += "<noscript><img src=\"" + "//mc.yandex.ru/watch/206275" + "\" style=\"" + "position:absolute; left:-9999px;" + "\"/></noscript>";
-        r0 += "</div>";
         r0 += "</body>";
         r0 += "</html>";
 
@@ -186,7 +181,7 @@ var yr = yr || require('yate/lib/runtime.js');
 
         r0 += closeAttrs(a0);
         r0 += "<div class=\"" + "body__content" + "\">";
-        r0 += nodeset2scalar( m.n(j11, m.v('v2', c0.doc.root)) );
+        r0 += nodeset2scalar( m.n(j10, m.v('v2', c0.doc.root)) );
         r0 += "</div>";
 
         return r0;
@@ -199,11 +194,11 @@ var yr = yr || require('yate/lib/runtime.js');
         var r0 = '';
         var current = [ c0 ];
 
-        r0 += m.a(m, 0, m.n(j12, m.v('v2', c0.doc.root)), '', a0)
+        r0 += m.a(m, 0, m.n(j11, m.v('v2', c0.doc.root)), '', a0)
 
         return r0;
     };
-    M.t7.j = j12;
+    M.t7.j = j11;
     M.t7.a = 0;
 
     // match .pages
@@ -223,7 +218,7 @@ var yr = yr || require('yate/lib/runtime.js');
 
         return r0;
     };
-    M.t8.j = j12;
+    M.t8.j = j11;
     M.t8.a = 0;
 
     // match .pages : list
@@ -231,11 +226,11 @@ var yr = yr || require('yate/lib/runtime.js');
         var r0 = '';
         var current = [ c0 ];
 
-        r0 += m.a(m, 0, m.s(j13, c0), '', a0)
+        r0 += m.a(m, 0, m.s(j12, c0), '', a0)
 
         return r0;
     };
-    M.t9.j = j12;
+    M.t9.j = j11;
     M.t9.a = 0;
 
     // match .pagelist
@@ -248,7 +243,7 @@ var yr = yr || require('yate/lib/runtime.js');
 
         return r0;
     };
-    M.t10.j = j14;
+    M.t10.j = j13;
     M.t10.a = 0;
 
     M.matcher = {

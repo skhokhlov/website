@@ -8,7 +8,7 @@ var marked = require('marked');
 var yaml = require('js-yaml');
 var minify = require('html-minifier').minify;
 var jshint = require('gulp-jshint');
-var exec = require('child_process').exec;
+var execSync = require('child_process').execSync;
 
 var renderer = new marked.Renderer();
 renderer.heading = function (text, level) {
@@ -203,15 +203,10 @@ gulp.task('js', function () {
 });
 
 gulp.task('yate', function(){
-    exec('./node_modules/.bin/yate app/app.yate > build/app/app.yate.js', function (err, stdout, stderr) {
-        if (err || stderr) {
-            throw new Error(err);
-        }
-    });
-
+    yate('app/app.yate', 'build/app/app.yate.js');
 });
 
-gulp.task('default', ['js', 'pages'], function () {
+gulp.task('default', ['js', 'pages', 'yate'], function () {
 });
 
 /**
@@ -254,4 +249,14 @@ function parsePage(data, callback) {
     }
 
     return callback(null, yaml.safeLoad(params), minify(marked(content, {renderer: renderer}), minifyOptions));
+}
+
+/**
+ *
+ * @param input
+ * @param output
+ * @returns {*}
+ */
+function yate(input, output){
+    return execSync('./node_modules/.bin/yate ' + input + ' > ' + output);
 }
