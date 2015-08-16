@@ -2,6 +2,7 @@ language: node_js
 node_js:
 - '0.12'
 before_script: ./node_modules/.bin/gulp
+before_deploy: git add . && git commit -a
 deploy:
   provider: heroku
   api_key:
