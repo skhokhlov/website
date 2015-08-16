@@ -6,20 +6,38 @@ type = /.type
 match / {
 <section class="feed feed_preview">
     @class += (
-        if type == 'full' {
-            " feed_full"
-        }
-        if .type == 'compact' {
-            " feed_compact"
-        }
-    )
+            if type == 'full' {
+                " feed_full"
+            }
+            if type == 'compact' {
+                " feed_compact"
+            }
+        )
     <div class="list list_inline">
         for .pages {
             <div class="list__item feed__item">
-                <a href="/feed/{ feedName }/{ .name }"><img class="image list__image feed__image feed__image_preview" src="{ .image }" /></a>
+                @class += (
+                        if type == 'full' {
+                            " feed__item_full"
+                        }
+                        if type == 'compact' {
+                            " feed__item_compact"
+                        }
+                    )
+
+                class = (
+                    'image list__image feed__image feed__image_preview'
+                    if type == 'full' {
+                        ' feed__image_full'
+                        }
+                    if type == 'compact' {
+                        ' feed__image_compact'
+                    }
+                )
+                <a href="/feed/{ feedName }/{ .name }"><img class="{ class }" src="{ .image }" /></a>
                 if type == 'full' {
-                    <article>
-                        <h3 class="feed__title">{ .title }</h3>
+                    <article class="feed__body">
+                        <a href="/feed/{ feedName }/{ .name }" class="link feed__link"><h3 class="feed__title">{ .title }</h3></a>
                         <p class="feed__author">{ .author }</p>
                         <p>{ .caption }</p>
                     </article>

@@ -35,19 +35,17 @@ var yr = yr || require('yate/lib/runtime.js');
 
     var j2 = [ ];
 
-    var j3 = [ 0, 'type' ];
+    var j3 = [ 0, 'pages' ];
 
-    var j4 = [ 0, 'pages' ];
+    var j4 = [ 0, 'name' ];
 
-    var j5 = [ 0, 'name' ];
+    var j5 = [ 0, 'image' ];
 
-    var j6 = [ 0, 'image' ];
+    var j6 = [ 0, 'title' ];
 
-    var j7 = [ 0, 'title' ];
+    var j7 = [ 0, 'author' ];
 
-    var j8 = [ 0, 'author' ];
-
-    var j9 = [ 0, 'caption' ];
+    var j8 = [ 0, 'caption' ];
 
     // match /
     M.t0 = function t0(m, c0, i0, l0, a0) {
@@ -65,7 +63,7 @@ var yr = yr || require('yate/lib/runtime.js');
         if (cmpSN("full", m.v('v1', c0.doc.root))) {
             r1 += " feed_full";
         }
-        if (cmpSN("compact", selectNametest('type', c0, []))) {
+        if (cmpSN("compact", m.v('v1', c0.doc.root))) {
             r1 += " feed_compact";
         }
         var tmp0 = a0.a[ "class" ];
@@ -79,11 +77,42 @@ var yr = yr || require('yate/lib/runtime.js');
         var items0 = selectNametest('pages', c0, []);
         for (var i1 = 0, l1 = items0.length; i1 < l1; i1++) {
             var c1 = items0[ i1 ];
-            r0 += "<div class=\"" + "list__item feed__item" + "\">";
-            r0 += "<a href=\"" + "/feed/" + nodeset2attrvalue( ( m.v('v0', c1.doc.root) ) ) + "/" + nodeset2attrvalue( ( selectNametest('name', c1, []) ) ) + "\"><img class=\"" + "image list__image feed__image feed__image_preview" + "\" src=\"" + nodeset2attrvalue( ( selectNametest('image', c1, []) ) ) + "\"/></a>";
+            //  var class : scalar
+            var r1 = '';
+            var a1 = { a: {} };
+            r1 += "image list__image feed__image feed__image_preview";
             if (cmpSN("full", m.v('v1', c1.doc.root))) {
-                r0 += "<article>";
-                r0 += "<h3 class=\"" + "feed__title" + "\">" + nodeset2xml( ( selectNametest('title', c1, []) ) ) + "</h3>";
+                r1 += " feed__image_full";
+            }
+            if (cmpSN("compact", m.v('v1', c1.doc.root))) {
+                r1 += " feed__image_compact";
+            }
+            var v2 = r1;
+
+            r0 += "<div";
+            a0.a = {
+                'class': new yr.scalarAttr("list__item feed__item")
+            };
+            a0.s = 'div';
+            var r1 = '';
+            var a1 = { a: {} };
+            if (cmpSN("full", m.v('v1', c1.doc.root))) {
+                r1 += " feed__item_full";
+            }
+            if (cmpSN("compact", m.v('v1', c1.doc.root))) {
+                r1 += " feed__item_compact";
+            }
+            var tmp1 = a0.a[ "class" ];
+            if (tmp1) {
+                a0.a[ "class" ] = tmp1.addscalar(r1);
+            } else {
+                a0.a[ "class" ] = new yr.scalarAttr(r1);
+            }
+            r0 += closeAttrs(a0);
+            r0 += "<a href=\"" + "/feed/" + nodeset2attrvalue( ( m.v('v0', c1.doc.root) ) ) + "/" + nodeset2attrvalue( ( selectNametest('name', c1, []) ) ) + "\"><img class=\"" + scalar2attrvalue( ( v2 ) ) + "\" src=\"" + nodeset2attrvalue( ( selectNametest('image', c1, []) ) ) + "\"/></a>";
+            if (cmpSN("full", m.v('v1', c1.doc.root))) {
+                r0 += "<article class=\"" + "feed__body" + "\">";
+                r0 += "<a href=\"" + "/feed/" + nodeset2attrvalue( ( m.v('v0', c1.doc.root) ) ) + "/" + nodeset2attrvalue( ( selectNametest('name', c1, []) ) ) + "\" class=\"" + "link feed__link" + "\"><h3 class=\"" + "feed__title" + "\">" + nodeset2xml( ( selectNametest('title', c1, []) ) ) + "</h3></a>";
                 r0 += "<p class=\"" + "feed__author" + "\">" + nodeset2xml( ( selectNametest('author', c1, []) ) ) + "</p>";
                 r0 += "<p>" + nodeset2xml( ( selectNametest('caption', c1, []) ) ) + "</p>";
                 r0 += "</article>";

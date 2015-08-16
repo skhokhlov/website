@@ -44,6 +44,30 @@
   width: 100px;
   padding: 0.5em;
 }
+.book__caption {
+  background-color: #ffffe7;
+  padding: 1em;
+}
+.book__comment {
+  padding: 1em;
+}
+.feed__item_compact {
+  display: inline-block;
+}
+.feed__image {
+  padding: 1em;
+}
+.feed__image_compact {
+  width: 75px;
+}
+.feed__image_full {
+  width: 100px;
+}
+.feed__body {
+  display: inline-block;
+  vertical-align: top;
+  width: calc(100% - 100px - 2 * 1em);
+}
 .page {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
