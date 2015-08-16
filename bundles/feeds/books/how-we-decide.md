@@ -9,4 +9,4 @@ original:
     image: http://books.google.ru/books/content?id=QEnjzV0rTvwC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api
 ---
 
-Интересная книга о работе мозга.
+Интересная книга о работе мозга. Эта книга объясняет многие моменты из жизни. А еще после прочтения этой книги забавно смотреть на людей, которые не могут сделать выбор.
