@@ -8,6 +8,11 @@ var app = express();
 var yr = require('./node_modules/yate/lib/runtime.js');
 require('./build/app/app.yate.js');
 
+app.use('/public', express.static(__dirname + '/build/app', {
+    index: false,
+    //maxAge: ((process.env.DEBUG === 'false') ? 15552000000 : 15000)
+}));
+
 app.set('port', process.env.VCAP_APP_PORT || process.env.PORT || 3000);
 
 app.get('/feed/:feed', function (req, res) {
@@ -55,14 +60,15 @@ app.get('/feed/:feed/:book', function (req, res) {
                 page: {
                     'page-blocks': {
                         header: {
-                            logo: true,
-                            body: true
+                            logo: true
                         },
+                        book: true,
                         footer: true
                     },
                     'page-params': {
                         _page: page.type || 'page',
-                        title: page.title
+                        title: page.title,
+                        param: page
                     },
                     'page-content': {
                         body: page.pageContent

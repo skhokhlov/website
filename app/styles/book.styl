@@ -1,0 +1,43 @@
+.book
+
+    &__name
+        border-bottom 1px dashed #b9b9b9
+        display inline-block
+        padding 1em
+        width 65%
+
+        @media (max-width: 800px)
+            display block
+            width 100%
+
+    &__original
+        display inline-block
+        border: 1px solid #EFEF1F
+        padding 0.3em 1em
+        vertical-align top
+        margin 1em
+        width 25%
+        position: absolute
+
+        @media (max-width: 800px)
+            display block
+            position: static
+            width 100%
+
+    &__blocktitle
+        font-style italic
+
+    &__title
+        margin 0
+
+        &_original
+            margin-bootom -0.3em
+
+    &__body
+        width 65%
+        padding 1em
+
+    &__image
+        float: left
+        width 100px
+        padding 0.5em

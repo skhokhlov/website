@@ -56,11 +56,27 @@ var yr = yr || require('yate/lib/runtime.js');
 
     var j10 = [ 0, 'body' ];
 
-    var j11 = [ 0, 'pages' ];
+    var j11 = [ 0, 'book' ];
 
-    var j12 = [ 0, 'list', 0, 'pagelist' ];
+    var j12 = [ 0, 'param', 0, 'image' ];
 
-    var j13 = [ 0, 'pagelist' ];
+    var j13 = [ 0, 'param', 0, 'author' ];
+
+    var j14 = [ 0, 'param', 0, 'original' ];
+
+    var j15 = [ 0, 'param', 0, 'original', 0, 'image' ];
+
+    var j16 = [ 0, 'param', 0, 'original', 0, 'title' ];
+
+    var j17 = [ 0, 'param', 0, 'original', 0, 'author' ];
+
+    var j18 = [ 0, 'param', 0, 'caption' ];
+
+    var j19 = [ 0, 'pages' ];
+
+    var j20 = [ 0, 'list', 0, 'pagelist' ];
+
+    var j21 = [ 0, 'pagelist' ];
 
     // match /
     M.t0 = function t0(m, c0, i0, l0, a0) {
@@ -72,9 +88,11 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += "<html>";
         r0 += "<head>";
         r0 += "<title>" + nodeset2xml( ( m.n(j4, m.v('v0', c0.doc.root)) ) ) + "</title>";
+        r0 += "<link rel=\"" + "stylesheet" + "\" href=\"" + "/public/app.css" + "\"/>";
         r0 += "</head>";
         r0 += "<body";
         a0.a = {
+            'class': new yr.scalarAttr("page")
         };
         a0.s = 'body';
         r0 += m.a(m, 0, selectNametest('page', c0, []), '', a0)
@@ -189,20 +207,60 @@ var yr = yr || require('yate/lib/runtime.js');
     M.t6.j = j10;
     M.t6.a = 0;
 
-    // match .pages : block-content
+    // match .book : block-content
     M.t7 = function t7(m, c0, i0, l0, a0) {
         var r0 = '';
         var current = [ c0 ];
 
-        r0 += m.a(m, 0, m.n(j11, m.v('v2', c0.doc.root)), '', a0)
+        r0 += closeAttrs(a0);
+        r0 += "<article class=\"" + "book" + "\">";
+        r0 += "<section class=\"" + "book__name" + "\">";
+        if (nodeset2boolean( m.n(j12, m.v('v0', c0.doc.root)) )) {
+            r0 += "<img class=\"" + "image book__image" + "\" src=\"" + nodeset2attrvalue( ( m.n(j12, m.v('v0', c0.doc.root)) ) ) + "\"/>";
+        }
+        r0 += "<h1 class=\"" + "book__title title title_h1" + "\">" + nodeset2xml( ( m.n(j4, m.v('v0', c0.doc.root)) ) ) + "</h1>";
+        r0 += "<p class=\"" + "book__author" + "\">" + nodeset2xml( ( m.n(j13, m.v('v0', c0.doc.root)) ) ) + "</p>";
+        r0 += "</section>";
+        if (nodeset2boolean( m.n(j14, m.v('v0', c0.doc.root)) )) {
+            r0 += "<section class=\"" + "book__original" + "\">";
+            r0 += "<p class=\"" + "book__blocktitle" + "\">" + "В оригинале:" + "</p>";
+            if (nodeset2boolean( m.n(j15, m.v('v0', c0.doc.root)) )) {
+                r0 += "<img class=\"" + "image book__image book__image_original" + "\" src=\"" + nodeset2attrvalue( ( m.n(j15, m.v('v0', c0.doc.root)) ) ) + "\"/>";
+            }
+            r0 += "<h2 class=\"" + "book__title book__title_original title title_h2" + "\">" + nodeset2xml( ( m.n(j16, m.v('v0', c0.doc.root)) ) ) + "</h2>";
+            r0 += "<p class=\"" + "book__author book__author_original" + "\">" + nodeset2xml( ( m.n(j17, m.v('v0', c0.doc.root)) ) ) + "</p>";
+            r0 += "</section>";
+        }
+        r0 += "<section class=\"" + "book__body" + "\">";
+        r0 += "<section class=\"" + "book__caption" + "\">";
+        r0 += "<p class=\"" + "book__blocktitle" + "\">" + "От автора:" + "</p>";
+        r0 += "<p>" + nodeset2xml( ( m.n(j18, m.v('v0', c0.doc.root)) ) ) + "</p>";
+        r0 += "</section>";
+        r0 += "<section class=\"" + "book__comment" + "\">";
+        r0 += nodeset2scalar( m.n(j10, m.v('v2', c0.doc.root)) );
+        r0 += "</section>";
+        r0 += "</section>";
+        r0 += "</article>";
 
         return r0;
     };
     M.t7.j = j11;
     M.t7.a = 0;
 
-    // match .pages
+    // match .pages : block-content
     M.t8 = function t8(m, c0, i0, l0, a0) {
+        var r0 = '';
+        var current = [ c0 ];
+
+        r0 += m.a(m, 0, m.n(j19, m.v('v2', c0.doc.root)), '', a0)
+
+        return r0;
+    };
+    M.t8.j = j19;
+    M.t8.a = 0;
+
+    // match .pages
+    M.t9 = function t9(m, c0, i0, l0, a0) {
         var r0 = '';
         var current = [ c0 ];
 
@@ -218,23 +276,23 @@ var yr = yr || require('yate/lib/runtime.js');
 
         return r0;
     };
-    M.t8.j = j11;
-    M.t8.a = 0;
+    M.t9.j = j19;
+    M.t9.a = 0;
 
     // match .pages : list
-    M.t9 = function t9(m, c0, i0, l0, a0) {
+    M.t10 = function t10(m, c0, i0, l0, a0) {
         var r0 = '';
         var current = [ c0 ];
 
-        r0 += m.a(m, 0, m.s(j12, c0), '', a0)
+        r0 += m.a(m, 0, m.s(j20, c0), '', a0)
 
         return r0;
     };
-    M.t9.j = j11;
-    M.t9.a = 0;
+    M.t10.j = j19;
+    M.t10.a = 0;
 
     // match .pagelist
-    M.t10 = function t10(m, c0, i0, l0, a0) {
+    M.t11 = function t11(m, c0, i0, l0, a0) {
         var r0 = '';
         var current = [ c0 ];
 
@@ -243,8 +301,8 @@ var yr = yr || require('yate/lib/runtime.js');
 
         return r0;
     };
-    M.t10.j = j13;
-    M.t10.a = 0;
+    M.t11.j = j21;
+    M.t11.a = 0;
 
     M.matcher = {
         "": {
@@ -255,10 +313,10 @@ var yr = yr || require('yate/lib/runtime.js');
                 "t1"
             ],
             "pages": [
-                "t8"
+                "t9"
             ],
             "pagelist": [
-                "t10"
+                "t11"
             ]
         },
         "block": {
@@ -282,14 +340,18 @@ var yr = yr || require('yate/lib/runtime.js');
                 "t6",
                 "t3"
             ],
-            "pages": [
+            "book": [
                 "t7",
+                "t3"
+            ],
+            "pages": [
+                "t8",
                 "t3"
             ]
         },
         "list": {
             "pages": [
-                "t9"
+                "t10"
             ]
         }
     };

@@ -1,0 +1,60 @@
+.book__name {
+  border-bottom: 1px dashed #b9b9b9;
+  display: inline-block;
+  padding: 1em;
+  width: 65%;
+}
+@media (max-width: 800px) {
+  .book__name {
+    display: block;
+    width: 100%;
+  }
+}
+.book__original {
+  display: inline-block;
+  border: 1px solid #efef1f;
+  padding: 0.3em 1em;
+  vertical-align: top;
+  margin: 1em;
+  width: 25%;
+  position: absolute;
+}
+@media (max-width: 800px) {
+  .book__original {
+    display: block;
+    position: static;
+    width: 100%;
+  }
+}
+.book__blocktitle {
+  font-style: italic;
+}
+.book__title {
+  margin: 0;
+}
+.book__title_original {
+  margin-bootom: -0.3em;
+}
+.book__body {
+  width: 65%;
+  padding: 1em;
+}
+.book__image {
+  float: left;
+  width: 100px;
+  padding: 0.5em;
+}
+.page {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+.title {
+  font-family: Georgia, Times, "Times New Roman", serif;
+  font-weight: normal;
+}
+.title_h1 {
+  font-size: 2.3em;
+}
+.title_h2 {
+  font-size: 1.9em;
+}

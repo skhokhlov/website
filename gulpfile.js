@@ -2,13 +2,15 @@
 
 var fs = require('fs');
 var gulp = require('gulp');
+var execSync = require('child_process').execSync;
 
 var jscs = require('gulp-jscs');
 var marked = require('marked');
 var yaml = require('js-yaml');
 var minify = require('html-minifier').minify;
 var jshint = require('gulp-jshint');
-var execSync = require('child_process').execSync;
+var stylus = require('gulp-stylus');
+var csso = require('gulp-csso');
 var yr = require('./node_modules/yate/lib/runtime.js');
 
 var renderer = new marked.Renderer();
@@ -234,7 +236,17 @@ gulp.task('yate', function () {
     yate('app/feed.yate', 'build/app/feed.yate.js');
 });
 
-gulp.task('default', ['js', 'pages'], function () {
+gulp.task('css', function () {
+    gulp.src(['app/app.styl'])
+        .pipe(stylus())
+        //.pipe(autoprefixer({
+        //    browsers: ['last 2 versions']
+        //}))
+        //.pipe(csso())
+        .pipe(gulp.dest('build/app'));
+});
+
+gulp.task('default', ['js', 'css', 'pages'], function () {
 });
 
 /**
