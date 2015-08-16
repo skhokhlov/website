@@ -5,4 +5,4 @@ image: http://books.google.ru/books/content?id=vfi4AAAAQBAJ&printsec=frontcover&
 caption: Книга рассчитана на широкий круг читателей, интересующихся графическим и промышленным дизайном, проектированием интерфейсов, типографикой, семиотикой, визуализацией и так далее.
 ---
 
-![Mandership](http://store.artlebedev.ru/products/images/0atdxr5k.jpg)
+Эта книга меняет взгляд на мир. А еще это шажок к достижению скила распознавания говна и не говна.
