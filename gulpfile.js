@@ -61,107 +61,64 @@ gulp.task('feeds', ['yate'], function () {
     /**
      * Перебирает ленты
      */
-    fs.readdir('./bundles/feeds', function (err, files) {
-        if (err) {
-            throw new Error(err);
-        }
+    var feeds = fs.readdirSync('./bundles/feeds');
+    feeds.forEach(function (feed) {
+        var listOfPages = [];
 
-        files.forEach(function (element) {
+        /**
+         * Перебирает страницы в ленте
+         */
+        var pages = fs.readdirSync('./bundles/feeds/' + feed);
+        pages.forEach(function (page) {
             /**
-             * Перебирает страницы в ленте
+             * Разборка страницы ленты
              */
-            fs.readdir('./bundles/feeds/' + element, function (subErr, subFiles) {
-                if (subErr) {
-                    throw new Error(subErr);
+            var content = fs.readFileSync('./bundles/feeds/' + feed + '/' + page, {encoding: 'utf-8'});
+            parsePage(content, function (err, params, html) {
+                if (err) {
+                    throw new Error(err);
                 }
 
-                var listOfPages = [];
+                var build = params;
+                build.name = removeEx(page);
 
-                subFiles.forEach(function (subElement) {
-                    /**
-                     * Разборка страницы ленты
-                     */
-                    fs.readFile('./bundles/feeds/' + element + '/' + subElement,
-                        {encoding: 'utf-8'}, function (ssErr, ssData) {
-                            if (ssErr) {
-                                throw new Error(ssErr);
-                            }
+                listOfPages.push(build);
 
-                            // TODO: технический файл тоже должен парситься
-                            /**
-                             * Проверка на технический файл ленты
-                             */
-                            if (!/^_/.test(subElement)) {
-                                parsePage(ssData, function (err, params, html) {
-                                    if (err) {
-                                        throw new Error(err);
-                                    }
+                build.pageContent = html;
 
-                                    var build = params;
-                                    build.name = subElement.replace('.md', '');
+                /**
+                 * Сохрание скомпилированного файла страницы
+                 */
+                fs.writeFileSync('./build/bundles/feeds/' + feed + '/' + removeEx(page) + '.json',
+                    JSON.stringify(build), {encoding: 'utf-8'});
 
-                                    listOfPages.push(build);
-
-                                    build.pageContent = html;
-
-                                    /**
-                                     * Сохрание скомпилированного файла страницы
-                                     */
-                                    fs.writeFile('./build/bundles/feeds/' +
-                                        element + '/' + subElement.replace('.md', '') + '.json',
-                                        JSON.stringify(build), {encoding: 'utf-8'}, function (err) {
-                                            if (err) {
-                                                throw new Error(err);
-                                            }
-                                        });
-
-                                });
-                            }
-
-                            /**
-                             * Сохрание массива с параметрами страниц ленты
-                             */
-                            if (listOfPages.length === (subFiles.length - 1)) {
-                                var feed = {
-                                    pages: listOfPages,
-                                    name: element
-                                };
-
-                                require('./build/app/feed.yate.js');
-                                feed.render = {
-                                    compact: yr.run('feed', {
-                                        pages: listOfPages,
-                                        name: element,
-                                        type: 'compact'
-                                    }),
-                                    full: yr.run('feed', {
-                                        pages: listOfPages,
-                                        name: element,
-                                        type: 'full'
-                                    })
-                                };
-
-                                fs.readFile('./bundles/feeds/' + element + '/_' + element + '.md',
-                                    {encoding: 'utf-8'}, function (err, sssData) {
-                                        if (err) {
-                                            throw new Error(err);
-                                        }
-
-                                        feed.pageContent = marked(sssData, {renderer: renderer});
-
-                                        fs.writeFile('./build/bundles/feeds/' + element.replace('.md', '') + '.json',
-                                            JSON.stringify(feed), {encoding: 'utf-8'}, function (err) {
-                                                if (err) {
-                                                    throw new Error(err);
-                                                }
-                                            });
-                                    });
-
-                            }
-                        });
-                });
             });
         });
+
+        /**
+         * Сохрание массива с параметрами страниц ленты
+         */
+        var feedParam = {
+            pages: listOfPages,
+            name: feed
+        };
+
+        require('./build/app/feed.yate.js');
+        feedParam.render = {
+            compact: yr.run('feed', {
+                pages: listOfPages,
+                name: feed,
+                type: 'compact'
+            }),
+            full: yr.run('feed', {
+                pages: listOfPages,
+                name: feed,
+                type: 'full'
+            })
+        };
+
+        fs.writeFileSync('./build/bundles/feeds/' + removeEx(feed) + '.json',
+            JSON.stringify(feedParam), {encoding: 'utf-8'});
     });
 });
 
@@ -299,4 +256,13 @@ function parsePage(data, callback) {
  */
 function yate(input, output) {
     return execSync('./node_modules/.bin/yate ' + input + ' > ' + output);
+}
+
+/**
+ *
+ * @param name
+ * @returns {XML|string|void}
+ */
+function removeEx(name) {
+    return name.replace('.md', '');
 }
