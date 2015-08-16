@@ -80,8 +80,6 @@ app.get('/:page', function (req, res) {
 
         var page = JSON.parse(data);
 
-        console.log(page);
-
         res.send(yr.run('app', {
             page: {
                 'page-blocks': {

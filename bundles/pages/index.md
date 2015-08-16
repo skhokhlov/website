@@ -4,4 +4,4 @@ title: Главная
 # Сергей Хохлов
 ## Вот что я люблю
 
-{ feeds.books }
+{ feeds.books.compact }

@@ -95,9 +95,11 @@ gulp.task('feeds', ['yate'], function () {
                                         throw new Error(err);
                                     }
 
-                                    listOfPages.push(params);
-
                                     var build = params;
+                                    build.name = subElement.replace('.md', '');
+
+                                    listOfPages.push(build);
+
                                     build.pageContent = html;
 
                                     /**
@@ -124,9 +126,18 @@ gulp.task('feeds', ['yate'], function () {
                                 };
 
                                 require('./build/app/feed.yate.js');
-                                feed.render = yr.run('feed', {
-                                    pages: listOfPages
-                                });
+                                feed.render = {
+                                    compact: yr.run('feed', {
+                                        pages: listOfPages,
+                                        name: element,
+                                        type: 'compact'
+                                    }),
+                                    full: yr.run('feed', {
+                                        pages: listOfPages,
+                                        name: element,
+                                        type: 'full'
+                                    })
+                                };
 
                                 fs.readFile('./bundles/feeds/' + element + '/_' + element + '.md',
                                     {encoding: 'utf-8'}, function (err, sssData) {
@@ -175,11 +186,16 @@ gulp.task('pages', ['feeds'], function () {
                                     throw new Error(err);
                                 }
 
+                                //TODO: сделать автоматическим
+
                                 var build = params;
                                 build.pageContent = html
-                                    .replace(new RegExp('{ feeds.books }', 'g'),
+                                    .replace(new RegExp('{ feeds.books.full }', 'g'),
                                     JSON.parse(fs.readFileSync('build/bundles/feeds/books.json',
-                                        {encoding: 'utf-8'})).render);
+                                        {encoding: 'utf-8'})).render.full)
+                                    .replace(new RegExp('{ feeds.books.compact }', 'g'),
+                                    JSON.parse(fs.readFileSync('build/bundles/feeds/books.json',
+                                        {encoding: 'utf-8'})).render.compact);
 
                                 /**
                                  * Сохрание скомпилированного файла страницы
