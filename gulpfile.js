@@ -11,6 +11,8 @@ var minify = require('html-minifier').minify;
 var jshint = require('gulp-jshint');
 var stylus = require('gulp-stylus');
 var csso = require('gulp-csso');
+var autoprefixer = require('gulp-autoprefixer');
+var imagemin = require('gulp-imagemin');
 var yr = require('./node_modules/yate/lib/runtime.js');
 
 var renderer = new marked.Renderer();
@@ -145,7 +147,7 @@ gulp.task('pages', ['feeds'], function () {
                                     throw new Error(err);
                                 }
 
-                                //TODO: сделать автоматическим
+                                // TODO: сделать автоматическим
 
                                 var build = params;
                                 build.pageContent = html
@@ -196,14 +198,23 @@ gulp.task('yate', function () {
 gulp.task('css', function () {
     gulp.src(['app/app.styl'])
         .pipe(stylus())
-        //.pipe(autoprefixer({
-        //    browsers: ['last 2 versions']
-        //}))
-        //.pipe(csso())
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions']
+        }))
+        // .pipe(csso())
+
         .pipe(gulp.dest('build/app'));
 });
 
-gulp.task('default', ['js', 'css', 'pages'], function () {
+gulp.task('images', function(){
+    gulp.src('images/*')
+        .pipe(imagemin({
+            progressive: true
+        }))
+        .pipe(gulp.dest('images'));
+});
+
+gulp.task('default', ['js', 'css', 'pages', 'images'], function () {
 });
 
 /**

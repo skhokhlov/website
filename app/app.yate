@@ -59,26 +59,32 @@ match .book block-content {
     <article class="book">
             <section class="book__name">
                 if params.param.image {
-                    <img class="image book__image" src="{ params.param.image }"/>
+                    <div class="book__section"><img class="image book__image" src="{ params.param.image }"/></div>
                 }
+                <div class="book__section">
                 <h1 class="book__title title title_h1">{ params.title }</h1>
                 <p class="book__author">{ params.param.author }</p>
+                </div>
             </section>
             if params.param.original {
                             <section class="book__original">
                                 <p class="book__blocktitle">В оригинале:</p>
                                 if params.param.original.image {
-                                    <img class="image book__image book__image_original" src="{ params.param.original.image }"/>
+                                    <div class="book__section"><img class="image book__image book__image_original" src="{ params.param.original.image }"/></div>
                                 }
-                                <h2 class="book__title book__title_original title title_h2">{ params.param.original.title }</h2>
-                                <p class="book__author book__author_original">{ params.param.original.author }</p>
+                                <div class="book__section">
+                                    <h2 class="book__title book__title_original title title_h2">{ params.param.original.title }</h2>
+                                    <p class="book__author book__author_original">{ params.param.original.author }</p>
+                                </div>
                             </section>
                         }
             <section class="book__body">
+            if params.param.caption {
                 <section class="book__caption">
                     <p class="book__blocktitle">От автора:</p>
                     <p>{ params.param.caption }</p>
                 </section>
+            }
                 <section class="book__comment">
                     html( content.body )
                 </section>

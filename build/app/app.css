@@ -6,8 +6,9 @@
 }
 @media (max-width: 800px) {
   .book__name {
+    width: inherit;
     display: block;
-    width: 100%;
+    border-bottom: none;
   }
 }
 .book__original {
@@ -21,9 +22,9 @@
 }
 @media (max-width: 800px) {
   .book__original {
+    width: inherit;
     display: block;
     position: static;
-    width: 100%;
   }
 }
 .book__blocktitle {
@@ -39,8 +40,12 @@
   width: 65%;
   padding: 1em;
 }
+@media (max-width: 800px) {
+  .book__body {
+    width: inherit;
+  }
+}
 .book__image {
-  float: left;
   width: 100px;
   padding: 0.5em;
 }
@@ -50,6 +55,10 @@
 }
 .book__comment {
   padding: 1em;
+}
+.book__section {
+  display: table-cell;
+  vertical-align: top;
 }
 .feed__item_compact {
   display: inline-block;

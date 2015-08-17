@@ -1,7 +1,7 @@
 ---
 title: Ководство
 author: Артемий Лебедев
-image: http://books.google.ru/books/content?id=vfi4AAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api
+image: /images/mandership.jpg
 caption: Книга рассчитана на широкий круг читателей, интересующихся графическим и промышленным дизайном, проектированием интерфейсов, типографикой, семиотикой, визуализацией и так далее.
 ---
 

@@ -87,6 +87,7 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += "<!DOCTYPE html>";
         r0 += "<html>";
         r0 += "<head>";
+        r0 += "<meta name=\"" + "viewport" + "\" content=\"" + "width=device-width, initial-scale=1" + "\"/>";
         r0 += "<title>" + nodeset2xml( ( m.n(j4, m.v('v0', c0.doc.root)) ) ) + "</title>";
         r0 += "<link rel=\"" + "stylesheet" + "\" href=\"" + "/public/app.css" + "\"/>";
         r0 += "</head>";
@@ -216,26 +217,32 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += "<article class=\"" + "book" + "\">";
         r0 += "<section class=\"" + "book__name" + "\">";
         if (nodeset2boolean( m.n(j12, m.v('v0', c0.doc.root)) )) {
-            r0 += "<img class=\"" + "image book__image" + "\" src=\"" + nodeset2attrvalue( ( m.n(j12, m.v('v0', c0.doc.root)) ) ) + "\"/>";
+            r0 += "<div class=\"" + "book__section" + "\"><img class=\"" + "image book__image" + "\" src=\"" + nodeset2attrvalue( ( m.n(j12, m.v('v0', c0.doc.root)) ) ) + "\"/></div>";
         }
+        r0 += "<div class=\"" + "book__section" + "\">";
         r0 += "<h1 class=\"" + "book__title title title_h1" + "\">" + nodeset2xml( ( m.n(j4, m.v('v0', c0.doc.root)) ) ) + "</h1>";
         r0 += "<p class=\"" + "book__author" + "\">" + nodeset2xml( ( m.n(j13, m.v('v0', c0.doc.root)) ) ) + "</p>";
+        r0 += "</div>";
         r0 += "</section>";
         if (nodeset2boolean( m.n(j14, m.v('v0', c0.doc.root)) )) {
             r0 += "<section class=\"" + "book__original" + "\">";
             r0 += "<p class=\"" + "book__blocktitle" + "\">" + "В оригинале:" + "</p>";
             if (nodeset2boolean( m.n(j15, m.v('v0', c0.doc.root)) )) {
-                r0 += "<img class=\"" + "image book__image book__image_original" + "\" src=\"" + nodeset2attrvalue( ( m.n(j15, m.v('v0', c0.doc.root)) ) ) + "\"/>";
+                r0 += "<div class=\"" + "book__section" + "\"><img class=\"" + "image book__image book__image_original" + "\" src=\"" + nodeset2attrvalue( ( m.n(j15, m.v('v0', c0.doc.root)) ) ) + "\"/></div>";
             }
+            r0 += "<div class=\"" + "book__section" + "\">";
             r0 += "<h2 class=\"" + "book__title book__title_original title title_h2" + "\">" + nodeset2xml( ( m.n(j16, m.v('v0', c0.doc.root)) ) ) + "</h2>";
             r0 += "<p class=\"" + "book__author book__author_original" + "\">" + nodeset2xml( ( m.n(j17, m.v('v0', c0.doc.root)) ) ) + "</p>";
+            r0 += "</div>";
             r0 += "</section>";
         }
         r0 += "<section class=\"" + "book__body" + "\">";
-        r0 += "<section class=\"" + "book__caption" + "\">";
-        r0 += "<p class=\"" + "book__blocktitle" + "\">" + "От автора:" + "</p>";
-        r0 += "<p>" + nodeset2xml( ( m.n(j18, m.v('v0', c0.doc.root)) ) ) + "</p>";
-        r0 += "</section>";
+        if (nodeset2boolean( m.n(j18, m.v('v0', c0.doc.root)) )) {
+            r0 += "<section class=\"" + "book__caption" + "\">";
+            r0 += "<p class=\"" + "book__blocktitle" + "\">" + "От автора:" + "</p>";
+            r0 += "<p>" + nodeset2xml( ( m.n(j18, m.v('v0', c0.doc.root)) ) ) + "</p>";
+            r0 += "</section>";
+        }
         r0 += "<section class=\"" + "book__comment" + "\">";
         r0 += nodeset2scalar( m.n(j10, m.v('v2', c0.doc.root)) );
         r0 += "</section>";

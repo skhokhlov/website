@@ -6,9 +6,10 @@
         padding 1em
         width 65%
 
-        @media (max-width: 800px)
+        @media(max-width: 800px)
+            width inherit
             display block
-            width 100%
+            border-bottom none
 
     &__original
         display inline-block
@@ -19,10 +20,10 @@
         width 25%
         position: absolute
 
-        @media (max-width: 800px)
+        @media(max-width: 800px)
+            width inherit
             display block
-            position: static
-            width 100%
+            position static
 
     &__blocktitle
         font-style italic
@@ -37,8 +38,10 @@
         width 65%
         padding 1em
 
+        @media(max-width: 800px)
+            width inherit
+
     &__image
-        float: left
         width 100px
         padding 0.5em
 
@@ -48,3 +51,7 @@
 
     &__comment
         padding 1em
+
+    &__section
+        display table-cell
+        vertical-align top

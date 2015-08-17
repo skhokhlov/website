@@ -13,6 +13,11 @@ app.use('/public', express.static(__dirname + '/build/app', {
     //maxAge: ((process.env.DEBUG === 'false') ? 15552000000 : 15000)
 }));
 
+app.use('/images', express.static(__dirname + '/images', {
+    index: false,
+    //maxAge: ((process.env.DEBUG === 'false') ? 15552000000 : 15000)
+}));
+
 app.set('port', process.env.VCAP_APP_PORT || process.env.PORT || 3000);
 
 app.get('/feed/:feed', function (req, res) {
