@@ -72,11 +72,7 @@ var yr = yr || require('yate/lib/runtime.js');
 
     var j18 = [ 0, 'param', 0, 'caption' ];
 
-    var j19 = [ 0, 'pages' ];
-
-    var j20 = [ 0, 'list', 0, 'pagelist' ];
-
-    var j21 = [ 0, 'pagelist' ];
+    var j19 = [ 0, 'header' ];
 
     // match /
     M.t0 = function t0(m, c0, i0, l0, a0) {
@@ -156,17 +152,17 @@ var yr = yr || require('yate/lib/runtime.js');
         var current = [ c0 ];
 
         r0 += closeAttrs(a0);
-        r0 += "<div";
+        r0 += "<footer";
         a0.a = {
         };
-        a0.s = 'div';
+        a0.s = 'footer';
         var r1 = '';
         var a1 = { a: {} };
         r1 += "footer";
         a0.a[ "class" ] = new yr.scalarAttr(r1);
         r0 += closeAttrs(a0);
         r0 += "<p>" + "© Сергей Хохлов" + "</p>";
-        r0 += "</div>";
+        r0 += "</footer>";
 
         return r0;
     };
@@ -240,7 +236,9 @@ var yr = yr || require('yate/lib/runtime.js');
         if (nodeset2boolean( m.n(j18, m.v('v0', c0.doc.root)) )) {
             r0 += "<section class=\"" + "book__caption" + "\">";
             r0 += "<p class=\"" + "book__blocktitle" + "\">" + "От автора:" + "</p>";
-            r0 += "<p>" + nodeset2xml( ( m.n(j18, m.v('v0', c0.doc.root)) ) ) + "</p>";
+            r0 += "<p>";
+            r0 += nodeset2scalar( m.n(j18, m.v('v0', c0.doc.root)) );
+            r0 += "</p>";
             r0 += "</section>";
         }
         r0 += "<section class=\"" + "book__comment" + "\">";
@@ -254,62 +252,24 @@ var yr = yr || require('yate/lib/runtime.js');
     M.t7.j = j11;
     M.t7.a = 0;
 
-    // match .pages : block-content
+    // match .header : block-content
     M.t8 = function t8(m, c0, i0, l0, a0) {
         var r0 = '';
         var current = [ c0 ];
 
-        r0 += m.a(m, 0, m.n(j19, m.v('v2', c0.doc.root)), '', a0)
+        r0 += closeAttrs(a0);
+        r0 += "<header class=\"" + "header" + "\">";
+        r0 += "<div class=\"" + "logo" + "\">" + "СХ" + "</div>";
+        r0 += "<nav class=\"" + "nav" + "\">";
+        r0 += "<a class=\"" + "nav__link" + "\" href=\"" + "/" + "\">" + "H" + "</a>";
+        r0 += "<a class=\"" + "nav__link" + "\" href=\"" + "/contacts" + "\">" + "C" + "</a>";
+        r0 += "</nav>";
+        r0 += "</header>";
 
         return r0;
     };
     M.t8.j = j19;
     M.t8.a = 0;
-
-    // match .pages
-    M.t9 = function t9(m, c0, i0, l0, a0) {
-        var r0 = '';
-        var current = [ c0 ];
-
-        r0 += closeAttrs(a0);
-        r0 += "<div";
-        a0.a = {
-            'class': new yr.scalarAttr("list")
-        };
-        a0.s = 'div';
-        r0 += m.a(m, 0, m.s(j8, c0), 'list', a0)
-        r0 += closeAttrs(a0);
-        r0 += "</div>";
-
-        return r0;
-    };
-    M.t9.j = j19;
-    M.t9.a = 0;
-
-    // match .pages : list
-    M.t10 = function t10(m, c0, i0, l0, a0) {
-        var r0 = '';
-        var current = [ c0 ];
-
-        r0 += m.a(m, 0, m.s(j20, c0), '', a0)
-
-        return r0;
-    };
-    M.t10.j = j19;
-    M.t10.a = 0;
-
-    // match .pagelist
-    M.t11 = function t11(m, c0, i0, l0, a0) {
-        var r0 = '';
-        var current = [ c0 ];
-
-        r0 += closeAttrs(a0);
-        r0 += "<p>" + nodeset2xml( ( selectNametest('title', c0, []) ) ) + "</p>";
-
-        return r0;
-    };
-    M.t11.j = j21;
-    M.t11.a = 0;
 
     M.matcher = {
         "": {
@@ -318,12 +278,6 @@ var yr = yr || require('yate/lib/runtime.js');
             ],
             "page": [
                 "t1"
-            ],
-            "pages": [
-                "t9"
-            ],
-            "pagelist": [
-                "t11"
             ]
         },
         "block": {
@@ -351,14 +305,9 @@ var yr = yr || require('yate/lib/runtime.js');
                 "t7",
                 "t3"
             ],
-            "pages": [
+            "header": [
                 "t8",
                 "t3"
-            ]
-        },
-        "list": {
-            "pages": [
-                "t10"
             ]
         }
     };

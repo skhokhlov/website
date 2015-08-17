@@ -20,38 +20,6 @@ app.use('/images', express.static(__dirname + '/images', {
 
 app.set('port', process.env.VCAP_APP_PORT || process.env.PORT || 3000);
 
-app.get('/feed/:feed', function (req, res) {
-    fs.readFile('./build/bundles/feeds/' + req.params.feed + '.json', {encoding: 'utf-8'}, function (err, data) {
-        if (err) {
-            return res.status(404).send('404');
-        }
-
-        var feed = JSON.parse(data);
-
-        res.send(yr.run('app', {
-            page: {
-                'page-blocks': {
-                    header: {
-                        logo: true,
-                        body: {
-                            pages: true
-                        }
-                    },
-                    footer: true
-                },
-                'page-params': {
-                    _page: 'feed',
-                    title: feed.title
-                },
-                'page-content': {
-                    body: feed.pageContent,
-                    pages: feed.pages
-                }
-            }
-        }));
-    });
-});
-
 app.get('/feed/:feed/:book', function (req, res) {
     fs.readFile('./build/bundles/feeds/' + req.params.feed + '/' + req.params.book + '.json',
         {encoding: 'utf-8'}, function (err, data) {
@@ -95,9 +63,9 @@ app.get('/:page', function (req, res) {
             page: {
                 'page-blocks': {
                     header: {
-                        logo: true,
-                        body: true
+                        logo: true
                     },
+                    body: true,
                     footer: true
                 },
                 'page-params': {
@@ -124,9 +92,9 @@ app.get('/', function (req, res) {
             page: {
                 'page-blocks': {
                     header: {
-                        logo: true,
-                        body: true
+                        logo: true
                     },
+                    body: true,
                     footer: true
                 },
                 'page-params': {

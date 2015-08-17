@@ -34,13 +34,13 @@ match .* block-content {
 }
 
 match .footer block-content {
-    <div>
+    <footer>
     @class=(
         "footer"
     )
 
     <p>© Сергей Хохлов</p>
-    </div>
+    </footer>
 }
 
 match .body block {
@@ -82,32 +82,24 @@ match .book block-content {
             if params.param.caption {
                 <section class="book__caption">
                     <p class="book__blocktitle">От автора:</p>
-                    <p>{ params.param.caption }</p>
+                    <p>
+                        html( params.param.caption )
+                    </p>
                 </section>
             }
                 <section class="book__comment">
                     html( content.body )
                 </section>
             </section>
-
-
     </article>
 }
 
-match .pages block-content {
-    apply content.pages
-}
-
-match .pages {
-    <div class="list">
-        apply . list
-    </div>
-}
-
-match .pages list {
-    apply .list.pagelist
-}
-
-match .pagelist {
-    <p>{ .title }</p>
+match .header block-content {
+    <header class="header">
+        <div class="logo">СХ</div>
+        <nav class="nav">
+            <a class="nav__link" href="/">H</a>
+            <a class="nav__link" href="/contacts">C</a>
+        </nav>
+    </header>
 }

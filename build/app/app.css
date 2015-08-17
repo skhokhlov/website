@@ -4,7 +4,7 @@
   padding: 1em;
   width: 65%;
 }
-@media (max-width: 800px) {
+@media (max-width: 880px) {
   .book__name {
     width: inherit;
     display: block;
@@ -18,13 +18,11 @@
   vertical-align: top;
   margin: 1em;
   width: 25%;
-  position: absolute;
 }
-@media (max-width: 800px) {
+@media (max-width: 880px) {
   .book__original {
     width: inherit;
     display: block;
-    position: static;
   }
 }
 .book__blocktitle {
@@ -40,7 +38,7 @@
   width: 65%;
   padding: 1em;
 }
-@media (max-width: 800px) {
+@media (max-width: 880px) {
   .book__body {
     width: inherit;
   }

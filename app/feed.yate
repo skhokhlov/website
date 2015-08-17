@@ -39,7 +39,9 @@ match / {
                     <article class="feed__body">
                         <a href="/feed/{ feedName }/{ .name }" class="link feed__link"><h3 class="feed__title">{ .title }</h3></a>
                         <p class="feed__author">{ .author }</p>
-                        <p>{ .caption }</p>
+                        <p>
+                            html( .caption )
+                        </p>
                     </article>
                 }
             </div>

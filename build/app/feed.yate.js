@@ -114,7 +114,9 @@ var yr = yr || require('yate/lib/runtime.js');
                 r0 += "<article class=\"" + "feed__body" + "\">";
                 r0 += "<a href=\"" + "/feed/" + nodeset2attrvalue( ( m.v('v0', c1.doc.root) ) ) + "/" + nodeset2attrvalue( ( selectNametest('name', c1, []) ) ) + "\" class=\"" + "link feed__link" + "\"><h3 class=\"" + "feed__title" + "\">" + nodeset2xml( ( selectNametest('title', c1, []) ) ) + "</h3></a>";
                 r0 += "<p class=\"" + "feed__author" + "\">" + nodeset2xml( ( selectNametest('author', c1, []) ) ) + "</p>";
-                r0 += "<p>" + nodeset2xml( ( selectNametest('caption', c1, []) ) ) + "</p>";
+                r0 += "<p>";
+                r0 += simpleScalar('caption', c1);
+                r0 += "</p>";
                 r0 += "</article>";
             }
             r0 += "</div>";
