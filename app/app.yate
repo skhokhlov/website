@@ -14,7 +14,7 @@ html('<!DOCTYPE html>')
 </head>
 <body class="page">
     apply .page
-
+<script src="/public/app.js"></script>
     </body>
     </html>
 }
@@ -98,8 +98,8 @@ match .header block-content {
     <header class="header">
         <div class="logo">СХ</div>
         <nav class="nav">
-            <a class="nav__link" href="/">H</a>
-            <a class="nav__link" href="/contacts">C</a>
+            <a class="nav__link nav__link_home" href="/">H</a>
+            <a class="nav__link nav__link_contacts" href="/contacts">C</a>
         </nav>
     </header>
 }

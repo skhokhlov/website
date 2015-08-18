@@ -184,9 +184,13 @@ gulp.task('js', function () {
             preset: 'yandex'
         }));
 
-    gulp.src(['./*.js', './app/*.js'])
+    gulp.src(['./*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
+
+    gulp.src(['./app/*.js'])
+        .pipe(jshint())
+        .pipe(gulp.dest('build/app/'));
 
 });
 

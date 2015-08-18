@@ -94,6 +94,7 @@ var yr = yr || require('yate/lib/runtime.js');
         a0.s = 'body';
         r0 += m.a(m, 0, selectNametest('page', c0, []), '', a0)
         r0 += closeAttrs(a0);
+        r0 += "<script src=\"" + "/public/app.js" + "\"></script>";
         r0 += "</body>";
         r0 += "</html>";
 
@@ -261,8 +262,8 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += "<header class=\"" + "header" + "\">";
         r0 += "<div class=\"" + "logo" + "\">" + "СХ" + "</div>";
         r0 += "<nav class=\"" + "nav" + "\">";
-        r0 += "<a class=\"" + "nav__link" + "\" href=\"" + "/" + "\">" + "H" + "</a>";
-        r0 += "<a class=\"" + "nav__link" + "\" href=\"" + "/contacts" + "\">" + "C" + "</a>";
+        r0 += "<a class=\"" + "nav__link nav__link_home" + "\" href=\"" + "/" + "\">" + "H" + "</a>";
+        r0 += "<a class=\"" + "nav__link nav__link_contacts" + "\" href=\"" + "/contacts" + "\">" + "C" + "</a>";
         r0 += "</nav>";
         r0 += "</header>";
 
