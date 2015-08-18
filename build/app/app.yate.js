@@ -162,7 +162,12 @@ var yr = yr || require('yate/lib/runtime.js');
         r1 += "footer";
         a0.a[ "class" ] = new yr.scalarAttr(r1);
         r0 += closeAttrs(a0);
+        r0 += "<div class=\"" + "footer__col footer__col_left" + "\">";
+        r0 += "<p>" + "Электропочта: " + "<a class=\"" + "link footer__link" + "\" href=\"" + "mailto:sergey.a.khokhlov@gmail.com" + "\">" + "sergey.a.khokhlov@gmail.com" + "</a></p>";
+        r0 += "</div>";
+        r0 += "<div class=\"" + "footer__col footer__col_right" + "\">";
         r0 += "<p>" + "© Сергей Хохлов" + "</p>";
+        r0 += "</div>";
         r0 += "</footer>";
 
         return r0;
