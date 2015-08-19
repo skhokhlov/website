@@ -1,6 +1,6 @@
-(function(window){
+(function (window) {
     var loc = window.location.pathname;
-    switch (loc){
+    switch (loc) {
         case '/':
             document.getElementsByClassName('nav__link_home')[0].classList.add('nav__link_active');
             break;

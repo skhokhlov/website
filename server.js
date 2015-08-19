@@ -15,7 +15,7 @@ app.use('/public', express.static(__dirname + '/build/app', {
 
 app.use('/images', express.static(__dirname + '/images', {
     index: false,
-    //maxAge: ((process.env.DEBUG === 'false') ? 15552000000 : 15000)
+    maxAge: ((process.env.DEBUG === 'false') ? 60480000 : 180000)
 }));
 
 app.set('port', process.env.VCAP_APP_PORT || process.env.PORT || 3000);
@@ -24,7 +24,7 @@ app.get('/feed/:feed/:book', function (req, res) {
     fs.readFile('./build/bundles/feeds/' + req.params.feed + '/' + req.params.book + '.json',
         {encoding: 'utf-8'}, function (err, data) {
             if (err) {
-                return res.status(404).send('404');
+                return sendError(res);
             }
 
             var page = JSON.parse(data);
@@ -51,10 +51,10 @@ app.get('/feed/:feed/:book', function (req, res) {
         });
 });
 
-app.get('/:page', function (req, res) {
-    fs.readFile('./build/bundles/pages/' + req.params.page + '.json', {encoding: 'utf-8'}, function (err, data) {
+app.get('/', function (req, res) {
+    fs.readFile('./build/bundles/pages/index.json', {encoding: 'utf-8'}, function (err, data) {
         if (err) {
-            return res.status(404).send('404');
+            return sendError(res);
         }
 
         var page = JSON.parse(data);
@@ -80,10 +80,10 @@ app.get('/:page', function (req, res) {
     });
 });
 
-app.get('/', function (req, res) {
-    fs.readFile('./build/bundles/pages/index.json', {encoding: 'utf-8'}, function (err, data) {
+app.use(function (req, res) {
+    fs.readFile('./build/bundles/pages/' + req.path + '.json', {encoding: 'utf-8'}, function (err, data) {
         if (err) {
-            return res.status(404).send('404');
+            return sendError(res);
         }
 
         var page = JSON.parse(data);
@@ -114,3 +114,7 @@ http.createServer(app).listen(app.get('port'), function () {
     (Boolean((process.env.DEBUG === 'true') || (process.env.DEBUG == null))));
     console.log('Server listening on port ' + app.get('port'));
 });
+
+function sendError(res) {
+    return res.status(404).sendFile(__dirname + '/app/404.html');
+}

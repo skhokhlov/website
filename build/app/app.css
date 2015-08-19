@@ -99,13 +99,17 @@
 }
 .nav__link {
   padding: 1em;
+  color: #0101bf;
 }
 .nav__link_active {
   text-decoration: none;
   color: inherit;
-}
-.nav__link_home:hover {
   fill: #f00;
+}
+.nav__link_home {
+  text-decoration: none;
+/*&:hover*/
+/*fill red*/
 }
 .page {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
