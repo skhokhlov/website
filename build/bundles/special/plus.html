@@ -1,0 +1,220 @@
+<!DOCTYPE html><html><head lang="en"><meta charset="UTF-8"><title>+me +math +science +art +you</title><style>.page {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+        }
+
+        .head {
+            margin-top: 30vh;
+        }
+
+        .head__body {
+            font-weight: 400;
+            font-size: 6vw;
+            text-align: center;
+
+        }
+
+        .head__item {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.1s;
+        }
+
+        .head__item_active {
+            color: #f00;
+        }
+
+        .body {
+            max-width: 83vw;
+            margin: 0 auto;
+        }
+
+        .body__article {
+            /*display: none;*/
+            transition: opacity 0.2s;
+            opacity: 0;
+            position: absolute;
+        }
+
+        .body__article_active {
+            display: block;
+            opacity: 1;
+        }</style></head><body class="page"><div class="head"><h1 class="head__body"><a href="#me" class="head__item head__item_me">+me</a> <a href="#math" class="head__item head__item_math">+math</a> <a href="#science" class="head__item head__item_science">+science</a> <a href="#art" class="head__item head__item_art">+art</a> <a href="#you" class="head__item head__item_you">+you</a></h1></div><div class="body"><article class="body__article body__article_me" id="me"><h2>I am Sergey A. Khokhlov</h2><p>I am the foundation myself.</p></article><article class="body__article body__article_math" id="math"><p>Mathematics is the basis of all life. Whether it's programming or chemistry, nothing is possible without mathematics.</p></article><article class="body__article body__article_science" id="science"><p>Without science it is impossible to find the real purpose of life.</p></article><article class="body__article body__article_art" id="art"><p>Without inspiration is impossible to achieve success.</p></article><article class="body__article body__article_you" id="you"><p>Together we can all. And without you, nothing will.</p><p>Let's be together.</p></article></div><script>(function (d) {
+    var names = {
+        active: {
+            head: 'head__item_active',
+            body: 'body__article_active'
+        },
+        me: {
+            hash: '#me',
+            classes: {
+                head: 'head__item_me',
+                body: 'body__article_me'
+            }
+        },
+        art: {
+            hash: '#art',
+            classes: {
+                head: 'head__item_art',
+                body: 'body__article_art'
+            }
+        },
+        you: {
+            hash: '#you',
+            classes: {
+                head: 'head__item_you',
+                body: 'body__article_you'
+            }
+        },
+        math: {
+            hash: '#math',
+            classes: {
+                head: 'head__item_math',
+                body: 'body__article_math'
+            }
+        },
+        science: {
+            hash: '#science',
+            classes: {
+                head: 'head__item_science',
+                body: 'body__article_science'
+            }
+        }
+    };
+
+    var active = {};
+
+    if (window.location.hash !== null) {
+        hashEvent();
+    }
+
+    window.addEventListener("hashchange", hashEvent, false);
+
+    function hashEvent() {
+        var h = window.location.hash;
+
+        if (h === names.me.hash) {
+            if (active.hash === undefined) {
+                addClass(d.getElementsByClassName(names.me.classes.head)[0], names.active.head);
+                addClass(d.getElementsByClassName(names.me.classes.body)[0], names.active.body);
+
+            } else {
+                removeClass(d.getElementsByClassName(active.classes.head)[0], names.active.head);
+                removeClass(d.getElementsByClassName(active.classes.body)[0], names.active.body);
+                addClass(d.getElementsByClassName(names.me.classes.head)[0], names.active.head);
+                addClass(d.getElementsByClassName(names.me.classes.body)[0], names.active.body);
+            }
+
+            active = names.me;
+        } else if (h === names.you.hash) {
+            if (active.hash === undefined) {
+                addClass(d.getElementsByClassName(names.you.classes.head)[0], names.active.head);
+                addClass(d.getElementsByClassName(names.you.classes.body)[0], names.active.body);
+
+            } else {
+                removeClass(d.getElementsByClassName(active.classes.head)[0], names.active.head);
+                removeClass(d.getElementsByClassName(active.classes.body)[0], names.active.body);
+                addClass(d.getElementsByClassName(names.you.classes.head)[0], names.active.head);
+                addClass(d.getElementsByClassName(names.you.classes.body)[0], names.active.body);
+            }
+
+            active = names.you;
+        } else if (h === names.art.hash) {
+            if (active.hash === undefined) {
+                addClass(d.getElementsByClassName(names.art.classes.head)[0], names.active.head);
+                addClass(d.getElementsByClassName(names.art.classes.body)[0], names.active.body);
+
+            } else {
+                removeClass(d.getElementsByClassName(active.classes.head)[0], names.active.head);
+                removeClass(d.getElementsByClassName(active.classes.body)[0], names.active.body);
+                addClass(d.getElementsByClassName(names.art.classes.head)[0], names.active.head);
+                addClass(d.getElementsByClassName(names.art.classes.body)[0], names.active.body);
+            }
+
+            active = names.art;
+        } else if (h === names.math.hash) {
+            if (active.hash === undefined) {
+                addClass(d.getElementsByClassName(names.math.classes.head)[0], names.active.head);
+                addClass(d.getElementsByClassName(names.math.classes.body)[0], names.active.body);
+
+            } else {
+                removeClass(d.getElementsByClassName(active.classes.head)[0], names.active.head);
+                removeClass(d.getElementsByClassName(active.classes.body)[0], names.active.body);
+                addClass(d.getElementsByClassName(names.math.classes.head)[0], names.active.head);
+                addClass(d.getElementsByClassName(names.math.classes.body)[0], names.active.body);
+            }
+
+            active = names.math;
+        } else if (h === names.science.hash) {
+            if (active.hash === undefined) {
+                addClass(d.getElementsByClassName(names.science.classes.head)[0], names.active.head);
+                addClass(d.getElementsByClassName(names.science.classes.body)[0], names.active.body);
+
+            } else {
+                removeClass(d.getElementsByClassName(active.classes.head)[0], names.active.head);
+                removeClass(d.getElementsByClassName(active.classes.body)[0], names.active.body);
+                addClass(d.getElementsByClassName(names.science.classes.head)[0], names.active.head);
+                addClass(d.getElementsByClassName(names.science.classes.body)[0], names.active.body);
+            }
+
+            active = names.science;
+        }
+    }
+
+    function removeClass(element, className) {
+        var classes = element.className.split(' ');
+
+        var index = classes.indexOf(className);
+
+        if (index === -1) {
+            return false;
+        }
+
+        classes.splice(index, 1);
+
+        element.className = classes.join(' ');
+
+    }
+
+    function addClass(element, className) {
+        var classes = element.className.split(' ');
+
+        if (classes.indexOf(className) !== -1) {
+            return false;
+        }
+
+        classes.push(className);
+        element.className = classes.join(' ');
+
+    }
+
+})(document);</script><script>(function (d, w, c) {
+        (w[c] = w[c] || []).push(function () {
+            try {
+                w.yaCounter28136448 = new Ya.Metrika({
+                    id: 28136448,
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true,
+                    webvisor: true,
+                    trackHash: true
+                });
+            } catch (e) {
+            }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () {
+                n.parentNode.insertBefore(s, n);
+            };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else {
+            f();
+        }
+    })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/28136448" style="position:absolute; left:-9999px;" alt=""/></div></noscript></body></html>

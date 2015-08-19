@@ -177,6 +177,44 @@ gulp.task('pages', ['feeds'], function () {
     })('/');
 });
 
+gulp.task('specials', function(){
+    (function parseDir(path) {
+        fs.readdir('./bundles/special/' + path, function (err, data) {
+            if (err) {
+                throw new Error(err);
+            }
+
+            data.forEach(function (element) {
+                if (fs.lstatSync('./bundles/special/' + path + element).isDirectory()) {
+                    parseDir(path + element + '/');
+
+                } else {
+                    fs.readFile('./bundles/special/' + path + element, {encoding: 'utf-8'}, function (err, ssData) {
+                        if (err) {
+                            throw new Error(err);
+                        }
+
+                        if (/\.html/.test(element)) {
+
+
+                            /**
+                             * Сохрание скомпилированного файла страницы
+                             */
+                            fs.writeFile('./build/bundles/special/' + path + element,
+                                minify(ssData, minifyOptions), {encoding: 'utf-8'}, function (err) {
+                                    if (err) {
+                                        throw new Error(err);
+                                    }
+                                });
+                        }
+                    });
+                }
+            });
+        });
+
+    })('/');
+});
+
 gulp.task('js', function () {
     gulp.src(['./**'])
         .pipe(jscs({

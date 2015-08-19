@@ -104,6 +104,9 @@
   text-decoration: none;
   color: inherit;
 }
+.nav__link_home {
+  text-decoration: none;
+}
 .nav__link_home:hover {
   fill: #f00;
 }
