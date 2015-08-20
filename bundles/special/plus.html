@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -8,7 +7,15 @@
     <style>
         .page {
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
 
+        .page__link {
+            color: #5f5f5f;
+            font-size: 0.8em;
+        }
+
+        .page__link:hover {
+            color: #000;
         }
 
         .head {
@@ -43,14 +50,11 @@
             opacity: 0;
             position: absolute;
         }
-
-        .body__article_active {
-            display: block;
-            opacity: 1;
-        }
     </style>
 </head>
 <body class="page">
+<a class="page__link" href="/">Back to home</a>
+
 <div class="head">
     <h1 class="head__body">
         <a href="#me" class="head__item head__item_me">
@@ -73,24 +77,20 @@
 
 <div class="body">
     <article class="body__article body__article_me" id="me">
-        <h2>I am Sergey A. Khokhlov</h2>
-
-        <p>I am the foundation myself.</p>
+        <p>I can't be without me.</p>
     </article>
     <article class="body__article body__article_math" id="math">
-        <p>Mathematics is the basis of all life. Whether it's programming or chemistry, nothing is possible without
-            mathematics.</p>
+        <p>Mathematics helps to understand themselves and optimize life. Math is more than a science. Mathematics is a
+            lifestyle.</p>
     </article>
     <article class="body__article body__article_science" id="science">
         <p>Without science it is impossible to find the real purpose of life.</p>
     </article>
     <article class="body__article body__article_art" id="art">
-        <p>Without inspiration is impossible to achieve success.</p>
+        <p>Art helps to enjoy life in all its manifestations. Helps to look at the world differently.</p>
     </article>
     <article class="body__article body__article_you" id="you">
-        <p>Together we can all. And without you, nothing will.</p>
-
-        <p>Let's be together.</p>
+        <p>Math, science, art, everything is important in its own way, but nothing matters without you.</p>
     </article>
 </div>
 
