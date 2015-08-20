@@ -8,7 +8,7 @@ match / {
 html('<!DOCTYPE html>')
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!--<meta name="viewport" content="width=device-width, initial-scale=1"/>-->
 <title>{params.title}</title>
 <link rel="stylesheet" href="/public/app.css" />
 </head>
@@ -86,7 +86,7 @@ match .book block-content {
             <section class="book__body">
             if params.param.caption {
                 <section class="book__caption">
-                    <p class="book__blocktitle">От автора:</p>
+                    <p class="book__blocktitle">Аннотация:</p>
                     <p>
                         html( params.param.caption )
                     </p>

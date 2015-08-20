@@ -177,7 +177,7 @@ gulp.task('pages', ['feeds'], function () {
     })('/');
 });
 
-gulp.task('specials', function(){
+gulp.task('specials', function () {
     (function parseDir(path) {
         fs.readdir('./bundles/special/' + path, function (err, data) {
             if (err) {
@@ -195,8 +195,6 @@ gulp.task('specials', function(){
                         }
 
                         if (/\.html/.test(element)) {
-
-
                             /**
                              * Сохрание скомпилированного файла страницы
                              */
@@ -218,7 +216,6 @@ gulp.task('specials', function(){
 gulp.task('js', function () {
     gulp.src(['./**'])
         .pipe(jscs({
-            fix: false,
             preset: 'yandex'
         }));
 
@@ -228,6 +225,7 @@ gulp.task('js', function () {
 
     gulp.src(['./app/*.js'])
         .pipe(jshint())
+        .pipe(jshint.reporter('default'))
         .pipe(gulp.dest('build/app/'));
 
 });
@@ -248,7 +246,7 @@ gulp.task('css', function () {
         .pipe(gulp.dest('build/app'));
 });
 
-gulp.task('images', function(){
+gulp.task('images', function () {
     gulp.src('images/**')
         .pipe(imagemin({
             progressive: true
@@ -256,7 +254,7 @@ gulp.task('images', function(){
         .pipe(gulp.dest('images'));
 });
 
-gulp.task('default', ['js', 'css', 'pages']);
+gulp.task('default', ['js', 'css', 'pages', 'specials']);
 
 gulp.task('production', ['default', 'images']);
 

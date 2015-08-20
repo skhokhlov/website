@@ -10,7 +10,7 @@ require('./build/app/app.yate.js');
 
 app.use('/public', express.static(__dirname + '/build/app', {
     index: false,
-    //maxAge: ((process.env.DEBUG === 'false') ? 15552000000 : 15000)
+    // maxAge: ((process.env.DEBUG === 'false') ? 15552000000 : 15000)
 }));
 
 app.use('/images', express.static(__dirname + '/images', {
@@ -124,7 +124,6 @@ app.use(function (req, res) {
     }
 
 });
-
 
 http.createServer(app).listen(app.get('port'), function () {
     console.info('DEBUG environment is set to ' +
