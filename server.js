@@ -89,6 +89,7 @@ app.get('/special/:project', function (req, res) {
 
             res.send(data);
         });
+)};
 
     app.use(function (req, res) {
         fs.readFile('./build/bundles/pages/' + req.path + '.json', {encoding: 'utf-8'}, function (err, data) {
@@ -118,7 +119,7 @@ app.get('/special/:project', function (req, res) {
             }));
         });
     });
-});
+
 
 http.createServer(app).listen(app.get('port'), function () {
     console.info('DEBUG environment is set to ' +
