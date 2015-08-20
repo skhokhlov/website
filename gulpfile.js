@@ -249,15 +249,16 @@ gulp.task('css', function () {
 });
 
 gulp.task('images', function(){
-    gulp.src('images/*')
+    gulp.src('images/**')
         .pipe(imagemin({
             progressive: true
         }))
         .pipe(gulp.dest('images'));
 });
 
-gulp.task('default', ['js', 'css', 'pages', 'images'], function () {
-});
+gulp.task('default', ['js', 'css', 'pages']);
+
+gulp.task('production', ['default', 'images']);
 
 /**
  * sync page parsing and building
