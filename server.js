@@ -89,36 +89,36 @@ app.get('/special/:project', function (req, res) {
 
             res.send(data);
         });
-)};
+});
 
-    app.use(function (req, res) {
-        fs.readFile('./build/bundles/pages/' + req.path + '.json', {encoding: 'utf-8'}, function (err, data) {
-            if (err) {
-                return sendError(res);
-            }
+app.use(function (req, res) {
+    fs.readFile('./build/bundles/pages/' + req.path + '.json', {encoding: 'utf-8'}, function (err, data) {
+        if (err) {
+            return sendError(res);
+        }
 
-            var page = JSON.parse(data);
+        var page = JSON.parse(data);
 
-            res.send(yr.run('app', {
-                page: {
-                    'page-blocks': {
-                        header: {
-                            logo: true
-                        },
-                        body: true,
-                        footer: true
+        res.send(yr.run('app', {
+            page: {
+                'page-blocks': {
+                    header: {
+                        logo: true
                     },
-                    'page-params': {
-                        _page: page.type || 'page',
-                        title: page.title
-                    },
-                    'page-content': {
-                        body: page.pageContent
-                    }
+                    body: true,
+                    footer: true
+                },
+                'page-params': {
+                    _page: page.type || 'page',
+                    title: page.title
+                },
+                'page-content': {
+                    body: page.pageContent
                 }
-            }));
-        });
+            }
+        }));
     });
+});
 
 
 http.createServer(app).listen(app.get('port'), function () {
