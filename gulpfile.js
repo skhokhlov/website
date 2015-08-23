@@ -241,8 +241,7 @@ gulp.task('css', function () {
         .pipe(autoprefixer({
             browsers: ['last 2 versions']
         }))
-        // .pipe(csso())
-
+        .pipe(csso())
         .pipe(gulp.dest('build/app'));
 });
 
