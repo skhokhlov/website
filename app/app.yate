@@ -63,39 +63,36 @@ match .body block-content {
 match .book block-content {
     <div class="book" itemscope="itemscope" itemtype="http://schema.org/Book">
         <div class="layout">
-            <div class="book__name layout__col layout__col_size_l">
+            <div class="book__name">
                 if params.param.image {
                     <div class="book__section"><img class="image book__image" src="{ params.param.image }" itemprop="image"/></div>
                 }
                 <div class="book__section">
                     <h1 class="book__title title title_h1" itemprop="name">{ params.title }</h1>
                     <p class="book__author" itemprop="author">{ params.param.author }</p>
+                    if params.param.original {
+                        <div class="book__original">
+                            <p><span>В оригинале:</span><br/>
+                                    <span class="book__author book__author_original">{ params.param.original.author }. </span>
+                                    <span class="book__title book__title_original">{ params.param.original.title }</span>
+                                </p>
+
+                        </div>
+                    }
                 </div>
             </div>
-
-            if params.param.original {
-                <div class="layout__col layout__col_size_s">
-                    <div class="book__original">
-                        <p class="book__blocktitle">В оригинале:</p>
-                        <div class="book__section">
-                            <h3 class="title title_h3 book__title book__title_original">{ params.param.original.title }</h3>
-                            <p class="book__author book__author_original">{ params.param.original.author }</p>
-                        </div>
-                    </div>
-                </div>
-            }
         </div>
+        <article class="book__body" itemprop="review">
+            html( content.body )
+        </article>
         if params.param.caption {
             <div class="book__caption" itemprop="about">
-                <p class="book__blocktitle">Аннотация:</p>
+                <h2 class="title title_h2">Аннотация</h2>
                 <p>
                     html( params.param.caption )
                 </p>
             </div>
         }
-        <article class="book__body" itemprop="review">
-            html( content.body )
-        </article>
     </div>
 }
 

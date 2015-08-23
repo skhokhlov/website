@@ -64,9 +64,9 @@ var yr = yr || require('yate/lib/runtime.js');
 
     var j14 = [ 0, 'param', 0, 'original' ];
 
-    var j15 = [ 0, 'param', 0, 'original', 0, 'title' ];
+    var j15 = [ 0, 'param', 0, 'original', 0, 'author' ];
 
-    var j16 = [ 0, 'param', 0, 'original', 0, 'author' ];
+    var j16 = [ 0, 'param', 0, 'original', 0, 'title' ];
 
     var j17 = [ 0, 'param', 0, 'caption' ];
 
@@ -215,38 +215,35 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += closeAttrs(a0);
         r0 += "<div class=\"" + "book" + "\" itemscope=\"" + "itemscope" + "\" itemtype=\"" + "http://schema.org/Book" + "\">";
         r0 += "<div class=\"" + "layout" + "\">";
-        r0 += "<div class=\"" + "book__name layout__col layout__col_size_l" + "\">";
+        r0 += "<div class=\"" + "book__name" + "\">";
         if (nodeset2boolean( m.n(j12, m.v('v0', c0.doc.root)) )) {
             r0 += "<div class=\"" + "book__section" + "\"><img class=\"" + "image book__image" + "\" src=\"" + nodeset2attrvalue( ( m.n(j12, m.v('v0', c0.doc.root)) ) ) + "\" itemprop=\"" + "image" + "\"/></div>";
         }
         r0 += "<div class=\"" + "book__section" + "\">";
         r0 += "<h1 class=\"" + "book__title title title_h1" + "\" itemprop=\"" + "name" + "\">" + nodeset2xml( ( m.n(j4, m.v('v0', c0.doc.root)) ) ) + "</h1>";
         r0 += "<p class=\"" + "book__author" + "\" itemprop=\"" + "author" + "\">" + nodeset2xml( ( m.n(j13, m.v('v0', c0.doc.root)) ) ) + "</p>";
-        r0 += "</div>";
-        r0 += "</div>";
         if (nodeset2boolean( m.n(j14, m.v('v0', c0.doc.root)) )) {
-            r0 += "<div class=\"" + "layout__col layout__col_size_s" + "\">";
             r0 += "<div class=\"" + "book__original" + "\">";
-            r0 += "<p class=\"" + "book__blocktitle" + "\">" + "В оригинале:" + "</p>";
-            r0 += "<div class=\"" + "book__section" + "\">";
-            r0 += "<h3 class=\"" + "title title_h3 book__title book__title_original" + "\">" + nodeset2xml( ( m.n(j15, m.v('v0', c0.doc.root)) ) ) + "</h3>";
-            r0 += "<p class=\"" + "book__author book__author_original" + "\">" + nodeset2xml( ( m.n(j16, m.v('v0', c0.doc.root)) ) ) + "</p>";
-            r0 += "</div>";
-            r0 += "</div>";
+            r0 += "<p><span>" + "В оригинале:" + "</span><br/>";
+            r0 += "<span class=\"" + "book__author book__author_original" + "\">" + nodeset2xml( ( m.n(j15, m.v('v0', c0.doc.root)) ) ) + ". " + "</span>";
+            r0 += "<span class=\"" + "book__title book__title_original" + "\">" + nodeset2xml( ( m.n(j16, m.v('v0', c0.doc.root)) ) ) + "</span>";
+            r0 += "</p>";
             r0 += "</div>";
         }
         r0 += "</div>";
+        r0 += "</div>";
+        r0 += "</div>";
+        r0 += "<article class=\"" + "book__body" + "\" itemprop=\"" + "review" + "\">";
+        r0 += nodeset2scalar( m.n(j10, m.v('v2', c0.doc.root)) );
+        r0 += "</article>";
         if (nodeset2boolean( m.n(j17, m.v('v0', c0.doc.root)) )) {
             r0 += "<div class=\"" + "book__caption" + "\" itemprop=\"" + "about" + "\">";
-            r0 += "<p class=\"" + "book__blocktitle" + "\">" + "Аннотация:" + "</p>";
+            r0 += "<h2 class=\"" + "title title_h2" + "\">" + "Аннотация" + "</h2>";
             r0 += "<p>";
             r0 += nodeset2scalar( m.n(j17, m.v('v0', c0.doc.root)) );
             r0 += "</p>";
             r0 += "</div>";
         }
-        r0 += "<article class=\"" + "book__body" + "\" itemprop=\"" + "review" + "\">";
-        r0 += nodeset2scalar( m.n(j10, m.v('v2', c0.doc.root)) );
-        r0 += "</article>";
         r0 += "</div>";
 
         return r0;
