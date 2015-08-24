@@ -83,6 +83,7 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += "<head>";
         r0 += "<title>" + nodeset2xml( ( m.n(j4, m.v('v0', c0.doc.root)) ) ) + "</title>";
         r0 += "<link rel=\"" + "stylesheet" + "\" href=\"" + "/public/app.css" + "\"/>";
+        r0 += "<link id=\"" + "favicon" + "\" type=\"" + "image/x-icon" + "\" rel=\"" + "shortcut icon" + "\" href=\"" + "/images/icon/1.svg" + "\"/>";
         r0 += "</head>";
         r0 += "<body";
         a0.a = {
@@ -221,7 +222,7 @@ var yr = yr || require('yate/lib/runtime.js');
         }
         r0 += "<div class=\"" + "book__section" + "\">";
         r0 += "<h1 class=\"" + "book__title title title_h1" + "\" itemprop=\"" + "name" + "\">" + nodeset2xml( ( m.n(j4, m.v('v0', c0.doc.root)) ) ) + "</h1>";
-        r0 += "<p class=\"" + "book__author" + "\" itemprop=\"" + "author" + "\">" + nodeset2xml( ( m.n(j13, m.v('v0', c0.doc.root)) ) ) + "</p>";
+        r0 += "<p class=\"" + "title book__author" + "\" itemprop=\"" + "author" + "\">" + nodeset2xml( ( m.n(j13, m.v('v0', c0.doc.root)) ) ) + "</p>";
         if (nodeset2boolean( m.n(j14, m.v('v0', c0.doc.root)) )) {
             r0 += "<div class=\"" + "book__original" + "\">";
             r0 += "<p><span>" + "В оригинале:" + "</span><br/>";
@@ -259,7 +260,11 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += closeAttrs(a0);
         r0 += "<header class=\"" + "header" + "\">";
         r0 += "<nav class=\"" + "nav" + "\">";
-        r0 += "<a class=\"" + "nav__link nav__link_home" + "\" href=\"" + "/" + "\"><svg height=\"" + "32" + "\" viewBox=\"" + "0 0 32 32" + "\" width=\"" + "32" + "\" xmlns=\"" + "http://www.w3.org/2000/svg" + "\"><g fill=\"" + "none" + "\" stroke=\"" + "#FFF" + "\" stroke-linecap=\"" + "round" + "\" stroke-linejoin=\"" + "round" + "\" stroke-miterlimit=\"" + "10" + "\" stroke-width=\"" + "2" + "\"><path d=\"" + "M649 138h26v18h-14M653 156h-4v-14M661 156l-8 6v-6" + "\"></path></g><path d=\"" + "M21.947 16.332C23.22 14.915 24 13.05 24 11c0-4.41-3.59-8-8-8s-8 3.59-8 8 3.59 8 8 8c1.555 0 3.003-.453 4.233-1.224 4.35 1.64 7.345 5.62 7.726 10.224H4.04c.26-3.1 1.713-5.99 4.078-8.05.417-.364.46-.995.097-1.412-.362-.416-.994-.46-1.41-.097C3.75 21.104 2 24.95 2 29c0 .553.448 1 1 1h26c.553 0 1-.447 1-1 0-5.486-3.18-10.385-8.053-12.668zM10 11c0-3.31 2.69-6 6-6s6 2.69 6 6-2.69 6-6 6-6-2.69-6-6z" + "\"></path></svg></a>";
+        r0 += "<a class=\"" + "nav__link nav__link_home" + "\" href=\"" + "/" + "\">";
+        r0 += "<svg style=\"" + "width: 20px;position: relative;height: 20px;top: 3px;" + "\" height=\"" + "32" + "\" viewBox=\"" + "0 0 32 32" + "\" width=\"" + "32" + "\" xmlns=\"" + "http://www.w3.org/2000/svg" + "\"><g fill=\"" + "none" + "\" stroke=\"" + "#FFF" + "\" stroke-linecap=\"" + "round" + "\" stroke-linejoin=\"" + "round" + "\" stroke-miterlimit=\"" + "10" + "\" stroke-width=\"" + "2" + "\"><path d=\"" + "M649 138h26v18h-14M653 156h-4v-14M661 156l-8 6v-6" + "\"></path></g><path d=\"" + "M21.947 16.332C23.22 14.915 24 13.05 24 11c0-4.41-3.59-8-8-8s-8 3.59-8 8 3.59 8 8 8c1.555 0 3.003-.453 4.233-1.224 4.35 1.64 7.345 5.62 7.726 10.224H4.04c.26-3.1 1.713-5.99 4.078-8.05.417-.364.46-.995.097-1.412-.362-.416-.994-.46-1.41-.097C3.75 21.104 2 24.95 2 29c0 .553.448 1 1 1h26c.553 0 1-.447 1-1 0-5.486-3.18-10.385-8.053-12.668zM10 11c0-3.31 2.69-6 6-6s6 2.69 6 6-2.69 6-6 6-6-2.69-6-6z" + "\"></path></svg>";
+        r0 += "<span style=\"" + "padding-left:0.5em;" + "\">" + "Сергей Хохлов" + "</span>";
+        r0 += "</a>";
+        r0 += "<a class=\"" + "nav__link nav__link_aroundme" + "\" href=\"" + "/around-me" + "\">" + "Вокруг меня" + "</a>";
         r0 += "<a class=\"" + "nav__link nav__link_contacts" + "\" href=\"" + "/contacts" + "\">" + "Контакты" + "</a>";
         r0 += "</nav>";
         r0 += "</header>";

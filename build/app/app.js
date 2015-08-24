@@ -4,6 +4,9 @@
         case '/':
             document.getElementsByClassName('nav__link_home')[0].classList.add('nav__link_active');
             break;
+        case '/around-me':
+            document.getElementsByClassName('nav__link_aroundme')[0].classList.add('nav__link_active');
+            break;
         case '/contacts':
             document.getElementsByClassName('nav__link_contacts')[0].classList.add('nav__link_active');
             break;
