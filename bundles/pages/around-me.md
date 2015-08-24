@@ -6,6 +6,8 @@ title: Вокруг меня
 <div class="layout">
 <div class="layout__col layout__col_np layout__col_size_50p">
 
+## Ссылки
+
 <p>[Библиотека](/bookshelf) – используемая литература</p>
 
 <p>[+me](/special/plus) – достаточно ясно показывает мою систему ценностей</p>
@@ -19,11 +21,13 @@ title: Вокруг меня
 </div>
 <div class="layout__col layout__col_np layout__col_size_50p">
 
-<p>[World Fly](https://www.worldfly.org) – обертка для проектов</p>
+## Проекты
+
+<p>[World Fly](https://www.worldfly.org) – обертка для проектов, то бишь основной проект</p>
 
 </div>
 </div>
 
 <div class="gap"></div>
 
-Техника
+## Техника
