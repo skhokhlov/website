@@ -27,7 +27,7 @@ renderer.heading = function (text, level) {
         text + '</h' + level + '>';
 };
 renderer.link = function (href, title, text) {
-    return '<a href="' + href + '" class="link" title="' + title + '">' + text + '</a>';
+    return '<a href="' + href + '" class="link" title="' + (title || text) + '">' + text + '</a>';
 };
 renderer.image = function (href, title, text) {
     var titleAtr = '';
