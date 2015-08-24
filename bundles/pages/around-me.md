@@ -9,6 +9,6 @@ title: Вокруг меня
 
 [Instagram](https://instagram.com/skhokhlov) – что-то вроде фотоблога
 
-[Flickr](https://flickr.com/skhokhlov) – здесь я храню свои фотографии
+[Flickr](https://flickr.com/skhokhlov) – фотохранилище
 
 [Github](https://github.com/skhokhlov) – кодохранилище
