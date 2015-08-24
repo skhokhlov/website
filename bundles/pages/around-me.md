@@ -6,8 +6,6 @@ title: Вокруг меня
 <div class="layout">
 <div class="layout__col layout__col_np layout__col_size_50p">
 
-## Ссылки
-
 <p>[Библиотека](/bookshelf) – используемая литература</p>
 
 <p>[+me](/special/plus) – достаточно ясно показывает мою систему ценностей</p>
@@ -21,8 +19,6 @@ title: Вокруг меня
 </div>
 <div class="layout__col layout__col_np layout__col_size_50p">
 
-## Проекты
-
 <p>[World Fly](https://www.worldfly.org) – обертка для проектов, то бишь основной проект</p>
 
 <p>[Contrast](https://www.worldfly.org/contrast) – немного современного искусства</p>
@@ -32,4 +28,6 @@ title: Вокруг меня
 
 <div class="gap"></div>
 
-## Техника
+### Используемая техника
+
+Среди всех компьютерных религий я отдаю предпочтение яблочной. На втором месте пингвинья. В общем юникс — наше все.
