@@ -9,5 +9,8 @@
     } else if (loc === '/contacts') {
         document.getElementsByClassName('nav__link_contacts')[0].classList.add('nav__link_active');
 
+    } else if (loc === '/who-i-am') {
+        document.getElementsByClassName('nav__link_whoiam')[0].classList.add('nav__link_active');
+
     }
 })(window);
