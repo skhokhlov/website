@@ -25,6 +25,8 @@ title: Вокруг меня
 
 <p>[World Fly](https://www.worldfly.org) – обертка для проектов, то бишь основной проект</p>
 
+<p>[Contrast](https://www.worldfly.org/contrast) – немного современного искусства</p>
+
 </div>
 </div>
 
