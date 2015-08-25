@@ -11,7 +11,7 @@ html('<!DOCTYPE html>')
 <!--<meta name="viewport" content="width=device-width, initial-scale=1"/>-->
 <title>{params.title}</title>
 <link rel="stylesheet" href="/public/app.css" />
-<link id="favicon" type="image/x-icon" rel="shortcut icon" href="/images/icon/1.svg"/>
+<link id="favicon" type="image/x-icon" rel="shortcut icon" href="/images/icon/icon.ico"/>
 </head>
 <body class="page">
     apply .page

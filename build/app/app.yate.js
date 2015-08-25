@@ -83,7 +83,7 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += "<head>";
         r0 += "<title>" + nodeset2xml( ( m.n(j4, m.v('v0', c0.doc.root)) ) ) + "</title>";
         r0 += "<link rel=\"" + "stylesheet" + "\" href=\"" + "/public/app.css" + "\"/>";
-        r0 += "<link id=\"" + "favicon" + "\" type=\"" + "image/x-icon" + "\" rel=\"" + "shortcut icon" + "\" href=\"" + "/images/icon/1.svg" + "\"/>";
+        r0 += "<link id=\"" + "favicon" + "\" type=\"" + "image/x-icon" + "\" rel=\"" + "shortcut icon" + "\" href=\"" + "/images/icon/icon.ico" + "\"/>";
         r0 += "</head>";
         r0 += "<body";
         a0.a = {
