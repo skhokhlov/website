@@ -1,63 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="200"
-   height="200"
-   id="svg3623"
-   version="1.1"
-   inkscape:version="0.91 r"
-   sodipodi:docname="3rd_division_emblem_-_Marigold.svg">
-  <defs
-     id="defs3625" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="51.567522"
-     inkscape:cy="111.54432"
-     inkscape:document-units="px"
-     inkscape:current-layer="svg3623"
-     showgrid="false"
-     inkscape:window-width="1319"
-     inkscape:window-height="744"
-     inkscape:window-x="47"
-     inkscape:window-y="24"
-     inkscape:window-maximized="1"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0"
-     showborder="true"
-     inkscape:showpageshadow="false" />
-  <metadata
-     id="metadata3628">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+   height="200">
   <path
      style="fill:#7b0050;fill-opacity:1;stroke:none"
      d="M 35.23236,56.946347 78.829446,75.553465 60.328837,31.922981 60.168219,32.083131 C 16.870057,22.693081 25.318463,13.753092 35.23236,56.946347 Z"
-     id="path4152"
-     inkscape:connector-curvature="0" />
+     id="path4152"/>
   <path
      style="fill:#7b0050;fill-opacity:1;stroke:none"
      d="m 144.8432,34.050558 -18.66148,43.470078 43.75796,-18.446712 -0.16061,-0.16015 c 9.78749,-39.988211 13.03705,-33.527922 -24.93561,-24.86296 z"
@@ -119,18 +67,6 @@
      inkscape:label="center"
      transform="translate(0,161.03646)" />
   <path
-     sodipodi:type="star"
      style="fill:#c83737;fill-opacity:1;stroke:none"
-     id="path4235"
-     sodipodi:sides="8"
-     sodipodi:cx="101.52033"
-     sodipodi:cy="102.52028"
-     sodipodi:r1="22.901743"
-     sodipodi:r2="21.158451"
-     sodipodi:arg1="-2.4186133"
-     sodipodi:arg2="-2.0259142"
-     inkscape:flatsided="true"
-     inkscape:rounded="0"
-     inkscape:randomized="0"
      d="m 84.347739,87.36799 15.744021,-7.704855 16.58086,5.68455 7.70486,15.744025 -5.68455,16.58086 -15.74403,7.70485 -16.580856,-5.68455 -7.704855,-15.74402 z" />
 </svg>
