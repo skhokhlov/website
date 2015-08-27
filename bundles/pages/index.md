@@ -6,10 +6,12 @@ title: Сергей Хохлов
 <div style="text-align:center">
 <svg
     xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
     id="Bellis"
     width="200"
     height="200">
     <g>
+    <a xlink:href="/around-me">
     <path
         fill="#7b0050"
         d="M 35.23236,56.946347 78.829446,75.553465 60.328837,31.922981 60.168219,32.083131 C 16.870057,22.693081 25.318463,13.753092 35.23236,56.946347 Z"
@@ -59,15 +61,18 @@ title: Сергей Хохлов
         d="m 97.203503,178.59383 -3.990479,-47.11727 -29.950478,36.77074 0.217245,0.0662 c 10.186339,39.88904 4.275359,35.70606 33.723393,10.28021 z"
         class="c-home__imagelink c-home__imagelink_around"/>
     <title>Вокруг меня</title>
+    </a>
     </g>
     <g
         id="center">
+        <a xlink:href="/who-i-am">
         <path
             fill="#c83737"
             class="c-home__imagelink c-home__imagelink_whoiam"
             d="m 84.347739,87.36799 15.744021,-7.704855 16.58086,5.68455 7.70486,15.744025 -5.68455,16.58086 -15.74403,7.70485 -16.580856,-5.68455 -7.704855,-15.74402 z">
             <title>Я</title>
         </path>
+        </a>
     </g>
 </svg>
 </div>
@@ -119,16 +124,4 @@ title: Сергей Хохлов
                 return 'rgb(' + d[1] + ', ' + d[2] + ', ' + d[3] + ')';
             });
     }, 500);
-    
-    document.getElementsByClassName('c-home__imagelink_whoiam')[0].addEventListener('click', function(){
-        window.location = '/who-i-am';
-    });
-    
-    var elements = document.getElementsByClassName('c-home__imagelink_around');
-    var i = elements.length;
-    while (i--) {
-        elements[i].addEventListener('click', function(){
-            window.location = '/around-me';
-        });
-    }
 </script>
