@@ -59,7 +59,10 @@ renderer.hr = function(){
 var minifyOptions = {
     removeComments: true,
     collapseWhitespace: true,
-    keepClosingSlash: true
+    keepClosingSlash: true,
+    minifyJS: true,
+    minifyCSS: true,
+    keepClosingSplash: true
 };
 
 gulp.task('feeds', ['yate'], function () {
