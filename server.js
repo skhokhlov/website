@@ -18,7 +18,7 @@ app.use('/images', express.static(__dirname + '/images', {
     maxAge: ((process.env.DEBUG === 'false') ? 60480000 : 180000)
 }));
 
-app.set('port', process.env.VCAP_APP_PORT || process.env.PORT || 3000);
+app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.VCAP_APP_PORT || process.env.PORT || 3000);
 
 app.get('/feed/:feed/:book', function (req, res) {
     fs.readFile('./build/bundles/feeds/' + req.params.feed + '/' + req.params.book + '.json',
