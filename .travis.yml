@@ -3,7 +3,6 @@ node_js:
 - '0.12'
 before_script: ./node_modules/.bin/gulp production
 deploy:
-  matrix:
   - provider: openshift
     domain: worldfly
     skip_cleanup: true
