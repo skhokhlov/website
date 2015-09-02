@@ -8,4 +8,4 @@ original:
     author: Walter Isaacson
     image: https://upload.wikimedia.org/wikipedia/en/e/e4/Steve_Jobs_by_Walter_Isaacson.jpg
 ---
-Книга о великом человеке, который изменил мир.
+Книга о&nbsp;великом человеке, который изменил мир.
