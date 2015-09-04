@@ -12,4 +12,4 @@ original:
 ### Закладки:
 1. ![Закладка 1](/images/design-for-the-real-world/bookmark-1.jpg)
 
-2. ![Закладка 2](https://farm6.staticflickr.com/5735/21102724292_ca9903fc01_c.jpg)
+2. ![Закладка 2](/images/design-for-the-real-world/bookmark-2.jpg)
