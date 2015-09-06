@@ -121,7 +121,7 @@ title: Сергей Хохлов
             .ease('sine')
             .duration(500)
             .attr('fill', function (d) {
-                return 'rgb(' + d[1] + ', ' + d[2] + ', ' + d[3] + ')';
+                return 'rgb(' + d[0] + ', ' + d[1] + ', ' + d[2] + ')';
             });
     }, 500);
 </script>

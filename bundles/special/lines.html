@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>#svg { stroke-width: 7;
+    width: 100%;
+        height: 30vw;
+    }</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" id="svg" viewBox="0 0 2000 1000">
+    <line x1="20" y1="100" x2="100" y2="29" stroke="#f00" />
+    <line x1="20" y1="100" x2="100" y2="29" stroke="#f00" />
+    <line x1="20" y1="100" x2="100" y2="29" stroke="#f00" />
+    <line x1="20" y1="100" x2="100" y2="29" stroke="#f00" />
+    <line x1="20" y1="100" x2="100" y2="29" stroke="#f00" />
+    <line x1="20" y1="100" x2="100" y2="29" stroke="#f00" />
+    <line x1="20" y1="100" x2="100" y2="29" stroke="#f00" />
+    <line x1="20" y1="100" x2="100" y2="29" stroke="#f00" />
+    <line x1="20" y1="100" x2="100" y2="29" stroke="#f00" />
+    <line x1="20" y1="100" x2="100" y2="29" stroke="#f00" />
+</svg>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+<script>
+    var svg = d3.select('svg');
+    var dataset = [
+        [20, 100, 100, 29],
+        [20, 100, 100, 29],
+        [20, 100, 100, 29],
+        [20, 100, 100, 29],
+        [20, 100, 100, 29],
+        [20, 100, 100, 29],
+        [20, 100, 100, 29],
+        [20, 100, 100, 29],
+        [20, 100, 100, 29],
+        [20, 100, 100, 29]
+    ];
+
+    var around = svg.selectAll('line');
+
+    setInterval(function () {
+        var numValues = dataset.length;
+        dataset = [];
+        for (var i = 0; i < numValues; i++) {
+            var newNumber = [];
+            var j;
+            for (j = 0; j < 4; j+=2) {
+                newNumber.push(Math.random() * 2000);
+            }
+            for (j = 1; j < 4; j+=2) {
+                newNumber.push(Math.random() * 1000);
+            }
+            dataset.push(newNumber);
+        }
+        around
+            .data(dataset)
+            .transition()
+            .ease('linear')
+            .duration(700)
+            .attr('x1', function(d){
+                return d[0];
+            })
+            .attr('x2', function(d){
+                return d[1];
+            })
+            .attr('y1', function(d){
+                return d[2];
+            })
+            .attr('y2', function(d){
+                return d[3];
+            })
+            .attr('stroke', function(d){
+                return 'rgb(' + d[0] + ',' + 0 + ',' + d[2] + ')';
+            });
+    }, 700);
+</script>
+</body>
+</html>
