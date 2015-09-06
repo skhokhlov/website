@@ -239,6 +239,7 @@ gulp.task('js', function () {
 gulp.task('yate', function () {
     yate('app/app.yate', 'build/app/app.yate.js');
     yate('app/feed.yate', 'build/app/feed.yate.js');
+    yate('app/error.yate', 'build/app/error.yate.js');
 });
 
 gulp.task('css', function () {

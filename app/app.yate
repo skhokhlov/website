@@ -37,13 +37,13 @@ match .* block-content {
 match .footer block-content {
     <footer>
     @class=(
-        "footer"
+        "footer layout"
     )
 
-    <div class="footer__col footer__col_left">
+    <div class="footer__col layout__col layout__col_size_50p footer__col_left">
         <p>Электропочта: <a class="link footer__link" href="mailto:sergeyakhokhlov@gmail.com">sergeyakhokhlov@gmail.com</a></p>
     </div>
-    <div class="footer__col footer__col_right">
+    <div class="footer__col layout__col layout__col_size_50p footer__col_right">
         <p>© Сергей Хохлов</p>
     </div>
     </footer>
