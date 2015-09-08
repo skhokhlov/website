@@ -14,4 +14,4 @@ original:
 
 2. ![Закладка 2](/images/design-for-the-real-world/bookmark-2.jpg)
 
-3. ![Закладка 2](/images/design-for-the-real-world/bookmark-3.jpg)
+3. ![Закладка 3](/images/design-for-the-real-world/bookmark-3.jpg)

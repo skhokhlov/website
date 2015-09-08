@@ -7,7 +7,6 @@ var express = require('express');
 var app = express();
 var yr = require('./node_modules/yate/lib/runtime.js');
 require('./build/app/app.yate.js');
-require('./build/app/error.yate.js');
 
 app.use('/public', express.static(__dirname + '/build/app', {
     index: false,
@@ -142,9 +141,22 @@ function sendError(res) {
         }
     }
 
-    return res.status(404).send(yr.run('error', {
-        code: '404',
-        title: 'Страница не найдена',
-        head: random(['Бегите, глупцы!', '&mdash;&nbsp;Будь здесь и&nbsp;сейчас<br/>&mdash;&nbsp;Не&nbsp;сегодня, дорогой'])
+    return res.status(404).send(yr.run('app', {
+        page: {
+            'page-blocks': {
+                header: {
+                    logo: true
+                },
+                body: true,
+                footer: true
+            },
+            'page-params': {
+                _page: 'error',
+                title: 'Страница не найдена'
+            },
+            'page-content': {
+                body: '<h2 class="title">' + random(['Бегите, глупцы!', '&mdash;&nbsp;Будь здесь и&nbsp;сейчас<br/>&mdash;&nbsp;Не&nbsp;сегодня, дорогой']) + '</h2><h1 class="title">Страница не найдена</h1>'
+            }
+        }
     }));
 }
