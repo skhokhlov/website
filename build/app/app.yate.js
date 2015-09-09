@@ -72,6 +72,10 @@ var yr = yr || require('yate/lib/runtime.js');
 
     var j18 = [ 0, 'header' ];
 
+    var j19 = [ 0, 'stat' ];
+
+    var j20 = [ 0, 'counter' ];
+
     // match /
     M.t0 = function t0(m, c0, i0, l0, a0) {
         var r0 = '';
@@ -275,6 +279,21 @@ var yr = yr || require('yate/lib/runtime.js');
     M.t8.j = j18;
     M.t8.a = 0;
 
+    // match .stat : block-content
+    M.t9 = function t9(m, c0, i0, l0, a0) {
+        var r0 = '';
+        var current = [ c0 ];
+
+        r0 += closeAttrs(a0);
+        r0 += "<div class=\"" + "i-stat" + "\">";
+        r0 += nodeset2scalar( m.n(j20, m.v('v2', c0.doc.root)) );
+        r0 += "</div>";
+
+        return r0;
+    };
+    M.t9.j = j19;
+    M.t9.a = 0;
+
     M.matcher = {
         "": {
             "": [
@@ -311,6 +330,10 @@ var yr = yr || require('yate/lib/runtime.js');
             ],
             "header": [
                 "t8",
+                "t3"
+            ],
+            "stat": [
+                "t9",
                 "t3"
             ]
         }

@@ -111,3 +111,9 @@ match .header block-content {
         </nav>
     </header>
 }
+
+match .stat block-content {
+    <div class="i-stat">
+        html( content.counter )
+    </div>
+}

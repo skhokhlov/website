@@ -8,6 +8,8 @@ var app = express();
 var yr = require('./node_modules/yate/lib/runtime.js');
 require('./build/app/app.yate.js');
 
+var counter = '<script> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter28136448 = new Ya.Metrika({ id:28136448, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/28136448" style="position:absolute; left:-9999px;" alt="" /></div></noscript>';
+
 app.use('/public', express.static(__dirname + '/build/app', {
     index: false,
     // maxAge: ((process.env.DEBUG === 'false') ? 15552000000 : 15000)
@@ -37,7 +39,8 @@ app.get('/feed/:feed/:book', function (req, res) {
                             logo: true
                         },
                         book: true,
-                        footer: true
+                        footer: true,
+                        stat: true
                     },
                     'page-params': {
                         _page: page.type || 'page',
@@ -45,6 +48,7 @@ app.get('/feed/:feed/:book', function (req, res) {
                         param: page
                     },
                     'page-content': {
+                        counter: counter,
                         body: page.pageContent
                     }
                 }
@@ -67,13 +71,15 @@ app.get('/', function (req, res) {
                         logo: true
                     },
                     body: true,
-                    footer: true
+                    footer: true,
+                    stat: true
                 },
                 'page-params': {
                     _page: page.type || 'page',
                     title: page.title
                 },
                 'page-content': {
+                    counter: counter,
                     body: page.pageContent
                 }
             }
@@ -108,13 +114,15 @@ app.use(function (req, res) {
                             logo: true
                         },
                         body: true,
-                        footer: true
+                        footer: true,
+                        stat: true
                     },
                     'page-params': {
                         _page: page.type || 'page',
                         title: page.title
                     },
                     'page-content': {
+                        counter: counter,
                         body: page.pageContent
                     }
                 }
