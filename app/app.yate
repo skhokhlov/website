@@ -41,7 +41,7 @@ match .footer block-content {
     )
 
     <div class="footer__col layout__col layout__col_size_50p footer__col_left">
-        <p>Электропочта: <a class="link footer__link" href="mailto:sergeyakhokhlov@gmail.com">sergeyakhokhlov@gmail.com</a></p>
+        <p>Электропочта: <a class="link footer__link" href="mailto:sergey@skhokhlov.ru">sergey@skhokhlov.ru</a></p>
     </div>
     <div class="footer__col layout__col layout__col_size_50p footer__col_right">
         <p>© Сергей Хохлов</p>
