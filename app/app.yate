@@ -63,6 +63,7 @@ match .body block-content {
 
 match .book block-content {
     <div class="book" itemscope="itemscope" itemtype="http://schema.org/Book">
+        <p><a href="/bookshelf" class="link">Книжная полка</a></p>
         <div class="layout">
             <div class="book__name">
                 if params.param.image {

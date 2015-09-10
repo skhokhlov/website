@@ -219,6 +219,7 @@ var yr = yr || require('yate/lib/runtime.js');
 
         r0 += closeAttrs(a0);
         r0 += "<div class=\"" + "book" + "\" itemscope=\"" + "itemscope" + "\" itemtype=\"" + "http://schema.org/Book" + "\">";
+        r0 += "<p><a href=\"" + "/bookshelf" + "\" class=\"" + "link" + "\">" + "Книжная полка" + "</a></p>";
         r0 += "<div class=\"" + "layout" + "\">";
         r0 += "<div class=\"" + "book__name" + "\">";
         if (nodeset2boolean( m.n(j12, m.v('v0', c0.doc.root)) )) {
