@@ -82,6 +82,11 @@ title: Сергей Хохлов
 <h3 class=""><a class="link link_home" href="/bookshelf">Моя книжная полка</a></h3>
 { feeds.books.compact }
 
+<div class="cover cover_photo">
+     <a href="/" class="cover__link">
+Мои фотографии
+</a></div>
+
 <style>
 .c-home__imagelink {
     cursor: pointer
