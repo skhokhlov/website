@@ -122,34 +122,35 @@ app.get('/special/:project', function (req, res) {
 
 app.use(function (req, res) {
     if (req.method === 'GET') {
-        fs.readFile(__dirname + '/build/bundles/pages/' + req.path + '.json', {encoding: 'utf-8'}, function (err, data) {
-            if (err) {
-                return sendError(res);
-            }
-
-            var page = JSON.parse(data);
-
-            res.send(yr.run('app', {
-                page: {
-                    'page-blocks': {
-                        header: {
-                            logo: true
-                        },
-                        body: true,
-                        footer: true,
-                        stat: true
-                    },
-                    'page-params': {
-                        _page: page.type || 'page',
-                        title: page.title
-                    },
-                    'page-content': {
-                        counter: counter,
-                        body: page.pageContent
-                    }
+        fs.readFile(__dirname + '/build/bundles/pages/' + req.path + '.json',
+            {encoding: 'utf-8'}, function (err, data) {
+                if (err) {
+                    return sendError(res);
                 }
-            }));
-        });
+
+                var page = JSON.parse(data);
+
+                res.send(yr.run('app', {
+                    page: {
+                        'page-blocks': {
+                            header: {
+                                logo: true
+                            },
+                            body: true,
+                            footer: true,
+                            stat: true
+                        },
+                        'page-params': {
+                            _page: page.type || 'page',
+                            title: page.title
+                        },
+                        'page-content': {
+                            counter: counter,
+                            body: page.pageContent
+                        }
+                    }
+                }));
+            });
     } else {
         sendError(res);
     }
@@ -191,7 +192,8 @@ function sendError(res) {
                     '&mdash;&nbsp;Будь здесь и&nbsp;сейчас<br/>&mdash;&nbsp;Не&nbsp;сегодня, дорогой'
                 ]) +
                 '</h2><h1 class="title">Страница не найдена</h1>' +
-                '<p>Если вы уверены, что здесь должно что-то быть, <a href="mailto:sergey@skhokhlov.ru" class="link">сообщите мне об этом: sergey@skhokhlov.ru</a>.</p>'
+                '<p>Если вы уверены, что здесь должно что-то быть, ' +
+                '<a href="mailto:sergey@skhokhlov.ru" class="link">сообщите мне об этом: sergey@skhokhlov.ru</a>.</p>'
             }
         }
     }));

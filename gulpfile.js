@@ -52,7 +52,7 @@ renderer.image = function (href, title, text) {
 
     return '<img src="' + href + '" class="image" ' + titleAtr + altAtr + '/>';
 };
-renderer.hr = function(){
+renderer.hr = function () {
     return '<hr class="hr"/>';
 };
 
