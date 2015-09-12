@@ -190,7 +190,8 @@ function sendError(res) {
                     'Бегите, глупцы!',
                     '&mdash;&nbsp;Будь здесь и&nbsp;сейчас<br/>&mdash;&nbsp;Не&nbsp;сегодня, дорогой'
                 ]) +
-                '</h2><h1 class="title">Страница не найдена</h1>'
+                '</h2><h1 class="title">Страница не найдена</h1>' +
+                '<p>Если вы уверены, что здесь должно что-то быть, <a href="mailto:sergey@skhokhlov.ru" class="link">сообщите мне об этом: sergey@skhokhlov.ru</a>.</p>'
             }
         }
     }));
