@@ -83,7 +83,7 @@ title: Сергей Хохлов
 { feeds.books.compact }
 
 <div class="cover cover_photo">
-     <a href="/" class="cover__link">
+     <a href="https://flickr.com/skhokhlov" class="cover__link">
 Мои фотографии
 </a></div>
 
