@@ -12,6 +12,7 @@ html('<!DOCTYPE html>')
 <title>{params.title}</title>
 <link rel="stylesheet" href="/public/app.css" />
 <link id="favicon" type="image/x-icon" rel="shortcut icon" href="/images/icon/icon.ico"/>
+<meta name="keywords" content="{ content.keywords }" />
 </head>
 <body class="page">
     apply .page

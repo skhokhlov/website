@@ -71,7 +71,8 @@ app.get('/feed/:feed/:book', function (req, res) {
                     },
                     'page-content': {
                         counter: counter,
-                        body: page.pageContent
+                        body: page.pageContent,
+                        keywords: page.keywords
                     }
                 }
             }));
@@ -102,7 +103,8 @@ app.get('/', function (req, res) {
                 },
                 'page-content': {
                     counter: counter,
-                    body: page.pageContent
+                    body: page.pageContent,
+                    keywords: page.keywords
                 }
             }
         }));
@@ -146,7 +148,8 @@ app.use(function (req, res) {
                         },
                         'page-content': {
                             counter: counter,
-                            body: page.pageContent
+                            body: page.pageContent,
+                            keywords: page.keywords
                         }
                     }
                 }));
