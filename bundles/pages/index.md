@@ -88,6 +88,18 @@ keywords: sergey khokhlov, sergey, khokhlov, skhokhlov, сергей, хохло
 Мои фотографии
 </a></div>
 
+<!--<div class="cover cover_black layout">
+    <div class="layout__col layout__col_np layout__col_size_50p">
+     <a href="https://github.com/skhokhlov" class="cover__link">
+Мои программы
+</a>
+</div>
+<div class="layout__col layout__col_np layout__col_size_50p">
+<img src="/images/index/js.svg" style="width: 10vw;"/>
+<img src="/images/index/c.svg" style="width: 10vw;"/>
+</div>
+</div>-->
+
 <style>
 .c-home__imagelink {
     cursor: pointer

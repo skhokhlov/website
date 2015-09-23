@@ -73,6 +73,8 @@ gulp.task('feeds', ['yate'], function () {
     feeds.forEach(function (feed) {
         var listOfPages = [];
 
+        console.log('feeds: build: \'' + feed + '\'');
+
         /**
          * Перебирает страницы в ленте
          */
@@ -89,6 +91,8 @@ gulp.task('feeds', ['yate'], function () {
 
                 var build = params;
                 build.name = removeEx(page);
+
+                console.log('feeds: build: \'' + feed + '\' page: \'' + build.name + '\'');
 
                 listOfPages.push(build);
 
@@ -153,6 +157,8 @@ gulp.task('pages', ['feeds'], function () {
                                     throw new Error(err);
                                 }
 
+                                console.log('pages: build: \'' + path + element.replace('.md', '') + '\'');
+
                                 // TODO: сделать автоматическим
 
                                 var build = params;
@@ -201,6 +207,8 @@ gulp.task('specials', function () {
                         }
 
                         if (/\.html/.test(element)) {
+                            console.log('specials: build: \'' + path + element + '\'');
+
                             /**
                              * Сохрание скомпилированного файла страницы
                              */
