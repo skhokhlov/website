@@ -3,14 +3,7 @@ node_js:
 - '0.12'
 before_script: ./node_modules/.bin/gulp production
 deploy:
-  - provider: openshift
-    domain: worldfly
-    skip_cleanup: true
-    user: khokhlovs@yahoo.com
-    app: nodejs
-    password:
-      secure: Ocm5R3Z1g5q7H+hYaWXTnjtwWpWauyxgfApgFestq/4wHsjiMGW68W97IShRL+Uu2expRPzA8vm8vv9V/cUwzUffyBjjjWMMz4MKf9MnidFYkftf/RFNe4SPdVXy//kqR10Dlk59iLD+8DHcGKVVAj2A1XQm3pOw16Td8waTZ2TdrxsfzuXmCbvGd8ufkOkdfHMNgmNoEIntOfZ9bWl5XD1fhceMIRkGc/Qzn4wkVVTcWchf3+bQEWfDVlXBVaVxebp63I0aLqna1vix2P2iep6zSUHskg0lVtv+xJCS0dEIZ7dlSaYeKO2S2/5gV7uyO8sFI5ZeDjprxdRO5r9hYXuWRg19ZiEg2nk2SL8L0B54CTC9HqCDGUyG8WG+Qxa+tyHtPGjENJf6fxV9vBjBvZazsNgfQTU6fI/GZHsB8OeAjeclwYLEWeWuBsyrWP1W9Vv5HZ0TFNuYgW0VTxfIIcPP8n6215KuFJBvPQWnXdDEQ+3UlTKgOmwvxxhnFC+UOBvZoPjI/ft/SczMiBaa7gpj6c4IOLVO+aBdcYK1zRLoL5P9BeAhuTl3ZlRHayL65NAbGeqo9cjmxT+CUiBDqGV6aKCpJUW1O4XpSdVSgbn2tat5Tty7JofTAA7e6bfyamD7ZUe+rU9Uk+CbT3F1twOry2H+m9SgQqK2hIQ33sw=
-  - provider: heroku
+ - provider: heroku
     api_key:
       secure: n5i98y3ox/xLnygM8eab/FlbDoHHLy136GbGSpJZIpkSuY0boUkg6uU7GE64D11lIuGlKQlYTVnAnQBWlJmZewSS/QHBh1a41EeWxhSTdOnob4ZhxfS48thf4Ajov62YDTrbTXGy1Gtk31LAgsw3U74QfYX0nhZraIfrtTgzbn1qhg9VyFwyuFkExzyVtkTsQCySeb6caXCAbz24+t/9TxAMxWwIALVJShtr2OB+lnkjNoVpgQbguIhuzkXvoJHlG0ooBPgrKGpikb+LHpOlCBzNEgHI1YdsPRjsbFJS+/STJ5t+XXyIjXsOwi3cjCNkiLWd/fLZrXn8yJ11DnGMs0Seoz7KDsd+KISWKsJaHaCRjPcTAvE+P3K1AkLC+KKil+o3BX0iNyV/GlnjDZ3mN5+M2bJOK56zYnhmuWeMjwMD4zpkBKfn23SyYZIyLCPJWY5v6AVqvaDQOgmNLwNhmEmyckl3Ybe2pFsGtKP1iXGB5e8M77+WNw8kIUC/BVAqJYZhlVRvnUiia1yfQsk0OybqjpT+/10tLpW2WkTwtX6/1He5OXoNk4T/O1a4RuT30RFQsM8S/fLnWd3aIfylb7Z0xlTtbxm4gK7vKsuJIKlYeNnHcRrmjFqmPue8c0JmYTUDaZaTA6c4tbqONpi51TVa4yjpX1TM2MslSoRPIVs=
     app: skhokhlov
