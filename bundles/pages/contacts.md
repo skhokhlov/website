@@ -1,6 +1,6 @@
 ---
 title: Контакты
-keywords: сергей, хохлов, контакты, связь, sergey@skhokhlov.ru, почта, электропочта
+keywords: сергей, хохлов, контакты, связь, sergey@skhokhlov.ru, почта, электропочта, skhokhlov
 ---
 # Контакты
 
