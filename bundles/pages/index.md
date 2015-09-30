@@ -84,7 +84,7 @@ keywords: sergey khokhlov, sergey, khokhlov, skhokhlov, сергей, хохло
 { feeds.books.compact }
 
 <div class="cover cover_photo">
-     <a href="https://flickr.com/skhokhlov" class="cover__link">
+     <a href="https://flickr.com/skhokhlov" class="cover__link" style="position: relative;top: 4vw;left: 6.4vw;">
 Мои фотографии
 </a></div>
 
