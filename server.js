@@ -121,6 +121,9 @@ app.get('/special/:project', function (req, res) {
             res.send(data);
         });
 });
+app.get('/plus', function (req, res) {
+    res.redirect('/special/plus');
+});
 
 app.use(function (req, res) {
     if (req.method === 'GET') {
