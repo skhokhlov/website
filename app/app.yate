@@ -19,6 +19,9 @@ html('<!DOCTYPE html>')
     <script async="async" src="/public/app.js"></script>
     </body>
     </html>
+    html('<!--')
+    html( params.hostname )
+    html(' -->')
 }
 
 match .page {

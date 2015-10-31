@@ -3,6 +3,8 @@
 var fs = require('fs');
 var http = require('http');
 var express = require('express');
+var os = require('os');
+var hostname = os.hostname();
 
 var app = express();
 var yr = require('./node_modules/yate/lib/runtime.js');
@@ -99,7 +101,8 @@ app.get('/', function (req, res) {
                 },
                 'page-params': {
                     _page: page.type || 'page',
-                    title: page.title
+                    title: page.title,
+                    hostname: 'With love from ' + hostname
                 },
                 'page-content': {
                     counter: counter,
