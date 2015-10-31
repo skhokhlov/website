@@ -104,9 +104,7 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += "<script async=\"" + "async" + "\" src=\"" + "/public/app.js" + "\"></script>";
         r0 += "</body>";
         r0 += "</html>";
-        r0 += "<!--";
-        r0 += nodeset2scalar( m.n(j7, m.v('v0', c0.doc.root)) );
-        r0 += " -->";
+        r0 += "<!-- " + nodeset2scalar( m.n(j7, m.v('v0', c0.doc.root)) ) + " -->";
 
         return r0;
     };

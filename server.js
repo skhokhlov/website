@@ -74,7 +74,8 @@ app.get('/feed/:feed/:book', function (req, res) {
                     'page-content': {
                         counter: counter,
                         body: page.pageContent,
-                        keywords: page.keywords
+                        keywords: page.keywords,
+                        hostname: 'With love from ' + hostname
                     }
                 }
             }));
@@ -150,7 +151,8 @@ app.use(function (req, res) {
                         },
                         'page-params': {
                             _page: page.type || 'page',
-                            title: page.title
+                            title: page.title,
+                            hostname: 'With love from ' + hostname
                         },
                         'page-content': {
                             counter: counter,
@@ -192,7 +194,8 @@ function sendError(res) {
             },
             'page-params': {
                 _page: 'error',
-                title: 'Страница не найдена'
+                title: 'Страница не найдена',
+                hostname: 'With love from ' + hostname
             },
             'page-content': {
                 body: '<h2 class="title">' +
