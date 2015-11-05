@@ -2,7 +2,7 @@ var after = require('after');
 var request = require('supertest');
 
 require('../server.js');
-request = request('http://localhost:3000');
+request = request('http://localhost:' + process.env.PORT || 3000);
 
 describe('router', function () {
 
