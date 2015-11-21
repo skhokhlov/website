@@ -12,7 +12,7 @@ var jshint = require('gulp-jshint');
 var stylus = require('gulp-stylus');
 var csso = require('gulp-csso');
 var autoprefixer = require('gulp-autoprefixer');
-var imagemin = require('gulp-imagemin');
+//var imagemin = require('gulp-imagemin');
 var yr = require('./node_modules/yate/lib/runtime.js');
 
 var renderer = new marked.Renderer();
@@ -259,17 +259,17 @@ gulp.task('css', function () {
         .pipe(gulp.dest('build/app'));
 });
 
-gulp.task('images', function () {
-    gulp.src('images/**')
-        .pipe(imagemin({
-            progressive: true
-        }))
-        .pipe(gulp.dest('images'));
-});
+//gulp.task('images', function () {
+//    gulp.src('images/**')
+//        .pipe(imagemin({
+//            progressive: true
+//        }))
+//        .pipe(gulp.dest('images'));
+//});
 
 gulp.task('default', ['js', 'css', 'pages', 'specials']);
 
-gulp.task('production', ['default', 'images']);
+gulp.task('production', ['default'/*, 'images'*/]);
 
 /**
  * sync page parsing and building

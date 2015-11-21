@@ -3,13 +3,12 @@
 var fs = require('fs');
 var http = require('http');
 var express = require('express');
-var os = require('os');
-var hostname = os.hostname();
 
 var app = express();
 var yr = require('./node_modules/yate/lib/runtime.js');
 require('./build/app/app.yate.js');
 
+var hostname = 'With love from ' + require('os').hostname() + ' pid=' + process.pid;
 var counter = '<script> (function (d, w, c) { (w[c] = w[c] || []).push(function() { ' +
     'try { w.yaCounter28136448 = new Ya.Metrika({ ' +
     'id:28136448, ' +
@@ -75,7 +74,7 @@ app.get('/feed/:feed/:book', function (req, res) {
                         counter: counter,
                         body: page.pageContent,
                         keywords: page.keywords,
-                        hostname: 'With love from ' + hostname
+                        hostname: hostname
                     }
                 }
             }));
@@ -103,7 +102,7 @@ app.get('/', function (req, res) {
                 'page-params': {
                     _page: page.type || 'page',
                     title: page.title,
-                    hostname: 'With love from ' + hostname
+                    hostname: hostname
                 },
                 'page-content': {
                     counter: counter,
@@ -152,7 +151,7 @@ app.use(function (req, res) {
                         'page-params': {
                             _page: page.type || 'page',
                             title: page.title,
-                            hostname: 'With love from ' + hostname
+                            hostname: hostname
                         },
                         'page-content': {
                             counter: counter,
@@ -195,7 +194,7 @@ function sendError(res) {
             'page-params': {
                 _page: 'error',
                 title: 'Страница не найдена',
-                hostname: 'With love from ' + hostname
+                hostname: hostname
             },
             'page-content': {
                 body: '<h2 class="title">' +
