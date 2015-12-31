@@ -80,9 +80,6 @@ keywords: sergey khokhlov, sergey, khokhlov, skhokhlov, сергей, хохло
 
 Эта маргаритка&nbsp;&mdash; диаграмма моей жизни, как&nbsp;бы странно это не&nbsp;было. Каждый лепесток случайным образом изменяет цвет вне зависимости от&nbsp;других, но&nbsp;все вместе с&nbsp;сердцевиной образуют единую систему. Если убрать хоть один элемент системы, она станет неполной. Лепестки символизируют [мое окружение](/around-me), а&nbsp;восьмиугольник в&nbsp;центре символизирует [меня](/who-i-am).
 
-<h3 class=""><a class="link link_home" href="/bookshelf">Моя книжная полка</a></h3>
-{ feeds.books.compact }
-
 <div class="cover cover_photo">
      <a href="https://flickr.com/skhokhlov" class="cover__link" style="position: relative;top: 4vw;left: 6.4vw;">
 Мои фотографии
