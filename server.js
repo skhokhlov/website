@@ -129,7 +129,14 @@ app.get('/plus', function (req, res) {
 });
 
 app.get('/en', function (req, res) {
-    res.redirect('/special/index-en');
+    fs.readFile(__dirname + '/build/bundles/special/index-en.html',
+        {encoding: 'utf-8'}, function (err, data) {
+            if (err) {
+                return sendError(res);
+            }
+
+            res.send(data);
+        });
 });
 
 app.use(function (req, res) {
