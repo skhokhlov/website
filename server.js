@@ -128,6 +128,10 @@ app.get('/plus', function (req, res) {
     res.redirect('/special/plus');
 });
 
+app.get('/en', function (req, res) {
+    res.redirect('/special/index-en');
+});
+
 app.use(function (req, res) {
     if (req.method === 'GET') {
         fs.readFile(__dirname + '/build/bundles/pages/' + req.path + '.json',

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Sergey Khokhlov</title>
     <link rel="stylesheet" href="/public/app.css"/>
     <link id="favicon" type="image/x-icon" rel="shortcut icon" href="/images/icon/icon.ico"/>
@@ -23,7 +24,7 @@
 
         .plus__head {
             max-width: 85vw;
-            margin: 15vh auto;
+            margin: 10vh auto 3em auto;
         }
 
         .plus__head__body {
@@ -70,18 +71,22 @@
         }
 
         .plus{
-            margin-bottom: 27em;
+            margin-bottom: 12em;
         }
 
         .content {
             max-width: 83vw;
             margin: 0 auto;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
         }
 
         .content__sec{
-            padding-bottom: 8em;
+            padding: 1em;
+            width: 140px;
+            font-size: 1.15em;
         }
-
     </style>
 </head>
 <body class="page">
@@ -129,39 +134,58 @@
 </div>
 
 <div class="content">
-    <section class="content__sec">
-        <div class="layout">
-            <div class="layout__col layout__col_np layout__col_size_35p layout__col_center">
-                <img src="/images/index/+art&you.svg" class="img img_100p"/>
-            </div>
-            <div class="layout__col layout__col_np layout__col_size_65p">
-                <p>Revolution</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="content__sec">
-        <div class="layout">
-            <div class="layout__col layout__col_np layout__col_size_35p layout__col_center">
-                <img src="/images/index/aip.svg" class="img"/>
-            </div>
-            <div class="layout__col layout__col_np layout__col_size_65p">
-                <p>Forever</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="content__sec">
-        <div class="">
-            <div style="text-align: center">
-                <img src="/images/index/wf.svg" class="img" style="width: 50%" />
-            </div>
-            <div>
-                <p>World Fly</p>
-            </div>
-        </div>
-    </section>
+    <div class="content__sec">
+        <a href="https://www.worldfly.org">World Fly</a>
+    </div>
+    <div class="content__sec">
+        <a href="https://github.com/skhokhlov">GitHub</a>
+    </div>
+    <div class="content__sec">
+        <a href="https://flickr.com/skhokhlov">Flickr</a>
+    </div>
+    <div class="content__sec">
+        <a href="mailto:i@skhokhlov.ru">i@skhokhlov.ru</a>
+    </div>
 </div>
+
+<footer class="footer footer_nb">
+    <p class="footer__col footer__col_center"><a href="/">По-русски</a></p>
+</footer>
+
+<!--<div class="content">-->
+    <!--<section class="content__sec">-->
+        <!--<div class="layout">-->
+            <!--<div class="layout__col layout__col_np layout__col_size_35p layout__col_center">-->
+                <!--<img src="/images/index/+art&you.svg" class="img img_100p"/>-->
+            <!--</div>-->
+            <!--<div class="layout__col layout__col_np layout__col_size_65p">-->
+                <!--<p>Revolution</p>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</section>-->
+
+    <!--<section class="content__sec">-->
+        <!--<div class="layout">-->
+            <!--<div class="layout__col layout__col_np layout__col_size_35p layout__col_center">-->
+                <!--<img src="/images/index/aip.svg" class="img"/>-->
+            <!--</div>-->
+            <!--<div class="layout__col layout__col_np layout__col_size_65p">-->
+                <!--<p>Forever</p>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</section>-->
+
+    <!--<section class="content__sec">-->
+        <!--<div class="">-->
+            <!--<div style="text-align: center">-->
+                <!--<img src="/images/index/wf.svg" class="img" style="width: 50%" />-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<p>World Fly</p>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</section>-->
+<!--</div>-->
 
 <script>(function (d) {
     var names = {
@@ -209,42 +233,39 @@
     var active = {};
 
     if (d.location.hash !== '') {
-        hashEvent();
+        hashEvent(d.location.hash);
 
     } else {
         var newhash = '';
         switch(Math.floor(Math.random()*10)) {
-            case 0 || 1:
+            case 0: case 1:
                 newhash = names.me.hash;
                 break;
 
-            case 2 || 3:
+            case 2: case 3:
                 newhash = names.art.hash;
                 break;
 
-            case 4 || 5:
+            case 4: case 5:
                 newhash = names.math.hash;
                 break;
 
-            case 6 || 7:
+            case 6: case 7:
                 newhash = names.science.hash;
                 break;
 
             default:
                 newhash = names.you.hash;
-                break;
         }
 
         setTimeout(function(){
-            d.location.hash = newhash;
+            hashEvent(newhash);
         }, 300);
     }
 
-    window.addEventListener("hashchange", hashEvent, false);
+    window.addEventListener("hashchange", function() {hashEvent(d.location.hash)}, false);
 
-    function hashEvent() {
-        var h = window.location.hash;
-
+    function hashEvent(h) {
         if (h === names.me.hash) {
             if (active.hash === undefined) {
                 addClass(d.getElementsByClassName(names.me.classes.head)[0], names.active.head);
