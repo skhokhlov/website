@@ -71,7 +71,7 @@
         }
 
         .plus{
-            margin-bottom: 12em;
+            margin-bottom: 8em;
         }
 
         .content {
@@ -84,7 +84,7 @@
 
         .content__sec{
             padding: 1em;
-            width: 140px;
+            /*width: 140px;*/
             font-size: 1.15em;
         }
     </style>
@@ -113,44 +113,43 @@
         </h2>
     </div>
 
-    <div class="plus__body">
-        <article class="plus__body__article plus__body__article_me" id="me">
-            <p>I can't be without me.</p>
-        </article>
-        <article class="plus__body__article plus__body__article_math" id="math">
-            <p>Mathematics helps to understand themselves and optimize life. Math is more than a science, mathematics is a
-                lifestyle.</p>
-        </article>
-        <article class="plus__body__article plus__body__article_science" id="science">
-            <p>Without science it is impossible to find the real purpose of life.</p>
-        </article>
-        <article class="plus__body__article plus__body__article_art" id="art">
-            <p>Art helps to enjoy life in all its manifestations and helps to look at the world differently.</p>
-        </article>
-        <article class="plus__body__article plus__body__article_you" id="you">
-            <p>Math, science, art, everything is important in its own way, but nothing matters without you.</p>
-        </article>
-    </div>
+    <!--<div class="plus__body">-->
+        <!--<article class="plus__body__article plus__body__article_me" id="me">-->
+            <!--<p>I can't be without me.</p>-->
+        <!--</article>-->
+        <!--<article class="plus__body__article plus__body__article_math" id="math">-->
+            <!--<p>Mathematics helps to understand themselves and optimize life. Math is more than a science, mathematics is a-->
+                <!--lifestyle.</p>-->
+        <!--</article>-->
+        <!--<article class="plus__body__article plus__body__article_science" id="science">-->
+            <!--<p>Without science it is impossible to find the real purpose of life.</p>-->
+        <!--</article>-->
+        <!--<article class="plus__body__article plus__body__article_art" id="art">-->
+            <!--<p>Art helps to enjoy life in all its manifestations and helps to look at the world differently.</p>-->
+        <!--</article>-->
+        <!--<article class="plus__body__article plus__body__article_you" id="you">-->
+            <!--<p>Math, science, art, everything is important in its own way, but nothing matters without you.</p>-->
+        <!--</article>-->
+    <!--</div>-->
 </div>
 
 <div class="content">
     <div class="content__sec">
-        <a href="https://www.worldfly.org">World Fly</a>
+        <a class="link" href="https://www.worldfly.org">World Fly</a>
     </div>
     <div class="content__sec">
-        <a href="https://github.com/skhokhlov">GitHub</a>
+        <a class="link" href="https://github.com/skhokhlov">GitHub</a>
     </div>
     <div class="content__sec">
-        <a href="https://flickr.com/skhokhlov">Flickr</a>
+        <a class="link" href="https://flickr.com/skhokhlov">Flickr</a>
     </div>
     <div class="content__sec">
-        <a href="mailto:i@skhokhlov.ru">i@skhokhlov.ru</a>
+        <a class="link" href="mailto:i@skhokhlov.ru">i@skhokhlov.ru</a>
+    </div>
+    <div class="content__sec">
+        <a class="link" href="/">По-русски</a></p>
     </div>
 </div>
-
-<footer class="footer footer_nb">
-    <p class="footer__col footer__col_center"><a href="/">По-русски</a></p>
-</footer>
 
 <!--<div class="content">-->
     <!--<section class="content__sec">-->
@@ -269,26 +268,26 @@
         if (h === names.me.hash) {
             if (active.hash === undefined) {
                 addClass(d.getElementsByClassName(names.me.classes.head)[0], names.active.head);
-                addClass(d.getElementsByClassName(names.me.classes.body)[0], names.active.body);
+//                addClass(d.getElementsByClassName(names.me.classes.body)[0], names.active.body);
 
             } else {
                 removeClass(d.getElementsByClassName(active.classes.head)[0], names.active.head);
-                removeClass(d.getElementsByClassName(active.classes.body)[0], names.active.body);
+//                removeClass(d.getElementsByClassName(active.classes.body)[0], names.active.body);
                 addClass(d.getElementsByClassName(names.me.classes.head)[0], names.active.head);
-                addClass(d.getElementsByClassName(names.me.classes.body)[0], names.active.body);
+//                addClass(d.getElementsByClassName(names.me.classes.body)[0], names.active.body);
             }
 
             active = names.me;
         } else if (h === names.you.hash) {
             if (active.hash === undefined) {
                 addClass(d.getElementsByClassName(names.you.classes.head)[0], names.active.head);
-                addClass(d.getElementsByClassName(names.you.classes.body)[0], names.active.body);
+//                addClass(d.getElementsByClassName(names.you.classes.body)[0], names.active.body);
 
             } else {
                 removeClass(d.getElementsByClassName(active.classes.head)[0], names.active.head);
-                removeClass(d.getElementsByClassName(active.classes.body)[0], names.active.body);
+//                removeClass(d.getElementsByClassName(active.classes.body)[0], names.active.body);
                 addClass(d.getElementsByClassName(names.you.classes.head)[0], names.active.head);
-                addClass(d.getElementsByClassName(names.you.classes.body)[0], names.active.body);
+//                addClass(d.getElementsByClassName(names.you.classes.body)[0], names.active.body);
             }
 
             active = names.you;
@@ -299,35 +298,35 @@
 
             } else {
                 removeClass(d.getElementsByClassName(active.classes.head)[0], names.active.head);
-                removeClass(d.getElementsByClassName(active.classes.body)[0], names.active.body);
+//                removeClass(d.getElementsByClassName(active.classes.body)[0], names.active.body);
                 addClass(d.getElementsByClassName(names.art.classes.head)[0], names.active.head);
-                addClass(d.getElementsByClassName(names.art.classes.body)[0], names.active.body);
+//                addClass(d.getElementsByClassName(names.art.classes.body)[0], names.active.body);
             }
 
             active = names.art;
         } else if (h === names.math.hash) {
             if (active.hash === undefined) {
                 addClass(d.getElementsByClassName(names.math.classes.head)[0], names.active.head);
-                addClass(d.getElementsByClassName(names.math.classes.body)[0], names.active.body);
+//                addClass(d.getElementsByClassName(names.math.classes.body)[0], names.active.body);
 
             } else {
                 removeClass(d.getElementsByClassName(active.classes.head)[0], names.active.head);
-                removeClass(d.getElementsByClassName(active.classes.body)[0], names.active.body);
+//                removeClass(d.getElementsByClassName(active.classes.body)[0], names.active.body);
                 addClass(d.getElementsByClassName(names.math.classes.head)[0], names.active.head);
-                addClass(d.getElementsByClassName(names.math.classes.body)[0], names.active.body);
+//                addClass(d.getElementsByClassName(names.math.classes.body)[0], names.active.body);
             }
 
             active = names.math;
         } else if (h === names.science.hash) {
             if (active.hash === undefined) {
                 addClass(d.getElementsByClassName(names.science.classes.head)[0], names.active.head);
-                addClass(d.getElementsByClassName(names.science.classes.body)[0], names.active.body);
+//                addClass(d.getElementsByClassName(names.science.classes.body)[0], names.active.body);
 
             } else {
                 removeClass(d.getElementsByClassName(active.classes.head)[0], names.active.head);
-                removeClass(d.getElementsByClassName(active.classes.body)[0], names.active.body);
+//                removeClass(d.getElementsByClassName(active.classes.body)[0], names.active.body);
                 addClass(d.getElementsByClassName(names.science.classes.head)[0], names.active.head);
-                addClass(d.getElementsByClassName(names.science.classes.body)[0], names.active.body);
+//                addClass(d.getElementsByClassName(names.science.classes.body)[0], names.active.body);
             }
 
             active = names.science;
