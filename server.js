@@ -185,9 +185,7 @@ http.createServer(app).listen(app.get('port'), function () {
 });
 
 function sendError(res) {
-    function random(strings) {
-        return Math.random() < 0.5 ? strings[0] : strings[1];
-    }
+    var random = (strings) => Math.random() < 0.5 ? strings[0] : strings[1];
 
     return res.status(404).send(yr.run('app', {
         page: {
