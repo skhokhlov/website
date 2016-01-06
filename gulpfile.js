@@ -234,7 +234,9 @@ gulp.task('js', function () {
         }));
 
     gulp.src(['./*.js'])
-        .pipe(jshint())
+        .pipe(jshint({
+            esnext: true
+        }))
         .pipe(jshint.reporter('default'));
 
     gulp.src(['./app/*.js'])
