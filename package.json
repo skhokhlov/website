@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "express": "^4.13.3",
+    "locale": "0.0.20",
     "yate": "0.0.78"
   },
   "devDependencies": {

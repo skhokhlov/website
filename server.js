@@ -3,6 +3,7 @@
 var fs = require('fs');
 var http = require('http');
 var express = require('express');
+var locale = require('locale');
 
 var app = express();
 var yr = require('./node_modules/yate/lib/runtime.js');
@@ -38,6 +39,8 @@ app.use('/images', express.static(__dirname + '/images', {
     index: false,
     maxAge: ((process.env.DEBUG === 'false') ? 60480000 : 180000)
 }));
+
+app.use(locale(['ru', 'en']));
 
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.OPENSHIFT_PORT ||
 process.env.VCAP_APP_PORT || process.env.PORT || 3000);
@@ -184,8 +187,9 @@ http.createServer(app).listen(app.get('port'), function () {
     console.log('Server listening on port ' + app.get('port'));
 });
 
-function sendError(res) {
+function sendError(res, lang) {
     var random = (strings) => Math.random() < 0.5 ? strings[0] : strings[1];
+    lang = lang || 'ru';
 
     return res.status(404).send(yr.run('app', {
         page: {
@@ -198,7 +202,7 @@ function sendError(res) {
             },
             'page-params': {
                 _page: 'error',
-                title: 'Страница не найдена',
+                title: lang === 'ru' ? 'Страница не найдена' : 'Page not found',
                 hostname: hostname
             },
             'page-content': {
