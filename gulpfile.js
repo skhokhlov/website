@@ -1,19 +1,19 @@
 'use strict';
 
-var fs = require('fs');
-var gulp = require('gulp');
-var execSync = require('child_process').execSync;
+const fs = require('fs');
+const gulp = require('gulp');
+const execSync = require('child_process').execSync;
 
-var jscs = require('gulp-jscs');
-var marked = require('marked');
-var yaml = require('js-yaml');
-var minify = require('html-minifier').minify;
-var jshint = require('gulp-jshint');
-var stylus = require('gulp-stylus');
-var csso = require('gulp-csso');
-var autoprefixer = require('gulp-autoprefixer');
-//var imagemin = require('gulp-imagemin');
-var yr = require('./node_modules/yate/lib/runtime.js');
+const jscs = require('gulp-jscs');
+const marked = require('marked');
+const yaml = require('js-yaml');
+const minify = require('html-minifier').minify;
+const jshint = require('gulp-jshint');
+const stylus = require('gulp-stylus');
+const cssnano = require('gulp-cssnano');
+const autoprefixer = require('gulp-autoprefixer');
+//const imagemin = require('gulp-imagemin');
+const yr = require('./node_modules/yate/lib/runtime.js');
 
 var renderer = new marked.Renderer();
 renderer.heading = function (text, level) {
@@ -56,7 +56,7 @@ renderer.hr = function () {
     return '<hr class="hr"/>';
 };
 
-var minifyOptions = {
+const minifyOptions = {
     removeComments: true,
     collapseWhitespace: true,
     keepClosingSlash: true,
@@ -99,7 +99,7 @@ gulp.task('feeds', ['yate'], function () {
                 build.pageContent = html;
 
                 /**
-                 * Сохрание скомпилированного файла страницы
+                 * Сохрание собранного файла страницы
                  */
                 fs.writeFileSync('./build/bundles/feeds/' + feed + '/' + removeEx(page) + '.json',
                     JSON.stringify(build), {encoding: 'utf-8'});
@@ -171,7 +171,7 @@ gulp.task('pages', ['feeds'], function () {
                                         {encoding: 'utf-8'})).render.compact);
 
                                 /**
-                                 * Сохрание скомпилированного файла страницы
+                                 * Сохрание собранного файла страницы
                                  */
                                 fs.writeFile('./build/bundles/pages/' + path + element.replace('.md', '') + '.json',
                                     JSON.stringify(build), {encoding: 'utf-8'}, function (err) {
@@ -257,7 +257,7 @@ gulp.task('css', function () {
         .pipe(autoprefixer({
             browsers: ['last 2 versions']
         }))
-        .pipe(csso())
+        .pipe(cssnano())
         .pipe(gulp.dest('build/app'));
 });
 

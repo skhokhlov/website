@@ -1,16 +1,16 @@
 'use strict';
 
-var fs = require('fs');
-var http = require('http');
-var express = require('express');
-var locale = require('locale');
+const fs = require('fs');
+const http = require('http');
+const express = require('express');
+const locale = require('locale');
 
-var app = express();
-var yr = require('./node_modules/yate/lib/runtime.js');
+const app = express();
+const yr = require('./node_modules/yate/lib/runtime.js');
 require('./build/app/app.yate.js');
 
-var hostname = 'With love from ' + require('os').hostname() + ' pid=' + process.pid;
-var counter = '<script> (function (d, w, c) { (w[c] = w[c] || []).push(function() { ' +
+const hostname = 'With love from ' + require('os').hostname() + ' pid=' + process.pid;
+const counter = '<script> (function (d, w, c) { (w[c] = w[c] || []).push(function() { ' +
     'try { w.yaCounter28136448 = new Ya.Metrika({ ' +
     'id:28136448, ' +
     'clickmap:true, ' +
