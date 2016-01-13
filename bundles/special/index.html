@@ -11,15 +11,16 @@
         .morda {
             margin: 0;
             padding: 0;
-            background-color: #161616;
+
         }
 
         .morda__landing {
-            background: url(https://c1.staticflickr.com/1/590/20189601103_a9f45f48b5_b.jpg) no-repeat;
-            background-size: cover;
+            /*background: url(https://c1.staticflickr.com/1/590/20189601103_a9f45f48b5_b.jpg) no-repeat;*/
+            background: url(/images/index/bezier8.svg) #2a363b no-repeat;
+            /*background-size: cover;*/
             color: #fff;
             height: 600px;
-            background-position-y: 85%;
+            background-position-x: 50%;
         }
 
         .nav__link, .nav__link_home {
@@ -27,9 +28,26 @@
         }
 
         .morda__title {
-            padding-bottom: .4vw;
             text-shadow: 0 0 1em #000;
-            position: relative;
+            top: 135px;
+            left: 70px;
+            position: absolute;
+            z-index: 20;
+        }
+
+        .morda__caption {
+            font-size: 40px;
+        }
+
+        .morda__name {
+            font-size: 80px;
+        }
+
+        .morda__image {
+            position: absolute;
+            right: 0;
+            height: 600px;
+            z-index: 1;
         }
 
         .morda__landlink {
@@ -64,16 +82,17 @@
                     <!--href="/contacts">Контакты</a></nav>-->
             <!--</header>-->
         <!--</div>-->
-        <h1 style="position: absolute">
-            <span class="morda__title"  style="top: 135px;left: 70px;">
-            <span style="font-size: 40px">
+        <h1 class="morda__title">
+            <span class="morda__caption">
                 Сергей Хохлов
             </span><br/>
-            <span style="font-size: 80px">
+            <span class="morda__name">
                 Вот что я люблю
             </span>
-            </span>
         </h1>
+        <!--<div >-->
+            <!--<img class="morda__image" src="/images/index/bezier7.svg"/>-->
+        <!--</div>-->
         <!--<h2 class="title">-->
         <!--<a href="https://flickr.com/skhokhlov" class="morda__title morda__landlink" style="font-size: 1.25em;left: 70vw;top: 45vh;">-->
         <!--Мои фотографии-->
