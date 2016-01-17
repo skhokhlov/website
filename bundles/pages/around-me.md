@@ -15,6 +15,8 @@ keywords: skhokhlov, список, окружжение, сергей, хохл�
 
 <p>https://github.com/skhokhlov – кодохранилище</p>
 
+<p>https://ello.co/skhokhlov – хипстерская социальная сеть</p>
+
 </div>
 <div class="layout__col layout__col_np layout__col_size_50p">
 
