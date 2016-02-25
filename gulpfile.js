@@ -14,7 +14,7 @@ const cssnano = require('gulp-cssnano');
 const autoprefixer = require('gulp-autoprefixer');
 const mkdir = require('mkdirpd');
 const sftp = require('gulp-sftp');
-//const imagemin = require('gulp-imagemin');
+const imagemin = require('gulp-imagemin');
 const yr = require('./node_modules/yate/lib/runtime.js');
 
 var renderer = new marked.Renderer();
@@ -117,13 +117,12 @@ gulp.task('feeds', ['yate'], function () {
 
                 listOfPages.push(build);
 
-
                 /**
                  * Сохрание собранного файла страницы
                  */
                 require('./build/app/app.yate.js');
                 fs.writeFileSync(
-                    './build/static/feeds/' + feed + '/' + page.replace('.md', '.html'),
+                    './build/static/feed/' + feed + '/' + page.replace('.md', '.html'),
                     yr.run('app', {
                         page: {
                             'page-blocks': {
@@ -343,15 +342,17 @@ gulp.task('css', function () {
         .pipe(gulp.dest('build/app'));
 });
 
-//gulp.task('images', function () {
-//    gulp.src('images/**')
-//        .pipe(imagemin({
-//            progressive: true
-//        }))
-//        .pipe(gulp.dest('images'));
-//});
+gulp.task('images', function () {
+    gulp.src('images/**')
+        .pipe(imagemin())
+        .pipe(gulp.dest('build/static/images'));
+});
 
-gulp.task('upload', ['default'], function () {
+gulp.task('default', ['js', 'css', 'pages', 'specials']);
+
+gulp.task('all', ['default', 'images']);
+
+gulp.task('production', ['all'], function () {
     gulp.src('build/static/**/')
         .pipe(sftp({
             host: 'sftp.selcdn.ru',
@@ -360,10 +361,6 @@ gulp.task('upload', ['default'], function () {
             remotePath: 'skhokhlov'
         }));
 });
-
-gulp.task('default', ['js', 'css', 'pages', 'specials']);
-
-gulp.task('production', ['default'/*, 'images'*/]);
 
 /**
  * sync page parsing and building

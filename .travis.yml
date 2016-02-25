@@ -2,10 +2,3 @@ language: node_js
 node_js:
 - '4.1'
 before_script: ./node_modules/.bin/gulp production
-deploy:
- provider: heroku
- api_key:
-   secure: n5i98y3ox/xLnygM8eab/FlbDoHHLy136GbGSpJZIpkSuY0boUkg6uU7GE64D11lIuGlKQlYTVnAnQBWlJmZewSS/QHBh1a41EeWxhSTdOnob4ZhxfS48thf4Ajov62YDTrbTXGy1Gtk31LAgsw3U74QfYX0nhZraIfrtTgzbn1qhg9VyFwyuFkExzyVtkTsQCySeb6caXCAbz24+t/9TxAMxWwIALVJShtr2OB+lnkjNoVpgQbguIhuzkXvoJHlG0ooBPgrKGpikb+LHpOlCBzNEgHI1YdsPRjsbFJS+/STJ5t+XXyIjXsOwi3cjCNkiLWd/fLZrXn8yJ11DnGMs0Seoz7KDsd+KISWKsJaHaCRjPcTAvE+P3K1AkLC+KKil+o3BX0iNyV/GlnjDZ3mN5+M2bJOK56zYnhmuWeMjwMD4zpkBKfn23SyYZIyLCPJWY5v6AVqvaDQOgmNLwNhmEmyckl3Ybe2pFsGtKP1iXGB5e8M77+WNw8kIUC/BVAqJYZhlVRvnUiia1yfQsk0OybqjpT+/10tLpW2WkTwtX6/1He5OXoNk4T/O1a4RuT30RFQsM8S/fLnWd3aIfylb7Z0xlTtbxm4gK7vKsuJIKlYeNnHcRrmjFqmPue8c0JmYTUDaZaTA6c4tbqONpi51TVa4yjpX1TM2MslSoRPIVs=
- app: skhokhlov
- skip_cleanup: true
- buildpack: node
