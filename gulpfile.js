@@ -18,7 +18,7 @@ const imagemin = require('gulp-imagemin');
 const yr = require('./node_modules/yate/lib/runtime.js');
 
 var renderer = new marked.Renderer();
-renderer.heading = function (text, level) {
+renderer.heading = (text, level) => {
     var escapedText = text.toLowerCase().replace(/ /g, '-');
 
     return '<h' + level + ' class="title title_h' + level + '"><a name="' +
@@ -28,10 +28,10 @@ renderer.heading = function (text, level) {
         '"><span class="title__link title__link_anchor"></span></a>' +
         text + '</h' + level + '>';
 };
-renderer.link = function (href, title, text) {
+renderer.link = (href, title, text) => {
     return '<a href="' + href + '" class="link" title="' + (title || text) + '">' + text + '</a>';
 };
-renderer.image = function (href, title, text) {
+renderer.image = (href, title, text) => {
     var titleAtr = '';
     var altAtr = '';
 
@@ -54,7 +54,7 @@ renderer.image = function (href, title, text) {
 
     return '<img src="' + href + '" class="image" ' + titleAtr + altAtr + '/>';
 };
-renderer.hr = function () {
+renderer.hr = () => {
     return '<hr class="hr"/>';
 };
 
@@ -86,75 +86,69 @@ const counter = '<script> (function (d, w, c) { (w[c] = w[c] || []).push(functio
     '</script>' +
     '<noscript><img src="https://mc.yandex.ru/watch/28136448" style="position:absolute; left:-9999px;" /></noscript>';
 
-gulp.task('feeds', ['yate'], function () {
+gulp.task('feeds', ['yate'], () => {
     /**
      * Перебирает ленты
      */
-    var feeds = fs.readdirSync('./bundles/feeds');
-    feeds.forEach(function (feed) {
+    let feeds = fs.readdirSync('./bundles/feeds');
+    feeds.forEach((feed) => {
         var listOfPages = [];
 
-        console.log('feeds: build: \'' + feed + '\'');
+        console.log('feeds: \'' + feed + '\'');
 
         /**
          * Перебирает страницы в ленте
          */
-        var pages = fs.readdirSync('./bundles/feeds/' + feed);
-        pages.forEach(function (page) {
+        let pages = fs.readdirSync('./bundles/feeds/' + feed);
+        pages.forEach((page) => {
             /**
              * Разборка страницы ленты
              */
-            var content = fs.readFileSync('./bundles/feeds/' + feed + '/' + page, {encoding: 'utf-8'});
-            parsePage(content, function (err, params, html) {
-                if (err) {
-                    throw new Error(err);
-                }
+            let content = fs.readFileSync('./bundles/feeds/' + feed + '/' + page, {encoding: 'utf-8'});
+            content = parsePage(content);
 
-                var build = params;
-                build.name = page.replace('.md', '');
+            content.params.name = page.replace('.md', '');
 
-                console.log('feeds: build: \'' + feed + '\' page: \'' + build.name + '\'');
+            console.log('feeds: \'' + feed + '\' page: \'' + content.params.name + '\'');
 
-                listOfPages.push(build);
+            listOfPages.push(content.params);
 
-                /**
-                 * Сохрание собранного файла страницы
-                 */
-                require('./build/app/app.yate.js');
-                fs.writeFileSync(
-                    './build/static/feed/' + feed + '/' + page.replace('.md', '.html'),
-                    yr.run('app', {
-                        page: {
-                            'page-blocks': {
-                                header: {
-                                    logo: true
-                                },
-                                book: true,
-                                footer: true,
-                                stat: true
+            /**
+             * Сохрание собранного файла страницы
+             */
+            require('./build/app/app.yate.js');
+            fs.writeFileSync(
+                './build/static/feed/' + feed + '/' + page.replace('.md', '.html'),
+                yr.run('app', {
+                    page: {
+                        'page-blocks': {
+                            header: {
+                                logo: true
                             },
-                            'page-params': {
-                                _page: build.type || 'page',
-                                title: build.title,
-                                param: build
-                            },
-                            'page-content': {
-                                counter: counter,
-                                body: html,
-                                keywords: build.keywords
-                            }
+                            book: true,
+                            footer: true,
+                            stat: true
+                        },
+                        'page-params': {
+                            _page: content.params.type || 'page',
+                            title: content.params.title,
+                            param: content.params
+                        },
+                        'page-content': {
+                            counter: counter,
+                            body: content.content,
+                            keywords: content.params.keywords
                         }
-                    }),
-                    {encoding: 'utf-8'}
-                );
-
-            });
+                    }
+                }),
+                {encoding: 'utf-8'}
+            );
         });
 
         /**
          * Сохрание массива с параметрами страниц ленты
          */
-        var feedParam = {
+        let feedParam = {
             pages: listOfPages,
             name: feed
         };
@@ -173,142 +167,122 @@ gulp.task('feeds', ['yate'], function () {
             })
         };
 
-        fs.writeFileSync('./build/bundles/feeds/' + feed + '.json',
-            JSON.stringify(feedParam), {encoding: 'utf-8'});
+        fs.writeFileSync(
+            './build/bundles/feeds/' + feed + '.json',
+            JSON.stringify(feedParam),
+            {encoding: 'utf-8'}
+        );
     });
 });
 
-gulp.task('pages', ['feeds'], function () {
+gulp.task('pages', ['feeds'], () => {
     (function parseDir(path) {
-        fs.readdir('./bundles/pages/' + path, function (err, data) {
-            if (err) {
-                throw new Error(err);
-            }
+        let pages = fs.readdirSync('./bundles/pages/' + path);
+        pages.forEach((element) => {
+            if (fs.lstatSync('./bundles/pages/' + path + element).isDirectory()) {
+                parseDir(path + element + '/');
 
-            data.forEach(function (element) {
-                if (fs.lstatSync('./bundles/pages/' + path + element).isDirectory()) {
-                    parseDir(path + element + '/');
+            } else if (/\.md/.test(element)) {
+                let page = fs.readFileSync('./bundles/pages/' + path + element, {encoding: 'utf-8'});
+                page = parsePage(page);
 
-                } else {
-                    fs.readFile('./bundles/pages/' + path + element, {encoding: 'utf-8'}, function (err, ssData) {
-                        if (err) {
-                            throw new Error(err);
-                        }
+                console.log('pages: \'' + path + element.replace('.md', '') + '\'');
 
-                        if (/\.md/.test(element)) {
-                            parsePage(ssData, function (err, params, html) {
-                                if (err) {
-                                    throw new Error(err);
-                                }
-
-                                console.log('pages: build: \'' + path + element.replace('.md', '') + '\'');
-
-                                // TODO: сделать автоматическим
-
-                                var build = params;
-                                build.pageContent = html
-                                    .replace(new RegExp('{ feeds.books.full }', 'g'),
-                                        JSON.parse(fs.readFileSync('build/bundles/feeds/books.json',
-                                            {encoding: 'utf-8'})).render.full)
-                                    .replace(new RegExp('{ feeds.books.compact }', 'g'),
-                                        JSON.parse(fs.readFileSync('build/bundles/feeds/books.json',
-                                            {encoding: 'utf-8'})).render.compact);
-
-                                /**
-                                 * Сохрание собранного файла страницы
-                                 */
-                                require('./build/app/app.yate.js');
-                                element = element.replace('.md', '');
-                                let res = yr.run('app', {
-                                    page: {
-                                        'page-blocks': {
-                                            header: {
-                                                logo: true
-                                            },
-                                            body: true,
-                                            footer: true,
-                                            stat: true
-                                        },
-                                        'page-params': {
-                                            _page: build.type || 'page',
-                                            title: build.title
-                                        },
-                                        'page-content': {
-                                            counter: counter,
-                                            body: build.pageContent,
-                                            keywords: build.keywords
-                                        }
-                                    }
-                                });
-
-                                if (element === 'index') {
-                                    fs.writeFileSync(
-                                        './build/static/' + path + 'index.html',
-                                        res,
-                                        {encoding: 'utf-8'}
-                                    );
-
-                                } else {
-                                    mkdir('./build/static/' + path + element, function (err) {
-                                        if (err) {
-                                            throw new Error(err);
-                                        }
-
-                                        fs.writeFileSync(
-                                            './build/static/' + path + element + '/' + 'index.html',
-                                            res,
-                                            {encoding: 'utf-8'}
-                                        );
-                                    });
-                                }
-                            });
-                        }
-                    });
-                }
-            });
-        });
-
-    })('/');
-});
-
-gulp.task('specials', function () {
-    (function parseDir(path) {
-        fs.readdir('./bundles/special/' + path, function (err, data) {
-            if (err) {
-                throw new Error(err);
-            }
-
-            data.forEach(function (element) {
-                if (fs.lstatSync('./bundles/special/' + path + element).isDirectory()) {
-                    parseDir(path + element + '/');
-
-                } else {
-                    fs.readFile('./bundles/special/' + path + element, {encoding: 'utf-8'}, function (err, ssData) {
-                        if (err) {
-                            throw new Error(err);
-                        }
-
-                        if (/\.html/.test(element)) {
-                            console.log('specials: build: \'' + path + element + '\'');
-
-                            /**
-                             * Сохрание скомпилированного файла страницы
-                             */
-                            fs.writeFileSync(
-                                './build/static/special' + path + element,
-                                minify(ssData, minifyOptions),
+                page.params.pageContent = page.content
+                    .replace(
+                        new RegExp('{ feeds.books.full }', 'g'),
+                        JSON.parse(
+                            fs.readFileSync(
+                                'build/bundles/feeds/books.json',
                                 {encoding: 'utf-8'}
-                            );
+                            )
+                        ).render.full
+                    )
+                    .replace(
+                        new RegExp('{ feeds.books.compact }', 'g'),
+                        JSON.parse(
+                            fs.readFileSync(
+                                'build/bundles/feeds/books.json',
+                                {encoding: 'utf-8'}
+                            )
+                        ).render.compact
+                    );
+
+                require('./build/app/app.yate.js');
+                element = element.replace('.md', '');
+                let res = yr.run('app', {
+                    page: {
+                        'page-blocks': {
+                            header: {
+                                logo: true
+                            },
+                            body: true,
+                            footer: true,
+                            stat: true
+                        },
+                        'page-params': {
+                            _page: page.params.type || 'page',
+                            title: page.params.title
+                        },
+                        'page-content': {
+                            counter: counter,
+                            body: page.params.pageContent,
+                            keywords: page.params.keywords
                         }
+                    }
+                });
+
+                if (element === 'index') {
+                    fs.writeFileSync(
+                        './build/static/' + path + 'index.html',
+                        res,
+                        {encoding: 'utf-8'}
+                    );
+
+                } else {
+                    mkdir('./build/static/' + path + element, (err) => {
+                        if (err) {
+                            throw new Error(err);
+                        }
+
+                        fs.writeFileSync(
+                            './build/static/' + path + element + '/' + 'index.html',
+                            res,
+                            {encoding: 'utf-8'}
+                        );
                     });
                 }
-            });
+            }
         });
-
     })('/');
 });
 
-gulp.task('js', function () {
+gulp.task('specials', () => {
+    (function parseDir(path) {
+        let dir = fs.readdirSync('./bundles/special/' + path);
+        dir.forEach((element) => {
+            if (fs.lstatSync('./bundles/special/' + path + element).isDirectory()) {
+                parseDir(path + element + '/');
+
+            } else if (/\.html/.test(element)) {
+                let file = fs.readFileSync('./bundles/special/' + path + element, {encoding: 'utf-8'});
+
+                console.log('specials: \'' + path + element + '\'');
+
+                /**
+                 * Сохрание собранного файла страницы
+                 */
+                fs.writeFileSync(
+                    './build/static/special' + path + element,
+                    minify(file, minifyOptions),
+                    {encoding: 'utf-8'}
+                );
+            }
+        });
+    })('/');
+});
+
+gulp.task('js', () => {
     gulp.src(['./**'])
         .pipe(jscs({
             preset: 'yandex'
@@ -327,12 +301,12 @@ gulp.task('js', function () {
 
 });
 
-gulp.task('yate', function () {
+gulp.task('yate', () => {
     yate('app/app.yate', 'build/app/app.yate.js');
     yate('app/feed.yate', 'build/app/feed.yate.js');
 });
 
-gulp.task('css', function () {
+gulp.task('css', () => {
     gulp.src(['app/app.styl'])
         .pipe(stylus())
         .pipe(autoprefixer({
@@ -342,7 +316,7 @@ gulp.task('css', function () {
         .pipe(gulp.dest('build/app'));
 });
 
-gulp.task('images', function () {
+gulp.task('images', () => {
     gulp.src('images/**')
         .pipe(imagemin())
         .pipe(gulp.dest('build/static/images'));
@@ -352,7 +326,7 @@ gulp.task('default', ['js', 'css', 'pages', 'specials']);
 
 gulp.task('all', ['default', 'images']);
 
-gulp.task('production', ['all'], function () {
+gulp.task('production', ['all'], () => {
     gulp.src('build/static/**/')
         .pipe(sftp({
             host: 'sftp.selcdn.ru',
@@ -365,9 +339,8 @@ gulp.task('production', ['all'], function () {
 /**
  * sync page parsing and building
  * @param data
- * @param callback
  */
-function parsePage(data, callback) {
+function parsePage(data) {
     /**
      * Разделение файла по строкам
      */
@@ -378,7 +351,7 @@ function parsePage(data, callback) {
      * начинающаяся и завершающаяся с помошью ---
      */
     if (splitted[0] !== '---') {
-        return callback('Missing ---');
+        throw new Error('Missing ---');
     }
 
     var endOfParams = false;
@@ -398,10 +371,13 @@ function parsePage(data, callback) {
     }
 
     if (!endOfParams) {
-        return callback('Missing second ---');
+        throw new Error('Missing second ---');
     }
 
-    return callback(null, yaml.safeLoad(params), minify(marked(content, {renderer: renderer}), minifyOptions));
+    return {
+        params: yaml.safeLoad(params),
+        content: minify(marked(content, {renderer: renderer}), minifyOptions)
+    };
 }
 
 /**
