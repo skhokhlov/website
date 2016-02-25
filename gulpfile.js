@@ -12,6 +12,8 @@ const jshint = require('gulp-jshint');
 const stylus = require('gulp-stylus');
 const cssnano = require('gulp-cssnano');
 const autoprefixer = require('gulp-autoprefixer');
+const mkdir = require('mkdirpd');
+const sftp = require('gulp-sftp');
 //const imagemin = require('gulp-imagemin');
 const yr = require('./node_modules/yate/lib/runtime.js');
 
@@ -64,6 +66,25 @@ const minifyOptions = {
     minifyCSS: true,
     keepClosingSplash: true
 };
+const counter = '<script> (function (d, w, c) { (w[c] = w[c] || []).push(function() { ' +
+    'try { w.yaCounter28136448 = new Ya.Metrika({ ' +
+    'id:28136448, ' +
+    'clickmap:true, ' +
+    'trackLinks:true, ' +
+    'accurateTrackBounce:true, ' +
+    'webvisor:true, ' +
+    'trackHash:true ' +
+    '}); } catch(e) { } }); ' +
+    'var n = d.getElementsByTagName("script")[0], ' +
+    's = d.createElement("script"), ' +
+    'f = function () { n.parentNode.insertBefore(s, n); }; ' +
+    's.type = "text/javascript"; ' +
+    's.async = true;' +
+    's.src = "https://mc.yandex.ru/metrika/watch.js"; ' +
+    'if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } ' +
+    '})(document, window, "yandex_metrika_callbacks");' +
+    '</script>' +
+    '<noscript><img src="https://mc.yandex.ru/watch/28136448" style="position:absolute; left:-9999px;" /></noscript>';
 
 gulp.task('feeds', ['yate'], function () {
     /**
@@ -90,19 +111,43 @@ gulp.task('feeds', ['yate'], function () {
                 }
 
                 var build = params;
-                build.name = removeEx(page);
+                build.name = page.replace('.md', '');
 
                 console.log('feeds: build: \'' + feed + '\' page: \'' + build.name + '\'');
 
                 listOfPages.push(build);
 
-                build.pageContent = html;
 
                 /**
                  * Сохрание собранного файла страницы
                  */
-                fs.writeFileSync('./build/bundles/feeds/' + feed + '/' + removeEx(page) + '.json',
-                    JSON.stringify(build), {encoding: 'utf-8'});
+                require('./build/app/app.yate.js');
+                fs.writeFileSync(
+                    './build/static/feeds/' + feed + '/' + page.replace('.md', '.html'),
+                    yr.run('app', {
+                        page: {
+                            'page-blocks': {
+                                header: {
+                                    logo: true
+                                },
+                                book: true,
+                                footer: true,
+                                stat: true
+                            },
+                            'page-params': {
+                                _page: build.type || 'page',
+                                title: build.title,
+                                param: build
+                            },
+                            'page-content': {
+                                counter: counter,
+                                body: html,
+                                keywords: build.keywords
+                            }
+                        }
+                    }),
+                    {encoding: 'utf-8'}
+                );
 
             });
         });
@@ -129,7 +174,7 @@ gulp.task('feeds', ['yate'], function () {
             })
         };
 
-        fs.writeFileSync('./build/bundles/feeds/' + removeEx(feed) + '.json',
+        fs.writeFileSync('./build/bundles/feeds/' + feed + '.json',
             JSON.stringify(feedParam), {encoding: 'utf-8'});
     });
 });
@@ -164,21 +209,59 @@ gulp.task('pages', ['feeds'], function () {
                                 var build = params;
                                 build.pageContent = html
                                     .replace(new RegExp('{ feeds.books.full }', 'g'),
-                                    JSON.parse(fs.readFileSync('build/bundles/feeds/books.json',
-                                        {encoding: 'utf-8'})).render.full)
+                                        JSON.parse(fs.readFileSync('build/bundles/feeds/books.json',
+                                            {encoding: 'utf-8'})).render.full)
                                     .replace(new RegExp('{ feeds.books.compact }', 'g'),
-                                    JSON.parse(fs.readFileSync('build/bundles/feeds/books.json',
-                                        {encoding: 'utf-8'})).render.compact);
+                                        JSON.parse(fs.readFileSync('build/bundles/feeds/books.json',
+                                            {encoding: 'utf-8'})).render.compact);
 
                                 /**
                                  * Сохрание собранного файла страницы
                                  */
-                                fs.writeFile('./build/bundles/pages/' + path + element.replace('.md', '') + '.json',
-                                    JSON.stringify(build), {encoding: 'utf-8'}, function (err) {
+                                require('./build/app/app.yate.js');
+                                element = element.replace('.md', '');
+                                let res = yr.run('app', {
+                                    page: {
+                                        'page-blocks': {
+                                            header: {
+                                                logo: true
+                                            },
+                                            body: true,
+                                            footer: true,
+                                            stat: true
+                                        },
+                                        'page-params': {
+                                            _page: build.type || 'page',
+                                            title: build.title
+                                        },
+                                        'page-content': {
+                                            counter: counter,
+                                            body: build.pageContent,
+                                            keywords: build.keywords
+                                        }
+                                    }
+                                });
+
+                                if (element === 'index') {
+                                    fs.writeFileSync(
+                                        './build/static/' + path + 'index.html',
+                                        res,
+                                        {encoding: 'utf-8'}
+                                    );
+
+                                } else {
+                                    mkdir('./build/static/' + path + element, function (err) {
                                         if (err) {
                                             throw new Error(err);
                                         }
+
+                                        fs.writeFileSync(
+                                            './build/static/' + path + element + '/' + 'index.html',
+                                            res,
+                                            {encoding: 'utf-8'}
+                                        );
                                     });
+                                }
                             });
                         }
                     });
@@ -212,12 +295,11 @@ gulp.task('specials', function () {
                             /**
                              * Сохрание скомпилированного файла страницы
                              */
-                            fs.writeFile('./build/bundles/special/' + path + element,
-                                minify(ssData, minifyOptions), {encoding: 'utf-8'}, function (err) {
-                                    if (err) {
-                                        throw new Error(err);
-                                    }
-                                });
+                            fs.writeFileSync(
+                                './build/static/special' + path + element,
+                                minify(ssData, minifyOptions),
+                                {encoding: 'utf-8'}
+                            );
                         }
                     });
                 }
@@ -268,6 +350,16 @@ gulp.task('css', function () {
 //        }))
 //        .pipe(gulp.dest('images'));
 //});
+
+gulp.task('upload', ['default'], function () {
+    gulp.src('build/static/**/')
+        .pipe(sftp({
+            host: 'sftp.selcdn.ru',
+            user: process.env.FTP_USER,
+            pass: process.env.FTP_PSWD,
+            remotePath: 'skhokhlov'
+        }));
+});
 
 gulp.task('default', ['js', 'css', 'pages', 'specials']);
 
@@ -323,13 +415,4 @@ function parsePage(data, callback) {
  */
 function yate(input, output) {
     return execSync('./node_modules/.bin/yate ' + input + ' > ' + output);
-}
-
-/**
- *
- * @param name
- * @returns {XML|string|void}
- */
-function removeEx(name) {
-    return name.replace('.md', '');
 }

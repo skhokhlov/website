@@ -49,132 +49,15 @@ app.get('/robots.txt', function (req, res) {
     res.status(200).sendFile(__dirname + '/app/robots.txt');
 });
 
-app.get('/feed/:feed/:book', function (req, res) {
-    fs.readFile(__dirname + '/build/bundles/feeds/' + req.params.feed + '/' + req.params.book + '.json',
-        {encoding: 'utf-8'}, function (err, data) {
-            if (err) {
-                return sendError(res);
-            }
-
-            var page = JSON.parse(data);
-
-            res.send(yr.run('app', {
-                page: {
-                    'page-blocks': {
-                        header: {
-                            logo: true
-                        },
-                        book: true,
-                        footer: true,
-                        stat: true
-                    },
-                    'page-params': {
-                        _page: page.type || 'page',
-                        title: page.title,
-                        param: page
-                    },
-                    'page-content': {
-                        counter: counter,
-                        body: page.pageContent,
-                        keywords: page.keywords,
-                        hostname: hostname
-                    }
-                }
-            }));
-        });
-});
-
-app.get('/', function (req, res) {
-    fs.readFile(__dirname + '/build/bundles/pages/index.json', {encoding: 'utf-8'}, function (err, data) {
-        if (err) {
-            return sendError(res);
-        }
-
-        var page = JSON.parse(data);
-
-        res.send(yr.run('app', {
-            page: {
-                'page-blocks': {
-                    header: {
-                        logo: true
-                    },
-                    body: true,
-                    footer: true,
-                    stat: true
-                },
-                'page-params': {
-                    _page: page.type || 'page',
-                    title: page.title,
-                    hostname: hostname
-                },
-                'page-content': {
-                    counter: counter,
-                    body: page.pageContent,
-                    keywords: page.keywords
-                }
-            }
-        }));
-    });
-});
-
-app.get('/special/:project', function (req, res) {
-    fs.readFile(__dirname + '/build/bundles/special/' + req.params.project + '.html',
-        {encoding: 'utf-8'}, function (err, data) {
-            if (err) {
-                return sendError(res);
-            }
-
-            res.send(data);
-        });
-});
 app.get('/plus', function (req, res) {
     res.redirect('/special/plus');
 });
 
-app.get('/en', function (req, res) {
-    fs.readFile(__dirname + '/build/bundles/special/index-en.html',
-        {encoding: 'utf-8'}, function (err, data) {
-            if (err) {
-                return sendError(res);
-            }
 
-            res.send(data);
-        });
-});
 
 app.use(function (req, res) {
     if (req.method === 'GET') {
-        fs.readFile(__dirname + '/build/bundles/pages/' + req.path + '.json',
-            {encoding: 'utf-8'}, function (err, data) {
-                if (err) {
-                    return sendError(res);
-                }
-
-                var page = JSON.parse(data);
-
-                res.send(yr.run('app', {
-                    page: {
-                        'page-blocks': {
-                            header: {
-                                logo: true
-                            },
-                            body: true,
-                            footer: true,
-                            stat: true
-                        },
-                        'page-params': {
-                            _page: page.type || 'page',
-                            title: page.title,
-                            hostname: hostname
-                        },
-                        'page-content': {
-                            counter: counter,
-                            body: page.pageContent,
-                            keywords: page.keywords
-                        }
-                    }
-                }));
-            });
+        res.sendFile(__dirname + '/build/static/' + req.path + '/index.html');
     } else {
         sendError(res);
     }

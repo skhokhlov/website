@@ -8,6 +8,7 @@ match / {
 html('<!DOCTYPE html>')
 <html>
 <head>
+<meta charset="utf-8"/>
 <!--<meta name="viewport" content="width=device-width, initial-scale=1"/>-->
 <title>{params.title}</title>
 <link rel="stylesheet" href="/public/app.css" />
@@ -19,7 +20,6 @@ html('<!DOCTYPE html>')
     <script async="async" src="/public/app.js"></script>
     </body>
     </html>
-    html('\n<!-- ' + params.hostname + ' -->')
 }
 
 match .page {
