@@ -85,36 +85,7 @@ app.get('/feed/:feed/:book', function (req, res) {
 });
 
 app.get('/', function (req, res) {
-    fs.readFile(__dirname + '/build/bundles/pages/index.json', {encoding: 'utf-8'}, function (err, data) {
-        if (err) {
-            return sendError(res);
-        }
-
-        var page = JSON.parse(data);
-
-        res.send(yr.run('app', {
-            page: {
-                'page-blocks': {
-                    header: {
-                        logo: true
-                    },
-                    body: true,
-                    footer: true,
-                    stat: true
-                },
-                'page-params': {
-                    _page: page.type || 'page',
-                    title: page.title,
-                    hostname: hostname
-                },
-                'page-content': {
-                    counter: counter,
-                    body: page.pageContent,
-                    keywords: page.keywords
-                }
-            }
-        }));
-    });
+    res.sendFile(__dirname + '/build/bundles/special/index-2.html');
 });
 
 app.get('/special/:project', function (req, res) {
