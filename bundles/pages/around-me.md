@@ -9,13 +9,13 @@ keywords: skhokhlov, список, окружжение, сергей, хохл�
 
 <p>[Библиотека](/bookshelf) – используемая литература</p>
 
-<p>https://instagram.com/skhokhlov – что-то вроде фотоблога</p>
+<p>[instagram.com/skhokhlov](https://instagram.com/skhokhlov) – что-то вроде фотоблога</p>
 
-<p>https://flickr.com/skhokhlov – фотохранилище</p>
+<p>[flickr.com/skhokhlov](https://flickr.com/skhokhlov) – фотохранилище</p>
 
-<p>https://github.com/skhokhlov – кодохранилище</p>
+<p>[github.com/skhokhlov](https://github.com/skhokhlov) – кодохранилище</p>
 
-<p>https://ello.co/skhokhlov – хипстерская социальная сеть</p>
+<p>[ello.co/skhokhlov](https://ello.co/skhokhlov) – хипстерская социальная сеть</p>
 
 </div>
 <div class="layout__col layout__col_np layout__col_size_50p">
