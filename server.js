@@ -43,7 +43,7 @@ app.use('/images', express.static(__dirname + '/images', {
 app.use(locale(['ru', 'en']));
 
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.OPENSHIFT_PORT ||
-process.env.VCAP_APP_PORT || process.env.PORT || 3000);
+    process.env.VCAP_APP_PORT || process.env.PORT || 3000);
 
 app.get('/robots.txt', function (req, res) {
     res.status(200).sendFile(__dirname + '/app/robots.txt');
@@ -154,12 +154,11 @@ app.use(function (req, res) {
 
 http.createServer(app).listen(app.get('port'), function () {
     console.info('DEBUG environment is set to ' +
-    (Boolean((process.env.DEBUG === 'true') || (process.env.DEBUG == null))));
+        (Boolean((process.env.DEBUG === 'true') || (process.env.DEBUG == null))));
     console.log('Server listening on port ' + app.get('port'));
 });
 
 function sendError(res, lang) {
-    var random = (strings) => Math.random() < 0.5 ? strings[0] : strings[1];
     lang = lang || 'ru';
 
     return res.status(404).send(yr.run('app', {
@@ -188,4 +187,8 @@ function sendError(res, lang) {
             }
         }
     }));
+}
+
+function random(strings) {
+    return Math.random() < 0.5 ? strings[0] : strings[1];
 }
