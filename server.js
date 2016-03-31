@@ -3,7 +3,6 @@
 const fs = require('fs');
 const http = require('http');
 const express = require('express');
-const locale = require('locale');
 
 const app = express();
 const yr = require('./node_modules/yate/lib/runtime.js');
@@ -41,7 +40,6 @@ const counter = `<script type="text/javascript">
 <img src="https://mc.yandex.ru/watch/28136448" style="position:absolute; left:-9999px;" alt="" /></div></noscript>`;
 
 app.set('x-powered-by', false);
-app.use(locale(['ru', 'en']));
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.OPENSHIFT_PORT || process.env.PORT || 3000);
 
 app.use('/public', express.static(__dirname + '/build/app', {
@@ -53,6 +51,9 @@ app.use('/images', express.static(__dirname + '/images', {
     index: false,
     maxAge: ((process.env.DEBUG === 'false') ? 60480000 : 180000)
 }));
+
+app.use('/api/bundles/feed', express.static(__dirname + '/build/bundles/feeds'));
+app.use('/api/bundles/pages', express.static(__dirname + '/build/bundles/pages'));
 
 app.get('/robots.txt', (req, res) => res.sendFile(__dirname + '/app/robots.txt'));
 
@@ -114,7 +115,7 @@ app.get(
 app.get('/plus', (req, res) => res.redirect('/special/plus'));
 
 app.get('/en', (req, res) => fs.readFile(
-    __dirname + '/build/bundles/special/index-en.html',
+    __dirname + '/build/bundles/special/index-en-2.html',
     {encoding: 'utf-8'},
     (err, data) => {
         if (err) {
