@@ -11,6 +11,9 @@ const minify = require('html-minifier').minify;
 const jshint = require('gulp-jshint');
 const stylus = require('gulp-stylus');
 const cssnano = require('gulp-cssnano');
+const babelify = require('babelify');
+const browserify = require('browserify');
+const source = require('vinyl-source-stream');
 const autoprefixer = require('gulp-autoprefixer');
 //const imagemin = require('gulp-imagemin');
 const yr = require('./node_modules/yate/lib/runtime.js');
@@ -163,7 +166,7 @@ gulp.task('specials', () => {
     })('/');
 });
 
-gulp.task('js', () => {
+gulp.task('js', ['yate'], () => {
     gulp.src(['./**'])
         .pipe(jscs({
             preset: 'yandex'
@@ -171,14 +174,25 @@ gulp.task('js', () => {
 
     gulp.src(['./*.js'])
         .pipe(jshint({
-            esnext: true
+            esversion: 6
         }))
         .pipe(jshint.reporter('default'));
 
     gulp.src(['./app/*.js'])
-        .pipe(jshint())
+        .pipe(jshint({
+            esversion: 6
+        }))
         .pipe(jshint.reporter('default'))
         .pipe(gulp.dest('build/app/'));
+
+    browserify({
+        entries: 'app/app.js',
+        extensions: ['.js']
+    })
+        .transform(babelify.configure({presets: ['es2015']}))
+        .bundle()
+        .pipe(source('app/app.js'))
+        .pipe(gulp.dest('build'));
 
 });
 

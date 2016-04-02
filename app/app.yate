@@ -5,21 +5,25 @@ page = params._page
 content = /.page.page-content
 
 match / {
-html('<!DOCTYPE html>')
-<html>
-<head>
-<!--<meta name="viewport" content="width=device-width, initial-scale=1"/>-->
-<title>{params.title}</title>
-<link rel="stylesheet" href="/public/app.css" />
-<link type="image/x-icon" rel="shortcut icon" href="/images/icon/icon.ico"/>
-<meta name="keywords" content="{ content.keywords }" />
-</head>
-<body class="page">
-    apply .page
-    <script async="async" src="/public/app.js"></script>
-    </body>
-    </html>
-    html('\n<!-- ' + params.hostname + ' -->')
+    if (params.wrap) {
+        html('<!DOCTYPE html>')
+        <html>
+        <head>
+            <!--<meta name="viewport" content="width=device-width, initial-scale=1"/>-->
+            <title>{params.title}</title>
+            <link rel="stylesheet" href="/public/app.css" />
+            <link type="image/x-icon" rel="shortcut icon" href="/images/icon/icon.ico"/>
+            <meta name="keywords" content="{ content.keywords }" />
+        </head>
+        <body class="page">
+            apply .page
+            <script async="async" src="/public/app.js"></script>
+        </body>
+        </html>
+        html('\n<!-- ' + params.hostname + ' -->')
+    } else {
+        apply .page
+    }
 }
 
 match .page {

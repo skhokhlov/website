@@ -82,7 +82,8 @@ app.get(
                     'page-params': {
                         _page: page.type || 'page',
                         title: page.title,
-                        param: page
+                        param: page,
+                        wrap: true
                     },
                     'page-content': {
                         counter: counter,
@@ -148,7 +149,8 @@ app.use((req, res) => {
                         'page-params': {
                             _page: page.type || 'page',
                             title: page.title,
-                            hostname: hostname
+                            hostname: hostname,
+                            wrap: true
                         },
                         'page-content': {
                             counter: counter,
@@ -187,7 +189,8 @@ function sendError(res, lang) {
             'page-params': {
                 _page: 'error',
                 title: lang === 'ru' ? 'Страница не найдена' : 'Page not found',
-                hostname: hostname
+                hostname: hostname,
+                wrap: true
             },
             'page-content': {
                 body: '<h2 class="title">' +

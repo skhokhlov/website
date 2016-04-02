@@ -42,69 +42,75 @@ var yr = yr || require('yate/lib/runtime.js');
 
     var j3 = [ ];
 
-    var j4 = [ 0, 'title' ];
+    var j4 = [ 0, 'page' ];
 
-    var j5 = [ 0, 'keywords' ];
+    var j5 = [ 0, 'wrap' ];
 
-    var j6 = [ 0, 'page' ];
+    var j6 = [ 0, 'title' ];
 
-    var j7 = [ 0, 'hostname' ];
+    var j7 = [ 0, 'keywords' ];
 
-    var j8 = [ 0, 'page-blocks', 0, '*' ];
+    var j8 = [ 0, 'hostname' ];
 
-    var j9 = [ 0, '*' ];
+    var j9 = [ 0, 'page-blocks', 0, '*' ];
 
-    var j10 = [ 1, 0 ];
+    var j10 = [ 0, '*' ];
 
-    var j11 = [ 0, 'footer' ];
+    var j11 = [ 1, 0 ];
 
-    var j12 = [ 0, 'body' ];
+    var j12 = [ 0, 'footer' ];
 
-    var j13 = [ 0, 'book' ];
+    var j13 = [ 0, 'body' ];
 
-    var j14 = [ 0, 'param', 0, 'image' ];
+    var j14 = [ 0, 'book' ];
 
-    var j15 = [ 0, 'param', 0, 'author' ];
+    var j15 = [ 0, 'param', 0, 'image' ];
 
-    var j16 = [ 0, 'param', 0, 'original' ];
+    var j16 = [ 0, 'param', 0, 'author' ];
 
-    var j17 = [ 0, 'param', 0, 'original', 0, 'author' ];
+    var j17 = [ 0, 'param', 0, 'original' ];
 
-    var j18 = [ 0, 'param', 0, 'original', 0, 'title' ];
+    var j18 = [ 0, 'param', 0, 'original', 0, 'author' ];
 
-    var j19 = [ 0, 'param', 0, 'caption' ];
+    var j19 = [ 0, 'param', 0, 'original', 0, 'title' ];
 
-    var j20 = [ 0, 'header' ];
+    var j20 = [ 0, 'param', 0, 'caption' ];
 
-    var j21 = [ 0, 'stat' ];
+    var j21 = [ 0, 'header' ];
 
-    var j22 = [ 0, 'counter' ];
+    var j22 = [ 0, 'stat' ];
+
+    var j23 = [ 0, 'counter' ];
 
     // match /
     M.t0 = function t0(m, c0, i0, l0, a0) {
         var r0 = '';
         var current = [ c0 ];
 
-        r0 += closeAttrs(a0);
-        r0 += "<!DOCTYPE html>";
-        r0 += "<html>";
-        r0 += "<head>";
-        r0 += "<title>" + nodeset2xml( ( m.n(j4, m.v('v0', c0.doc.root)) ) ) + "</title>";
-        r0 += "<link rel=\"" + "stylesheet" + "\" href=\"" + "/public/app.css" + "\"/>";
-        r0 += "<link type=\"" + "image/x-icon" + "\" rel=\"" + "shortcut icon" + "\" href=\"" + "/images/icon/icon.ico" + "\"/>";
-        r0 += "<meta name=\"" + "keywords" + "\" content=\"" + nodeset2attrvalue( ( m.n(j5, m.v('v2', c0.doc.root)) ) ) + "\"/>";
-        r0 += "</head>";
-        r0 += "<body";
-        a0.a = {
-            'class': new yr.scalarAttr("page")
-        };
-        a0.s = 'body';
-        r0 += m.a(m, 0, selectNametest('page', c0, []), '', a0)
-        r0 += closeAttrs(a0);
-        r0 += "<script async=\"" + "async" + "\" src=\"" + "/public/app.js" + "\"></script>";
-        r0 += "</body>";
-        r0 += "</html>";
-        r0 += "\n<!-- " + nodeset2scalar( m.n(j7, m.v('v0', c0.doc.root)) ) + " -->";
+        if (nodeset2boolean( (m.n(j5, m.v('v0', c0.doc.root))) )) {
+            r0 += closeAttrs(a0);
+            r0 += "<!DOCTYPE html>";
+            r0 += "<html>";
+            r0 += "<head>";
+            r0 += "<title>" + nodeset2xml( ( m.n(j6, m.v('v0', c0.doc.root)) ) ) + "</title>";
+            r0 += "<link rel=\"" + "stylesheet" + "\" href=\"" + "/public/app.css" + "\"/>";
+            r0 += "<link type=\"" + "image/x-icon" + "\" rel=\"" + "shortcut icon" + "\" href=\"" + "/images/icon/icon.ico" + "\"/>";
+            r0 += "<meta name=\"" + "keywords" + "\" content=\"" + nodeset2attrvalue( ( m.n(j7, m.v('v2', c0.doc.root)) ) ) + "\"/>";
+            r0 += "</head>";
+            r0 += "<body";
+            a0.a = {
+                'class': new yr.scalarAttr("page")
+            };
+            a0.s = 'body';
+            r0 += m.a(m, 0, selectNametest('page', c0, []), '', a0)
+            r0 += closeAttrs(a0);
+            r0 += "<script async=\"" + "async" + "\" src=\"" + "/public/app.js" + "\"></script>";
+            r0 += "</body>";
+            r0 += "</html>";
+            r0 += "\n<!-- " + nodeset2scalar( m.n(j8, m.v('v0', c0.doc.root)) ) + " -->";
+        } else {
+            r0 += m.a(m, 0, selectNametest('page', c0, []), '', a0)
+        }
 
         return r0;
     };
@@ -122,13 +128,13 @@ var yr = yr || require('yate/lib/runtime.js');
             'class': new yr.scalarAttr("page__content")
         };
         a0.s = 'div';
-        r0 += m.a(m, 0, m.s(j8, c0), 'block', a0)
+        r0 += m.a(m, 0, m.s(j9, c0), 'block', a0)
         r0 += closeAttrs(a0);
         r0 += "</div>";
 
         return r0;
     };
-    M.t1.j = j6;
+    M.t1.j = j4;
     M.t1.a = 0;
 
     // match .* : block
@@ -136,11 +142,11 @@ var yr = yr || require('yate/lib/runtime.js');
         var r0 = '';
         var current = [ c0 ];
 
-        r0 += m.a(m, 0, m.s(j10, c0), 'block-content', a0)
+        r0 += m.a(m, 0, m.s(j11, c0), 'block-content', a0)
 
         return r0;
     };
-    M.t2.j = j9;
+    M.t2.j = j10;
     M.t2.a = 0;
 
     // match .* : block-content
@@ -152,7 +158,7 @@ var yr = yr || require('yate/lib/runtime.js');
 
         return r0;
     };
-    M.t3.j = j9;
+    M.t3.j = j10;
     M.t3.a = 0;
 
     // match .footer : block-content
@@ -177,7 +183,7 @@ var yr = yr || require('yate/lib/runtime.js');
 
         return r0;
     };
-    M.t4.j = j11;
+    M.t4.j = j12;
     M.t4.a = 0;
 
     // match .body : block
@@ -191,13 +197,13 @@ var yr = yr || require('yate/lib/runtime.js');
             'class': new yr.scalarAttr("body")
         };
         a0.s = 'div';
-        r0 += m.a(m, 0, m.s(j10, c0), 'block-content', a0)
+        r0 += m.a(m, 0, m.s(j11, c0), 'block-content', a0)
         r0 += closeAttrs(a0);
         r0 += "</div>";
 
         return r0;
     };
-    M.t5.j = j12;
+    M.t5.j = j13;
     M.t5.a = 0;
 
     // match .body : block-content
@@ -207,12 +213,12 @@ var yr = yr || require('yate/lib/runtime.js');
 
         r0 += closeAttrs(a0);
         r0 += "<div class=\"" + "body__content" + "\">";
-        r0 += nodeset2scalar( m.n(j12, m.v('v2', c0.doc.root)) );
+        r0 += nodeset2scalar( m.n(j13, m.v('v2', c0.doc.root)) );
         r0 += "</div>";
 
         return r0;
     };
-    M.t6.j = j12;
+    M.t6.j = j13;
     M.t6.a = 0;
 
     // match .book : block-content
@@ -225,17 +231,17 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += "<p><a href=\"" + "/bookshelf" + "\" class=\"" + "link" + "\">" + "Книжная полка" + "</a></p>";
         r0 += "<div class=\"" + "layout" + "\">";
         r0 += "<div class=\"" + "book__name" + "\">";
-        if (nodeset2boolean( m.n(j14, m.v('v0', c0.doc.root)) )) {
-            r0 += "<div class=\"" + "book__section" + "\"><img class=\"" + "image book__image" + "\" src=\"" + nodeset2attrvalue( ( m.n(j14, m.v('v0', c0.doc.root)) ) ) + "\" itemprop=\"" + "image" + "\"/></div>";
+        if (nodeset2boolean( m.n(j15, m.v('v0', c0.doc.root)) )) {
+            r0 += "<div class=\"" + "book__section" + "\"><img class=\"" + "image book__image" + "\" src=\"" + nodeset2attrvalue( ( m.n(j15, m.v('v0', c0.doc.root)) ) ) + "\" itemprop=\"" + "image" + "\"/></div>";
         }
         r0 += "<div class=\"" + "book__section" + "\">";
-        r0 += "<h1 class=\"" + "book__title title title_h1" + "\" itemprop=\"" + "name" + "\">" + nodeset2xml( ( m.n(j4, m.v('v0', c0.doc.root)) ) ) + "</h1>";
-        r0 += "<p class=\"" + "title book__author" + "\" itemprop=\"" + "author" + "\">" + nodeset2xml( ( m.n(j15, m.v('v0', c0.doc.root)) ) ) + "</p>";
-        if (nodeset2boolean( m.n(j16, m.v('v0', c0.doc.root)) )) {
+        r0 += "<h1 class=\"" + "book__title title title_h1" + "\" itemprop=\"" + "name" + "\">" + nodeset2xml( ( m.n(j6, m.v('v0', c0.doc.root)) ) ) + "</h1>";
+        r0 += "<p class=\"" + "title book__author" + "\" itemprop=\"" + "author" + "\">" + nodeset2xml( ( m.n(j16, m.v('v0', c0.doc.root)) ) ) + "</p>";
+        if (nodeset2boolean( m.n(j17, m.v('v0', c0.doc.root)) )) {
             r0 += "<div class=\"" + "book__original" + "\">";
             r0 += "<p><span>" + "В оригинале:" + "</span><br/>";
-            r0 += "<span class=\"" + "book__author book__author_original" + "\">" + nodeset2xml( ( m.n(j17, m.v('v0', c0.doc.root)) ) ) + ". " + "</span>";
-            r0 += "<span class=\"" + "book__title book__title_original" + "\">" + nodeset2xml( ( m.n(j18, m.v('v0', c0.doc.root)) ) ) + "</span>";
+            r0 += "<span class=\"" + "book__author book__author_original" + "\">" + nodeset2xml( ( m.n(j18, m.v('v0', c0.doc.root)) ) ) + ". " + "</span>";
+            r0 += "<span class=\"" + "book__title book__title_original" + "\">" + nodeset2xml( ( m.n(j19, m.v('v0', c0.doc.root)) ) ) + "</span>";
             r0 += "</p>";
             r0 += "</div>";
         }
@@ -243,13 +249,13 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += "</div>";
         r0 += "</div>";
         r0 += "<article class=\"" + "book__body" + "\" itemprop=\"" + "review" + "\">";
-        r0 += nodeset2scalar( m.n(j12, m.v('v2', c0.doc.root)) );
+        r0 += nodeset2scalar( m.n(j13, m.v('v2', c0.doc.root)) );
         r0 += "</article>";
-        if (nodeset2boolean( m.n(j19, m.v('v0', c0.doc.root)) )) {
+        if (nodeset2boolean( m.n(j20, m.v('v0', c0.doc.root)) )) {
             r0 += "<div class=\"" + "book__caption" + "\" itemprop=\"" + "about" + "\">";
             r0 += "<h2 class=\"" + "title title_h2" + "\">" + "Аннотация" + "</h2>";
             r0 += "<p>";
-            r0 += nodeset2scalar( m.n(j19, m.v('v0', c0.doc.root)) );
+            r0 += nodeset2scalar( m.n(j20, m.v('v0', c0.doc.root)) );
             r0 += "</p>";
             r0 += "</div>";
         }
@@ -257,7 +263,7 @@ var yr = yr || require('yate/lib/runtime.js');
 
         return r0;
     };
-    M.t7.j = j13;
+    M.t7.j = j14;
     M.t7.a = 0;
 
     // match .header : block-content
@@ -281,7 +287,7 @@ var yr = yr || require('yate/lib/runtime.js');
 
         return r0;
     };
-    M.t8.j = j20;
+    M.t8.j = j21;
     M.t8.a = 0;
 
     // match .stat : block-content
@@ -291,12 +297,12 @@ var yr = yr || require('yate/lib/runtime.js');
 
         r0 += closeAttrs(a0);
         r0 += "<div class=\"" + "i-stat" + "\">";
-        r0 += nodeset2scalar( m.n(j22, m.v('v2', c0.doc.root)) );
+        r0 += nodeset2scalar( m.n(j23, m.v('v2', c0.doc.root)) );
         r0 += "</div>";
 
         return r0;
     };
-    M.t9.j = j21;
+    M.t9.j = j22;
     M.t9.a = 0;
 
     M.matcher = {
