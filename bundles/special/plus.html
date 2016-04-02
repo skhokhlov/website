@@ -251,6 +251,13 @@
 
 })(document);</script>
 <script>
+    window.addEventListener('popstate', function (e) {
+        if (e.state) {
+            document.location = e.state.path;
+        }
+    });
+</script>
+<script>
     (function (d, w, c) {
         (w[c] = w[c] || []).push(function () {
             try {

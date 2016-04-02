@@ -43,6 +43,13 @@
     <p>А&nbsp;так&nbsp;же со&nbsp;мной всегда можно найти контакт: <a href="mailto:sergey@skhokhlov.ru"
                                                    class="link">sergey@skhokhlov.ru</a>.</p>
 </div>
+<script>
+    window.addEventListener('popstate', function (e) {
+        if (e.state) {
+            document.location = e.state.path;
+        }
+    });
+</script>
 <script type="text/javascript">
     (function (d, w, c) {
         (w[c] = w[c] || []).push(function() {
