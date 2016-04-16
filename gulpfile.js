@@ -18,7 +18,7 @@ const yr = require('./node_modules/yate/lib/runtime.js');
 const renderer = new marked.Renderer();
 renderer.heading = (text, level) => {
     let escapedText = text.toLowerCase().replace(/ /g, '-');
-    return `<h${level} class="title title_h${level}">
+    return `<h${level} id="${escapedText}" class="title title_h${level}">
             <a name="${escapedText}" class="title__anchor" href="#${escapedText}">
                 <span class="title__link title__link_anchor"></span>
             </a>${text}</h${level}>`;
