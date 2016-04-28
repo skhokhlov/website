@@ -14,8 +14,7 @@ checkPath(window, document);
 page('/feed/:feed/:book', function (ctx) {
     request('/api/bundles/feed/' + ctx.params.feed + '/' + ctx.params.book + '.json', function (err, res) {
         if (err) {
-            page.stop();
-            document.location = ctx.pathname;
+            return sendError(document);
         }
 
         res = JSON.parse(res);
@@ -51,25 +50,7 @@ page('/', function (ctx) {
 page('*', function (ctx) {
     request('/api/bundles/pages' + ctx.pathname + '.json', function (err, res) {
         if (err) {
-            document.title = 'Страница не найдена';
-            return document.getElementsByClassName('page')[0].innerHTML = yr.run('app', {
-                page: {
-                    'page-blocks': {
-                        header: {
-                            logo: true
-                        },
-                        body: true,
-                        footer: true
-                    },
-                    'page-params': {
-                        _page: 'error',
-                        title: 'Страница не найдена'
-                    },
-                    'page-content': {
-                        body: '<h2 class="title">' + random(['Бегите, глупцы!', '&mdash;&nbsp;Будь здесь и&nbsp;сейчас<br/>&mdash;&nbsp;Не&nbsp;сегодня, дорогой']) + '</h2><h1 class="title">Страница не найдена</h1>' + '<p>Если вы уверены, что здесь должно что-то быть, ' + '<a href="mailto:sergey@skhokhlov.ru" class="link">сообщите мне об этом: sergey@skhokhlov.ru</a>.</p>'
-                    }
-                }
-            });
+            return sendError(document, err);
         }
 
         res = JSON.parse(res);
@@ -98,6 +79,50 @@ page('*', function (ctx) {
 });
 
 page();
+
+function sendError(document, err) {
+    if (err === 'Network Error') {
+        document.title = 'Ошибка сети';
+        return document.getElementsByClassName('page')[0].innerHTML = yr.run('app', {
+            page: {
+                'page-blocks': {
+                    header: {
+                        logo: true
+                    },
+                    body: true,
+                    footer: true
+                },
+                'page-params': {
+                    _page: 'error',
+                    title: 'Ошибка сети'
+                },
+                'page-content': {
+                    body: '<h1 class="title">Ошибка сети</h1>'
+                }
+            }
+        });
+    } else {
+        document.title = 'Страница не найдена';
+        return document.getElementsByClassName('page')[0].innerHTML = yr.run('app', {
+            page: {
+                'page-blocks': {
+                    header: {
+                        logo: true
+                    },
+                    body: true,
+                    footer: true
+                },
+                'page-params': {
+                    _page: 'error',
+                    title: 'Страница не найдена'
+                },
+                'page-content': {
+                    body: '<h2 class="title">\n                    ' + random(['Бегите, глупцы!', '&mdash;&nbsp;Будь здесь и&nbsp;сейчас<br/>&mdash;&nbsp;Не&nbsp;сегодня, дорогой']) + '\n                    </h2><h1 class="title">Страница не найдена</h1>\n                    <p>Если вы уверены, что здесь должно что-то быть,\n                    <a href="mailto:sergey@skhokhlov.ru" class="link">сообщите мне об этом: sergey@skhokhlov.ru</a>.</p>'
+                }
+            }
+        });
+    }
+}
 
 function checkPath(window, d) {
     var loc = window.location.pathname;
