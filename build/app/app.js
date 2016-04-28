@@ -5,6 +5,10 @@ var page = require('page');
 var yr = require('./../node_modules/yate/lib/runtime.js');
 require('./../build/app/app.yate.js');
 
+var random = function random(strings) {
+    return Math.random() < 0.5 ? strings[0] : strings[1];
+};
+
 checkPath(window, document);
 
 page('/feed/:feed/:book', function (ctx) {
@@ -47,8 +51,25 @@ page('/', function (ctx) {
 page('*', function (ctx) {
     request('/api/bundles/pages' + ctx.pathname + '.json', function (err, res) {
         if (err) {
-            page.stop();
-            document.location = ctx.pathname;
+            document.title = 'Страница не найдена';
+            return document.getElementsByClassName('page')[0].innerHTML = yr.run('app', {
+                page: {
+                    'page-blocks': {
+                        header: {
+                            logo: true
+                        },
+                        body: true,
+                        footer: true
+                    },
+                    'page-params': {
+                        _page: 'error',
+                        title: 'Страница не найдена'
+                    },
+                    'page-content': {
+                        body: '<h2 class="title">' + random(['Бегите, глупцы!', '&mdash;&nbsp;Будь здесь и&nbsp;сейчас<br/>&mdash;&nbsp;Не&nbsp;сегодня, дорогой']) + '</h2><h1 class="title">Страница не найдена</h1>' + '<p>Если вы уверены, что здесь должно что-то быть, ' + '<a href="mailto:sergey@skhokhlov.ru" class="link">сообщите мне об этом: sergey@skhokhlov.ru</a>.</p>'
+                    }
+                }
+            });
         }
 
         res = JSON.parse(res);
