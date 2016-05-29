@@ -10,8 +10,9 @@ const yaml = require('js-yaml');
 const minify = require('html-minifier').minify;
 const jshint = require('gulp-jshint');
 const stylus = require('gulp-stylus');
-const cssnano = require('gulp-cssnano');
-const autoprefixer = require('gulp-autoprefixer');
+const postcss = require('gulp-postcss');
+const cssnano = require('cssnano');
+const autoprefixer = require('autoprefixer');
 //const imagemin = require('gulp-imagemin');
 const yr = require('./node_modules/yate/lib/runtime.js');
 
@@ -188,12 +189,13 @@ gulp.task('yate', () => {
 });
 
 gulp.task('css', () => {
+    var processors = [
+        autoprefixer({browsers: ['last 2 version']}),
+        cssnano(),
+    ];
     gulp.src(['app/app.styl'])
         .pipe(stylus())
-        .pipe(autoprefixer({
-            browsers: ['last 2 versions']
-        }))
-        .pipe(cssnano())
+        .pipe(postcss(processors))
         .pipe(gulp.dest('build/app'));
 });
 

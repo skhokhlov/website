@@ -11,20 +11,20 @@ original:
 ---
 
 ### Закладки:
-1. ![Закладка 1](/images/design-for-the-real-world/bookmark-1.jpg)
+1. ![Закладка 1](/images/design-for-the-real-world/bookmark-thumb-1.jpg)
 
-2. ![Закладка 2](/images/design-for-the-real-world/bookmark-2.jpg)
+2. ![Закладка 2](/images/design-for-the-real-world/bookmark-thumb-2.jpg)
 
-3. ![Закладка 3](/images/design-for-the-real-world/bookmark-3.jpg)
+3. ![Закладка 3](/images/design-for-the-real-world/bookmark-thumb-3.jpg)
 
-4. ![Закладка 4](/images/design-for-the-real-world/bookmark-4.jpg)
+4. ![Закладка 4](/images/design-for-the-real-world/bookmark-thumb-4.jpg)
 
-5. ![Закладка 5](/images/design-for-the-real-world/bookmark-5.jpg)
+5. ![Закладка 5](/images/design-for-the-real-world/bookmark-thumb-5.jpg)
 
-6. ![Закладка 6](/images/design-for-the-real-world/bookmark-6.jpg)
+6. ![Закладка 6](/images/design-for-the-real-world/bookmark-thumb-6.jpg)
 
-7. ![Закладка 7](/images/design-for-the-real-world/bookmark-7.jpg)
+7. ![Закладка 7](/images/design-for-the-real-world/bookmark-thumb-7.jpg)
 
-7. ![Закладка 8](/images/design-for-the-real-world/bookmark-8.jpg)
+7. ![Закладка 8](/images/design-for-the-real-world/bookmark-thumb-8.jpg)
 
-7. ![Закладка 9](/images/design-for-the-real-world/bookmark-9.jpg)
+7. ![Закладка 9](/images/design-for-the-real-world/bookmark-thumb-9.jpg)

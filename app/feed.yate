@@ -34,9 +34,10 @@ match / {
                         ' feed__image_compact'
                     }
                 )
-                <a href="/feed/{ feedName }/{ .name }"><img class="{ class }" src="{ .image }" /></a>
+
                 if type == 'full' {
                     <article class="feed__body">
+                        <a href="/feed/{ feedName }/{ .name }"><img class="{ class }" src="{ .image }" /></a>
                         <a href="/feed/{ feedName }/{ .name }" class="link feed__link"><h3 class="feed__title">{ .title }</h3></a>
                         <p class="feed__author">{ .author }</p>
                         <p>

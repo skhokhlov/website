@@ -8,4 +8,4 @@ caption: Книга рассчитана на широкий круг читат
 
 Эта книга меняет взгляд на&nbsp;мир. А&nbsp;еще это шажок к&nbsp;достижению скила распознавания говна и&nbsp;не&nbsp;говна.
 
-Вы&nbsp;всегда можете [почитать Ководство на&nbsp;сайте Студии](http://www. artlebedev. ru/kovodstvo/sections/).
+Вы&nbsp;всегда можете [почитать Ководство на&nbsp;сайте Студии](http://www.artlebedev.ru/kovodstvo/sections/).

@@ -109,9 +109,9 @@ var yr = yr || require('yate/lib/runtime.js');
                 a0.a[ "class" ] = new yr.scalarAttr(r1);
             }
             r0 += closeAttrs(a0);
-            r0 += "<a href=\"" + "/feed/" + nodeset2attrvalue( ( m.v('v0', c1.doc.root) ) ) + "/" + nodeset2attrvalue( ( selectNametest('name', c1, []) ) ) + "\"><img class=\"" + scalar2attrvalue( ( v2 ) ) + "\" src=\"" + nodeset2attrvalue( ( selectNametest('image', c1, []) ) ) + "\"/></a>";
             if (cmpSN("full", m.v('v1', c1.doc.root))) {
                 r0 += "<article class=\"" + "feed__body" + "\">";
+                r0 += "<a href=\"" + "/feed/" + nodeset2attrvalue( ( m.v('v0', c1.doc.root) ) ) + "/" + nodeset2attrvalue( ( selectNametest('name', c1, []) ) ) + "\"><img class=\"" + scalar2attrvalue( ( v2 ) ) + "\" src=\"" + nodeset2attrvalue( ( selectNametest('image', c1, []) ) ) + "\"/></a>";
                 r0 += "<a href=\"" + "/feed/" + nodeset2attrvalue( ( m.v('v0', c1.doc.root) ) ) + "/" + nodeset2attrvalue( ( selectNametest('name', c1, []) ) ) + "\" class=\"" + "link feed__link" + "\"><h3 class=\"" + "feed__title" + "\">" + nodeset2xml( ( selectNametest('title', c1, []) ) ) + "</h3></a>";
                 r0 += "<p class=\"" + "feed__author" + "\">" + nodeset2xml( ( selectNametest('author', c1, []) ) ) + "</p>";
                 r0 += "<p>";
