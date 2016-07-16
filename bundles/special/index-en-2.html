@@ -1,70 +1,189 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta charset="UTF-8"/>
-    <title>Sergey Khokhlov</title>
-    <link rel="stylesheet" href="/public/app.css" />
+    <title>Сергей Хохлов</title>
+    <link rel="stylesheet" href="/public/app.css"/>
     <style>
         .page {
-            font-size: 1.1em;
+            font-size: 20px;
             /*font-family: "Myriad Set Pro", "Helvetica Neue", "Helvetica", "Arial", sans-serif;*/
             font-weight: 400;
+            background: #1c1c1c;
+            color: #fff;
+        }
+
+        .page__wrapper {
+            margin: 59px;
         }
 
         .page__container {
             margin: 0 auto;
-            max-width: 900px;
-            padding: 1em;
+            position: absolute;
+            left: 444px;
+            top: 25%;
+            /*max-width: 900px;*/
+            /*padding: 1em;*/
+
         }
 
-        .page__container_center {
-            margin-top: 15%;
+        .identity {
+            background: url(/images/identity/+me.png) no-repeat;
+            position: absolute;
+            left: 59px;
+            bottom: 59px;
+            /*bottom: 0;*/
+            width: 221px;
+            height: 70px;
+            background-size: 100%;
         }
+
+        .lang {
+            position: absolute;
+            right: 59px;
+            bottom: 59px;
+            /*bottom: 0;*/
+            width: 75px;
+            height: 30px;
+        }
+
+        @media (max-width: 1150px) and (min-width: 900px) {
+            /*.page {*/
+            /*font-size: 27px;*/
+            /*}*/
+            .page__container {
+                top: 88px;
+                left: 330px;
+            }
+
+            .title {
+                min-height: 0;
+            }
+
+        }
+
+        @media (max-width: 900px) {
+            .page {
+                /*font-size: 30px;*/
+            }
+
+            .page__container {
+                position: static;
+            }
+
+            .identity {
+                position: static;
+                /*background-size: 50%;*/
+                width: 112px;
+                height: 35px;
+                margin-top: 50px;
+            }
+
+            .lang {
+                position: static;
+            }
+
+        }
+
+        @media (max-height: 500px) and (max-width: 900px) {
+            .identity {
+                position: static;
+
+            }
+            .lang{
+                position: static;
+            }
+        }
+
+        /*.page__container_center {*/
+        /*margin-top: 15%;*/
+        /*margin-left: 20%;*/
+        /*}*/
 
         .link {
-            color: #428bca;
+            color: #fff;
             text-decoration: underline;
         }
+
+        .link:visited {
+            color: #ddd;
+        }
+
+        .link:hover {
+            color: #f00;
+        }
+
+        /*.title {*/
+        /*font-size: 50px;*/
+        /*}*/
+        .title {
+            font-size: 60px;
+            font-family: "Source Sans Pro";
+            color: rgb(255, 255, 255);
+            line-height: 1.2;
+            text-align: left;
+            /*position: absolute;*/
+            /*left: 440.937px;*/
+            /*top: 1851.437px;*/
+            /*width: 373px;*/
+            min-height: 56px;
+            z-index: 5;
+        }
+
+
     </style>
 </head>
 <body class="page">
-<div class="page__container page__container_center">
-    <h1 class="title">Sergey Khokhlov</h1>
-    <p>Today I&nbsp;am a&nbsp;<a class="link" href="https://flickr.com/skhokhlov">photographer</a> and&nbsp;<a class="link"
-                                                                                                 href="https://github.com/skhokhlov">programmer</a>.
-    </p>
-    <p>There&nbsp;are also social networks: <a class="link" href="https://instagram.com/skhokhlov">Instagram</a> and&nbsp;<a class="link" href="https://ello.co/skhokhlov">Ello</a>.</p>
-    <p>And you can always find a&nbsp;contact with&nbsp;me: <a href="mailto:sergey@skhokhlov.ru"
-                                                                      class="link">sergey@skhokhlov.ru</a>.</p>
+<div class="page__wrapper">
+    <div class="page__container">
+        <h1 class="title">Sergey Khokhlov</h1>
+        <p>Today I&nbsp;am a&nbsp;<a class="link" href="https://flickr.com/skhokhlov">photographer</a> and&nbsp;<a class="link"
+                                                                                                                   href="https://github.com/skhokhlov">programmer</a>.
+        </p>
+        <p>There&nbsp;are also social networks: <a class="link" href="https://instagram.com/skhokhlov">Instagram</a> and&nbsp;<a class="link" href="https://ello.co/skhokhlov">Ello</a>.</p></p>
+        <p>And you can always find a&nbsp;contact with&nbsp;me: <a href="mailto:sergey@skhokhlov.ru"
+                                                                   class="link">sergey@skhokhlov.ru</a>.</p>
+    </div>
+    <div class="lang"><a class="link" href="/">Русский?</a></div>
+    <div class="identity"></div>
+
+
 </div>
 <script type="text/javascript">
     (function (d, w, c) {
-        (w[c] = w[c] || []).push(function() {
+        (w[c] = w[c] || []).push(function () {
             try {
                 w.yaCounter28136448 = new Ya.Metrika({
-                    id:28136448,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true,
-                    webvisor:true,
-                    trackHash:true
+                    id: 28136448,
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true,
+                    webvisor: true,
+                    trackHash: true
                 });
-            } catch(e) { }
+            } catch (e) {
+            }
         });
 
         var n = d.getElementsByTagName("script")[0],
             s = d.createElement("script"),
-            f = function () { n.parentNode.insertBefore(s, n); };
+            f = function () {
+                n.parentNode.insertBefore(s, n);
+            };
         s.type = "text/javascript";
         s.async = true;
         s.src = "https://mc.yandex.ru/metrika/watch.js";
 
         if (w.opera == "[object Opera]") {
             d.addEventListener("DOMContentLoaded", f, false);
-        } else { f(); }
+        } else {
+            f();
+        }
     })(document, window, "yandex_metrika_callbacks");
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/28136448" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/28136448" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
 </body>
 </html>
