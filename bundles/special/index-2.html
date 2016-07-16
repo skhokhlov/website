@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta charset="UTF-8"/>
     <title>Сергей Хохлов</title>
-    <link rel="stylesheet" href="/public/app.css" />
+    <link rel="stylesheet" href="/public/app.css"/>
     <style>
         .page {
             font-size: 20px;
@@ -28,8 +28,8 @@
 
         }
 
-        .page__identity {
-            background: url(/images/identity/+me.png);
+        .identity {
+            background: url(/images/identity/+me.png) no-repeat;
             position: absolute;
             left: 59px;
             bottom: 59px;
@@ -39,37 +39,66 @@
             background-size: 100%;
         }
 
+        .lang {
+            position: absolute;
+            right: 59px;
+            bottom: 59px;
+            /*bottom: 0;*/
+            width: 75px;
+            height: 30px;
+        }
+
         @media (max-width: 1150px) and (min-width: 900px) {
+            /*.page {*/
+            /*font-size: 27px;*/
+            /*}*/
             .page__container {
                 top: 88px;
                 left: 330px;
+            }
+
+            .title {
+                min-height: 0;
             }
 
         }
 
         @media (max-width: 900px) {
             .page {
-                font-size: 30px;
+                /*font-size: 30px;*/
             }
+
             .page__container {
                 position: static;
             }
 
-            .page__identity {
-                /*position: static;*/
+            .identity {
+                position: static;
+                /*background-size: 50%;*/
+                width: 112px;
+                height: 35px;
+                margin-top: 50px;
+            }
+
+            .lang {
+                position: static;
             }
 
         }
 
         @media (max-height: 500px) and (max-width: 900px) {
-            .page__identity {
+            .identity {
+                position: static;
+
+            }
+            .lang{
                 position: static;
             }
         }
 
         /*.page__container_center {*/
-            /*margin-top: 15%;*/
-            /*margin-left: 20%;*/
+        /*margin-top: 15%;*/
+        /*margin-left: 20%;*/
         /*}*/
 
         .link {
@@ -86,7 +115,7 @@
         }
 
         /*.title {*/
-            /*font-size: 50px;*/
+        /*font-size: 50px;*/
         /*}*/
         .title {
             font-size: 60px;
@@ -98,11 +127,9 @@
             /*left: 440.937px;*/
             /*top: 1851.437px;*/
             /*width: 373px;*/
-            height: 56px;
+            min-height: 56px;
             z-index: 5;
         }
-
-
 
 
     </style>
@@ -120,38 +147,45 @@
         <p>А&nbsp;так&nbsp;же со&nbsp;мной всегда можно найти контакт: <a href="mailto:sergey@skhokhlov.ru"
                                                                           class="link">sergey@skhokhlov.ru</a>.</p>
     </div>
-    <div class="page__identity">
-</div>
+    <div class="lang"><a class="link" href="/en">English?</a></div>
+    <div class="identity"></div>
 
 
 </div>
 <script type="text/javascript">
     (function (d, w, c) {
-        (w[c] = w[c] || []).push(function() {
+        (w[c] = w[c] || []).push(function () {
             try {
                 w.yaCounter28136448 = new Ya.Metrika({
-                    id:28136448,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true,
-                    webvisor:true,
-                    trackHash:true
+                    id: 28136448,
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true,
+                    webvisor: true,
+                    trackHash: true
                 });
-            } catch(e) { }
+            } catch (e) {
+            }
         });
 
         var n = d.getElementsByTagName("script")[0],
             s = d.createElement("script"),
-            f = function () { n.parentNode.insertBefore(s, n); };
+            f = function () {
+                n.parentNode.insertBefore(s, n);
+            };
         s.type = "text/javascript";
         s.async = true;
         s.src = "https://mc.yandex.ru/metrika/watch.js";
 
         if (w.opera == "[object Opera]") {
             d.addEventListener("DOMContentLoaded", f, false);
-        } else { f(); }
+        } else {
+            f();
+        }
     })(document, window, "yandex_metrika_callbacks");
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/28136448" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/28136448" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
 </body>
 </html>
