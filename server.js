@@ -3,6 +3,7 @@
 const fs = require('fs');
 const http = require('http');
 const express = require('express');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const yr = require('./node_modules/yate/lib/runtime.js');
@@ -41,6 +42,8 @@ const counter = `<script type="text/javascript">
 
 app.set('x-powered-by', false);
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.OPENSHIFT_PORT || process.env.PORT || 3000);
+
+app.use(cookieParser());
 
 app.use('/public', express.static(__dirname + '/build/app', {
     index: false,
@@ -96,7 +99,19 @@ app.get(
     )
 );
 
-app.get('/', (req, res) => res.sendFile(__dirname + '/build/bundles/special/index-2.html'));
+app.get('/', (req, res) => {
+    let langs = req.headers["accept-language"];
+    //TODO: Додоелать
+
+    if (req.cookies.lang === 'en') {
+        res.redirect('/en');
+    } else if (req.cookies.lang == null) {
+        let langs = req.headers["accept-language"];
+        res.sendFile(__dirname + '/build/bundles/special/index-2.html');
+    } else {
+        res.sendFile(__dirname + '/build/bundles/special/index-2.html');
+    }
+});
 
 app.get(
     '/special/:project',
