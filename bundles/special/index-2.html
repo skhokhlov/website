@@ -187,5 +187,22 @@
 <noscript>
     <div><img src="https://mc.yandex.ru/watch/28136448" style="position:absolute; left:-9999px;" alt=""/></div>
 </noscript>
+<script src="https://vk.com/js/api/openapi.js"></script>
+<script>
+    function checkVk() {
+        VK.init({
+            apiId: '5806405'
+        });
+        function authInfo(response){
+            if (response.session) {s
+                window.yaCounter28136448.userParams({
+                    vkid: response.session.mid
+                });
+            }
+        }
+        VK.Auth.getLoginStatus(authInfo);
+    }
+    checkVk();
+</script>
 </body>
 </html>
