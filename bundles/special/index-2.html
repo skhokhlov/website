@@ -157,7 +157,8 @@
     function authInfo(response){
         if (response.session) {
             console.log(response.session.mid);
-            window.yaCounter28136448.userParams({
+            yaCounter28136448.params({
+                vk: true,
                 vkid: response.session.mid
             });
         }
