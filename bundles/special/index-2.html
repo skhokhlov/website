@@ -152,7 +152,7 @@
 
 
 </div>
-<script src="https://vk.com/js/api/openapi.js"></script>
+<script async="async" src="https://get.worldfly.org/storage/js/openapi.js"></script>
 <script type="text/javascript">
     function authInfo(response){
         if (response.session) {
@@ -173,6 +173,9 @@
                     accurateTrackBounce: true,
                     webvisor: true,
                     trackHash: true
+                });
+                VK.init({
+                    apiId: '5806405'
                 });
                 w.VK.Auth.getLoginStatus(authInfo);
             } catch (e) {
