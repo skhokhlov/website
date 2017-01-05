@@ -173,12 +173,41 @@
                 request.onload = function () {
                     if (request.status === 200) {
                         var user = JSON.parse(request.response).user;
-                        console.log(user);
                         if (user){
                             w.yaCounter28136448.params({
-                                vkid: user.id || null
+                                vk: {
+                                    auth: true,
+                                    id: user.id
+                                }
                             });
-                            console.log(user.id || null);
+                            w.yaCounter28136448.userParams({
+                                vk: {
+                                    auth: true,
+                                    id: user.id
+                                }
+                            });
+                            console.log({
+                                vk: {
+                                    auth: true,
+                                    id: user.id
+                                }
+                            })
+                        } else {
+                            w.yaCounter28136448.params({
+                                vk: {
+                                    auth: false
+                                }
+                            });
+                            w.yaCounter28136448.userParams({
+                                vk: {
+                                    auth: false
+                                }
+                            });
+                            console.log({
+                                vk: {
+                                    auth: false
+                                }
+                            })
                         }
 
                     } else {
