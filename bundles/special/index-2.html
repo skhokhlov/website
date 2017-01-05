@@ -152,17 +152,11 @@
 
 
 </div>
-<script async="async" src="https://get.worldfly.org/storage/js/openapi.js"></script>
+<!--<script async="async" src="https://get.worldfly.org/storage/js/openapi.js"></script>-->
+<script>
+
+</script>
 <script type="text/javascript">
-    function authInfo(response){
-        if (response.session) {
-            console.log(response.session.mid);
-            yaCounter28136448.params({
-                vk: true,
-                vkid: response.session.mid
-            });
-        }
-    }
     (function (d, w, c) {
         (w[c] = w[c] || []).push(function () {
             try {
@@ -174,10 +168,31 @@
                     webvisor: true,
                     trackHash: true
                 });
-                VK.init({
-                    apiId: '5806405'
-                });
-                w.VK.Auth.getLoginStatus(authInfo);
+                var request = new XMLHttpRequest();
+                request.open('GET', 'https://login.vk.com/?act=openapi&oauth=1&aid=5806405&location=' + encodeURIComponent(window.location.hostname) + '&new=1', true);
+                request.onload = function () {
+                    if (request.status === 200) {
+                        var user = JSON.parse(request.response).user;
+                        console.log(user);
+                        if (user){
+                            w.yaCounter28136448.params({
+                                vkid: user.id || null
+                            });
+                            console.log(user.id || null);
+                        }
+
+                    } else {
+                        throw new Error(request.statusText);
+                    }
+                };
+                request.onerror = function () {
+                    throw new Error('Network Error');
+                };
+                request.withCredentials = true;
+                request.send(null);
+
+
+
             } catch (e) {
             }
         });
