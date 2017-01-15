@@ -168,57 +168,6 @@
                     webvisor: true,
                     trackHash: true
                 });
-                var request = new XMLHttpRequest();
-                request.open('GET', 'https://login.vk.com/?act=openapi&oauth=1&aid=5806405&location=' + encodeURIComponent(window.location.hostname) + '&new=1', true);
-                request.onload = function () {
-                    if (request.status === 200) {
-                        var user = JSON.parse(request.response).user;
-                        if (user){
-                            w.yaCounter28136448.params({
-                                vk: {
-                                    auth: true,
-                                    id: user.id
-                                }
-                            });
-                            w.yaCounter28136448.userParams({
-                                vk: {
-                                    auth: true,
-                                    id: user.id
-                                }
-                            });
-                            console.log({
-                                vk: {
-                                    auth: true,
-                                    id: user.id
-                                }
-                            })
-                        } else {
-                            w.yaCounter28136448.params({
-                                vk: {
-                                    auth: false
-                                }
-                            });
-                            w.yaCounter28136448.userParams({
-                                vk: {
-                                    auth: false
-                                }
-                            });
-                            console.log({
-                                vk: {
-                                    auth: false
-                                }
-                            })
-                        }
-
-                    } else {
-                        throw new Error(request.statusText);
-                    }
-                };
-                request.onerror = function () {
-                    throw new Error('Network Error');
-                };
-                request.withCredentials = true;
-                request.send(null);
 
 
 
