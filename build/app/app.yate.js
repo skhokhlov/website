@@ -248,7 +248,7 @@ var yr = yr || require('yate/lib/runtime.js');
         r0 += "</article>";
         if (nodeset2boolean( m.n(j19, m.v('v0', c0.doc.root)) )) {
             r0 += "<div class=\"" + "book__caption" + "\" itemprop=\"" + "about" + "\">";
-            r0 += "<h2 class=\"" + "title title_h2" + "\">" + "Аннотация" + "</h2>";
+            r0 += "<h2 class=\"" + "title title_h2" + "\">" + "От автора" + "</h2>";
             r0 += "<p>";
             r0 += nodeset2scalar( m.n(j19, m.v('v0', c0.doc.root)) );
             r0 += "</p>";

@@ -88,7 +88,7 @@ match .book block-content {
         </article>
         if params.param.caption {
             <div class="book__caption" itemprop="about">
-                <h2 class="title title_h2">Аннотация</h2>
+                <h2 class="title title_h2">От автора</h2>
                 <p>
                     html( params.param.caption )
                 </p>
