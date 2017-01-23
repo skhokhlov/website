@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const http = require('http');
+const compression = require('compression');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 
@@ -16,6 +17,7 @@ app.set('x-powered-by', false);
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.OPENSHIFT_PORT || process.env.PORT || 3000);
 
 app.use(cookieParser());
+app.use(compression());
 
 app.use('/public', express.static(__dirname + '/build/app', {
     index: false,
