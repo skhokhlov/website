@@ -25,7 +25,8 @@ renderer.heading = (text, level) => {
             </a>${text}</h${level}>`;
 };
 renderer.link = (href, title, text) => `<a href="${href}" class="link" title="${title || text}">${text}</a>`;
-renderer.image = (href, title, text) => `<img src="${href}" class="image" title="${title || text}" alt="${text || title}" />`;
+renderer.image = (href, title, text) =>
+    `<img src="${href}" class="image" title="${title || text}" alt="${text || title}" />`;
 renderer.hr = () => '<hr class="hr"/>';
 
 const minifyOptions = {
@@ -61,7 +62,6 @@ gulp.task('feeds', ['yate'], () => {
             content.params.name = page.replace('.md', '');
             console.log('feeds: \'' + feed + '\' page: \'' + content.params.name + '\'');
             listOfPages.push(content.params);
-
             let build = content.params;
             build.pageContent = content.pageContent;
 
@@ -75,6 +75,8 @@ gulp.task('feeds', ['yate'], () => {
             );
 
         });
+
+        listOfPages = listOfPages.sort((a,b) => new Date(b.date) > new Date(a.date));
 
         /**
          * Сохрание массива с параметрами страниц ленты
