@@ -4,16 +4,14 @@ const fs = require('fs');
 const gulp = require('gulp');
 const execSync = require('child_process').execSync;
 
-const jscs = require('gulp-jscs');
 const marked = require('marked');
 const yaml = require('js-yaml');
 const minify = require('html-minifier').minify;
-const jshint = require('gulp-jshint');
+const eslint = require('gulp-eslint');
 const stylus = require('gulp-stylus');
 const postcss = require('gulp-postcss');
 const cssnano = require('cssnano');
 const autoprefixer = require('autoprefixer');
-//const imagemin = require('gulp-imagemin');
 const yr = require('./node_modules/yate/lib/runtime.js');
 
 const renderer = new marked.Renderer();
@@ -167,21 +165,33 @@ gulp.task('specials', () => {
 });
 
 gulp.task('js', () => {
-    gulp.src(['./**'])
-        .pipe(jscs({
-            preset: 'yandex'
-        }));
 
-    gulp.src(['./*.js'])
-        .pipe(jshint({
-            esnext: true
-        }))
-        .pipe(jshint.reporter('default'));
+    gulp.src(['**/*.js', '!app/*', '!build/**', '!node_modules/**'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
 
-    gulp.src(['./app/*.js'])
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'))
+    gulp.src(['app/*.js'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError())
         .pipe(gulp.dest('build/app/'));
+
+    // gulp.src(['./**'])
+    //     .pipe(jscs({
+    //         preset: 'yandex'
+    //     }));
+    //
+    // gulp.src(['./*.js'])
+    //     .pipe(jshint({
+    //         esnext: true
+    //     }))
+    //     .pipe(jshint.reporter('default'));
+    //
+    // gulp.src(['./app/*.js'])
+    //     .pipe(jshint())
+    //     .pipe(jshint.reporter('default'))
+    //     .pipe(gulp.dest('build/app/'));
 
 });
 
@@ -201,17 +211,9 @@ gulp.task('css', () => {
         .pipe(gulp.dest('build/app'));
 });
 
-//gulp.task('images', function () {
-//    gulp.src('images/**')
-//        .pipe(imagemin({
-//            progressive: true
-//        }))
-//        .pipe(gulp.dest('images'));
-//});
-
 gulp.task('default', ['js', 'css', 'pages', 'specials']);
 
-gulp.task('production', ['default'/*, 'images'*/]);
+gulp.task('production', ['default']);
 
 /**
  * sync page parsing and building

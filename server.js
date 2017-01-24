@@ -74,14 +74,8 @@ app.get(
 );
 
 app.get('/', (req, res) => {
-    let langs = req.headers["accept-language"];
-    //TODO: Додоелать
-
     if (req.cookies.lang === 'en') {
         res.redirect('/en');
-    } else if (req.cookies.lang == null) {
-        let langs = req.headers["accept-language"];
-        res.sendFile(__dirname + '/build/bundles/special/index-2.html');
     } else {
         res.sendFile(__dirname + '/build/bundles/special/index-2.html');
     }
@@ -156,7 +150,7 @@ app.use((req, res) => {
 http.createServer(app).listen(app.get('port'), () => {
     console.info(
         'DEBUG environment is set to ' +
-        (Boolean((process.env.DEBUG === 'true') || (process.env.DEBUG == null)))
+        (Boolean((process.env.DEBUG === 'true') || (process.env.DEBUG === null)))
     );
     console.log('Server listening on port ' + app.get('port'));
 });
