@@ -155,35 +155,8 @@ http.createServer(app).listen(app.get('port'), () => {
     console.log('Server listening on port ' + app.get('port'));
 });
 
-function sendError(res, lang) {
-    lang = lang || 'ru';
-
-    return res.status(404).send(yr.run('app', {
-        page: {
-            'page-blocks': {
-                header: {
-                    logo: true
-                },
-                body: true,
-                footer: true
-            },
-            'page-params': {
-                _page: 'error',
-                title: lang === 'ru' ? 'Страница не найдена' : 'Page not found',
-                hostname: hostname
-            },
-            'page-content': {
-                body: '<h2 class="title">' +
-                random([
-                    'Бегите, глупцы!',
-                    '&mdash;&nbsp;Будь здесь и&nbsp;сейчас<br/>&mdash;&nbsp;Не&nbsp;сегодня, дорогой'
-                ]) +
-                '</h2><h1 class="title">Страница не найдена</h1>' +
-                '<p>Если вы уверены, что здесь должно что-то быть, ' +
-                '<a href="mailto:sergey@skhokhlov.ru" class="link">сообщите мне об этом: sergey@skhokhlov.ru</a>.</p>'
-            }
-        }
-    }));
+function sendError(res) {
+    return res.status(404).sendFile(__dirname + '/build/bundles/special/404.html');
 }
 
 function random(strings) {

@@ -67,7 +67,7 @@ gulp.task('feeds', ['yate'], () => {
              * Сохрание собранного файла страницы
              */
             fs.writeFileSync(
-                './build/bundles/feeds/' + feed + '/' + page.replace('.md', '') + '.json',
+                './build/bundles/feeds/' + feed + '/' + page.replace('.md', '.json'),
                 JSON.stringify(build),
                 {encoding: 'utf-8'}
             );
@@ -129,7 +129,7 @@ gulp.task('pages', ['feeds'], () => {
                  * Сохрание собранного файла страницы
                  */
                 fs.writeFileSync(
-                    './build/bundles/pages/' + path + element.replace('.md', '') + '.json',
+                    './build/bundles/pages/' + path + element.replace('.md', '.json'),
                     JSON.stringify(build),
                     {encoding: 'utf-8'}
                 );
@@ -165,7 +165,6 @@ gulp.task('specials', () => {
 });
 
 gulp.task('js', () => {
-
     gulp.src(['**/*.js', '!app/*', '!build/**', '!node_modules/**'])
         .pipe(eslint())
         .pipe(eslint.format())
@@ -176,23 +175,6 @@ gulp.task('js', () => {
         .pipe(eslint.format())
         .pipe(eslint.failAfterError())
         .pipe(gulp.dest('build/app/'));
-
-    // gulp.src(['./**'])
-    //     .pipe(jscs({
-    //         preset: 'yandex'
-    //     }));
-    //
-    // gulp.src(['./*.js'])
-    //     .pipe(jshint({
-    //         esnext: true
-    //     }))
-    //     .pipe(jshint.reporter('default'));
-    //
-    // gulp.src(['./app/*.js'])
-    //     .pipe(jshint())
-    //     .pipe(jshint.reporter('default'))
-    //     .pipe(gulp.dest('build/app/'));
-
 });
 
 gulp.task('yate', () => {

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link type="image/x-icon" rel="shortcut icon" href="/images/icon/icon-me.ico"/>
+    <meta charset="UTF-8"/>
+    <title>Страница не найдена</title>
+    <link rel="stylesheet" href="/public/app.css"/>
+    <style>
+        .page {
+            font-weight: 400;
+            background: #1c1c1c;
+            color: #fff;
+        }
+
+        @media (max-width: 1150px) and (min-width: 900px) {
+            /*.page {*/
+            /*font-size: 27px;*/
+            /*}*/
+            .page__container {
+                top: 88px;
+                left: 330px;
+            }
+
+            .title {
+                min-height: 0;
+            }
+
+        }
+
+        @media (max-width: 900px) {
+            .page {
+                /*font-size: 30px;*/
+            }
+
+            .page__container {
+                position: static;
+            }
+
+        }
+
+        @media (max-height: 500px) and (max-width: 900px) {
+        }
+
+        /*.page__container_center {*/
+        /*margin-top: 15%;*/
+        /*margin-left: 20%;*/
+        /*}*/
+
+        .link {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .link:visited {
+            color: #ddd;
+        }
+
+        .link:hover {
+            color: #f00;
+        }
+
+        /*.title {*/
+        /*font-size: 50px;*/
+        /*}*/
+        .title {
+            font-size: 60px;
+            font-family: 'Source Sans Pro';
+            color: rgb(255, 255, 255);
+            line-height: 1.2;
+            text-align: left;
+            /*position: absolute;*/
+            /*left: 440.937px;*/
+            /*top: 1851.437px;*/
+            /*width: 373px;*/
+            min-height: 56px;
+            z-index: 5;
+        }
+
+
+    </style>
+</head>
+<body class="page">
+<div class="page__content">
+    <header class="header">
+        <nav class="nav">
+            <a class="nav__link nav__link_home link" href="/">
+                <h1 class="nav__title">
+                    <span>Сергей&nbsp;Хохлов</span>
+                </h1>
+            </a>
+            <a class="nav__link nav__link_aroundme link" href="/around-me">Вокруг</a>
+            <a class="nav__link nav__link_whoiam link" href="/who-i-am">Внутри</a>
+        </nav>
+    </header>
+    <div class="body">
+        <div class="body__content">
+            <img class="image" src="/images/404.png" alt="404"/>
+            <p>Если вы уверены, что здесь должно что-то быть, <a href="mailto:sergey@skhokhlov.ru" class="link">сообщите
+                мне об этом: sergey@skhokhlov.ru</a>.</p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function () {
+            try {
+                w.yaCounter28136448 = new Ya.Metrika({
+                    id: 28136448,
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true,
+                    webvisor: true,
+                    trackHash: true
+                });
+
+
+            } catch (e) {
+            }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () {
+                n.parentNode.insertBefore(s, n);
+            };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else {
+            f();
+        }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/28136448" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
+</body>
+</html>
