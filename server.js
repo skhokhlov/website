@@ -158,7 +158,3 @@ http.createServer(app).listen(app.get('port'), () => {
 function sendError(res) {
     return res.status(404).sendFile(__dirname + '/build/bundles/special/404.html');
 }
-
-function random(strings) {
-    return Math.random() < 0.5 ? strings[0] : strings[1];
-}
