@@ -1,0 +1,5 @@
+match .counter block-content {
+    <div class="i-counter">
+        html( content.counter )
+    </div>
+}

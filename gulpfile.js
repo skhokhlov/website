@@ -178,7 +178,8 @@ gulp.task('js', () => {
 });
 
 gulp.task('yate', () => {
-    yate('app/app.yate', 'build/app/app.yate.js');
+    execSync('cat app/app.yate app/blocks/*/*.yate > build/app/app.yate');
+    yate('build/app/app.yate', 'build/app/app.yate.js');
     yate('app/feed.yate', 'build/app/feed.yate.js');
 });
 

@@ -1,0 +1,11 @@
+match .footer block-content {
+    <footer>
+    @class=(
+        "footer layout"
+    )
+
+    <div class="footer__col footer__col_left">
+        <p>Электропочта: <a class="link footer__link" href="mailto:sergey@skhokhlov.ru">sergey@skhokhlov.ru</a></p>
+    </div>
+    </footer>
+}

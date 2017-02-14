@@ -1,0 +1,124 @@
+module "app"
+
+params = /.page.page-params
+page = params._page
+content = /.page.page-content
+
+match / {
+html('<!DOCTYPE html>')
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>{params.title}</title>
+<link rel="stylesheet" href="/public/app.css" />
+<link type="image/x-icon" rel="shortcut icon" href="/images/icon/icon-me.ico"/>
+<meta name="keywords" content="{ content.keywords }" />
+</head>
+<body>
+    apply .page
+    <script async="async" src="/public/app.js"></script>
+</body>
+</html>
+html('\n<!-- ' + params.hostname + ' -->')
+}
+
+match .* block {
+    apply . block-content
+}
+
+match .* block-content {
+    apply .* block
+}
+match .body block {
+    <div class="body">
+        apply . block-content
+    </div>
+}
+
+match .body block-content {
+    <div class="body__content">
+    html( content.body )
+    </div>
+}
+match .book block-content {
+    <div class="book" itemscope="itemscope" itemtype="http://schema.org/Book">
+        <p><a href="/bookshelf" class="link">Книжная полка</a></p>
+        <div class="layout">
+            <div class="book__name">
+                if params.param.image {
+                    <div class="book__section"><img class="image book__image" src="{ params.param.image }" itemprop="image"/></div>
+                }
+                <div class="book__section">
+                    <h1 class="book__title title title_h1" itemprop="name">{ params.title }</h1>
+                    <p class="title book__author" itemprop="author">{ params.param.author }</p>
+                    if params.param.original {
+                        <div class="book__original">
+                            <p><span>В оригинале:</span><br/>
+                                    <span class="book__author book__author_original">{ params.param.original.author }. </span>
+                                    <span class="book__title book__title_original">{ params.param.original.title }</span>
+                                </p>
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <article class="book__body" itemprop="review">
+            html( content.body )
+        </article>
+        if params.param.caption {
+            <div class="book__caption" itemprop="about">
+                <h2 class="title title_h2">От автора</h2>
+                <p>
+                    html( params.param.caption )
+                </p>
+            </div>
+        }
+    </div>
+}
+match .counter block-content {
+    <div class="i-counter">
+        html( content.counter )
+    </div>
+}
+match .footer block-content {
+    <footer>
+    @class=(
+        "footer layout"
+    )
+
+    <div class="footer__col footer__col_left">
+        <p>Электропочта: <a class="link footer__link" href="mailto:sergey@skhokhlov.ru">sergey@skhokhlov.ru</a></p>
+    </div>
+    </footer>
+}
+match .header block {
+    <header class="header">
+        <nav class="header__nav">
+            <a class="header__nav-link header__nav-link_home" href="/">
+                <h1 class="header__nav-title">
+                    <span>Сергей Хохлов</span>
+                    <!--<svg class="header__nav-pic" style="width: 20px;position: relative;height: 20px;top: 3px;" height="32" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"><path d="M649 138h26v18h-14M653 156h-4v-14M661 156l-8 6v-6"></path></g><path d="M21.947 16.332C23.22 14.915 24 13.05 24 11c0-4.41-3.59-8-8-8s-8 3.59-8 8 3.59 8 8 8c1.555 0 3.003-.453 4.233-1.224 4.35 1.64 7.345 5.62 7.726 10.224H4.04c.26-3.1 1.713-5.99 4.078-8.05.417-.364.46-.995.097-1.412-.362-.416-.994-.46-1.41-.097C3.75 21.104 2 24.95 2 29c0 .553.448 1 1 1h26c.553 0 1-.447 1-1 0-5.486-3.18-10.385-8.053-12.668zM10 11c0-3.31 2.69-6 6-6s6 2.69 6 6-2.69 6-6 6-6-2.69-6-6z"></path></svg>-->
+                </h1>
+            </a>
+            <a class="header__nav-link header__nav-link_aroundme" href="/around-me">Вокруг</a>
+            <a class="header__nav-link header__nav-link_whoiam" href="/who-i-am">Внутри</a>
+        </nav>
+        apply . block-content
+    </header>
+}
+
+match .header block-content {
+    <div class="linker">Linker</div>
+}
+match .page {
+    <div class="page">
+        if page == 'page_black' {
+            @class += ' page_black'
+        }
+
+        <div class="page__content">
+            apply .page-blocks.* block
+        </div>
+    </div>
+}

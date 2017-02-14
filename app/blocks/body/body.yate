@@ -1,0 +1,11 @@
+match .body block {
+    <div class="body">
+        apply . block-content
+    </div>
+}
+
+match .body block-content {
+    <div class="body__content">
+    html( content.body )
+    </div>
+}

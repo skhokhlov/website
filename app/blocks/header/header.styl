@@ -1,0 +1,37 @@
+.header
+    //border-bottom 1px solid #d2d2d2
+    //margin-bottom 1vw
+    padding 1.5em 0 0 0
+
+    &__nav
+        font-size 1.16em
+
+        &-title
+            display inline-block
+            font inherit
+            margin 0
+            padding 0
+
+        &-pic
+            padding-left 0.5em
+
+        &-link
+            padding 1em
+            color #0101BF
+            fill #0101bf
+            line-height 1.8
+
+            @media screen and (max-width 550px)
+                padding-left 0
+
+            &:first-child
+                padding-left 0
+
+            &_active
+                text-decoration none
+                color inherit
+                fill red
+
+            &_home
+                text-decoration none
+                color #000

@@ -54,7 +54,7 @@ app.get(
                         },
                         book: true,
                         footer: true,
-                        stat: true
+                        counter: true
                     },
                     'page-params': {
                         _page: page.type || 'page',
@@ -126,7 +126,7 @@ app.use((req, res) => {
                             },
                             body: true,
                             footer: true,
-                            stat: true
+                            counter: true
                         },
                         'page-params': {
                             _page: page.type || 'page',

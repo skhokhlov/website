@@ -1,0 +1,11 @@
+match .page {
+    <div class="page">
+        if page == 'page_black' {
+            @class += ' page_black'
+        }
+
+        <div class="page__content">
+            apply .page-blocks.* block
+        </div>
+    </div>
+}

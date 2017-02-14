@@ -1,0 +1,3 @@
+[submodule "app/bem-helper-js"]
+	path = app/bem-helper-js
+	url = https://github.com/14islands/bem-helper-js.git
