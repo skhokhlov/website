@@ -283,7 +283,7 @@ var yr = yr || require('yate/lib/runtime.js');
         var current = [ c0 ];
 
         r0 += closeAttrs(a0);
-        r0 += "<div class=\"" + "linker" + "\">" + "Linker" + "</div>";
+        r0 += "<div class=\"" + "linker" + "\"></div>";
 
         return r0;
     };

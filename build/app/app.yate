@@ -109,7 +109,7 @@ match .header block {
 }
 
 match .header block-content {
-    <div class="linker">Linker</div>
+    <div class="linker"></div>
 }
 match .page {
     <div class="page">

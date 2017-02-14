@@ -10,6 +10,7 @@ const minify = require('html-minifier').minify;
 const eslint = require('gulp-eslint');
 const stylus = require('gulp-stylus');
 const postcss = require('gulp-postcss');
+const babel = require('gulp-babel');
 const cssnano = require('cssnano');
 const autoprefixer = require('autoprefixer');
 const yr = require('./node_modules/yate/lib/runtime.js');
@@ -164,17 +165,24 @@ gulp.task('specials', () => {
     })('/');
 });
 
-gulp.task('js', () => {
+gulp.task('js-lint', () => {
     gulp.src(['**/*.js', '!app/*', '!build/**', '!node_modules/**'])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
 
-    gulp.src(['app/*.js'])
+    gulp.src(['app/*.js', 'app/blocks/*/*.js', '!app/bem-helper-js/**'])
         .pipe(eslint())
         .pipe(eslint.format())
-        .pipe(eslint.failAfterError())
-        .pipe(gulp.dest('build/app/'));
+        .pipe(eslint.failAfterError());
+
+    execSync('cat app/app.js app/blocks/*/*.js > build/app/app.js');
+});
+
+gulp.task('js', ['js-lint'], () => {
+    gulp.src(['build/app/app.js'])
+        .pipe(babel())
+        .pipe(gulp.dest('build/app'));
 });
 
 gulp.task('yate', () => {
