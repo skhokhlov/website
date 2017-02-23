@@ -134,7 +134,7 @@ app.use((req, res) => {
                             hostname: hostname
                         },
                         'page-content': {
-                            counter: `<script>window.ips = '${req.ips}';</script>` + counter,
+                            counter: `<script>window.ips = '${req.headers['cf-connecting-ip']}';</script>` + counter,
                             body: page.pageContent,
                             keywords: page.keywords
                         }
