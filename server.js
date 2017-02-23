@@ -5,7 +5,6 @@ const http = require('http');
 const compression = require('compression');
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const cf = require('node_cloudflare');
 
 const app = express();
 const yr = require('./node_modules/yate/lib/runtime.js');
