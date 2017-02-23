@@ -5,6 +5,7 @@ const http = require('http');
 const compression = require('compression');
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const cf = require('node_cloudflare');
 
 const app = express();
 const yr = require('./node_modules/yate/lib/runtime.js');
@@ -134,7 +135,7 @@ app.use((req, res) => {
                             hostname: hostname
                         },
                         'page-content': {
-                            counter: counter,
+                            counter: `<script>window.ips = '${req.ips}';</script>` + counter,
                             body: page.pageContent,
                             keywords: page.keywords
                         }
