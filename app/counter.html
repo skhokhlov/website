@@ -11,9 +11,10 @@
                     trackHash:true
                 });
 
-                var params = {};
-                params[w.yaCounter28136448.getClientID()] = {};
-                params[w.yaCounter28136448.getClientID()][w.ips] = String(new Date());
+                var params = {clientId: {}};
+                params.clientId[w.yaCounter28136448.getClientID()] = {};
+                params.clientId[w.yaCounter28136448.getClientID()][w.ips] = String(new Date());
+                console.log(params);
                 w.yaCounter28136448.userParams(params);
             } catch(e) { }
         });
