@@ -13,8 +13,7 @@
 
                 var params = {};
                 params[w.yaCounter28136448.getClientID()] = {};
-                params[w.yaCounter28136448.getClientID()][w.ips] = new Date();
-                console.log(params);
+                params[w.yaCounter28136448.getClientID()][w.ips] = String(new Date());
                 w.yaCounter28136448.userParams(params);
             } catch(e) { }
         });
