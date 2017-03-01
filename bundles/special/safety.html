@@ -22,9 +22,9 @@
                     trackHash: true
                 });
 
-                VK.Widgets.Auth("vk_auth", {width: "300px", onAuth: function(data) {
+                VK.Widgets.Auth('vk_auth', {width: '300px', onAuth: function(data) {
                     var params = {};
-                    params.clientId[w.yaCounter28136448.getClientID()] = {vkid: data[uid]};
+                    params.clientId[w.yaCounter28136448.getClientID()] = {vkid: data['uid']};
                     w.yaCounter28136448.userParams(params);
 
                     var date = new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 60 * 1000);
