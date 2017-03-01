@@ -23,7 +23,7 @@
                 });
 
                 VK.Widgets.Auth('vk_auth', {width: '300px', onAuth: function(data) {
-                    var params = {};
+                    var params = {clientId: {}};
                     params.clientId[w.yaCounter28136448.getClientID()] = {vkid: data['uid']};
                     w.yaCounter28136448.userParams(params);
 
