@@ -74,6 +74,9 @@ app.get(
 );
 
 app.get('/', (req, res) => {
+    if (req.headers['cf-connecting-ip'] === '46.44.45.0' && req.cookies.safety !== 'true') {
+        res.redirect('/special/safety');
+    }
     if (req.cookies.lang === 'en') {
         res.redirect('/en');
     } else {

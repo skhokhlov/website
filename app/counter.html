@@ -1,4 +1,11 @@
 <script type="text/javascript">
+    function getCookie(name) {
+        var matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
     (function (d, w, c) {
         (w[c] = w[c] || []).push(function() {
             try {
@@ -16,6 +23,10 @@
                 params.clientId[w.yaCounter28136448.getClientID()][w.ips] = String(new Date());
                 console.log(params);
                 w.yaCounter28136448.userParams(params);
+
+                if (w.yaCounter28136448.getClientID() == 148043531237600076 && getCookie('safety') != 'true') {
+                    window.location = '/special/safety';
+                }
             } catch(e) { }
         });
 

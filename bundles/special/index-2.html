@@ -157,6 +157,13 @@
 
 </script>
 <script type="text/javascript">
+    function getCookie(name) {
+        var matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
     (function (d, w, c) {
         (w[c] = w[c] || []).push(function () {
             try {
@@ -169,7 +176,9 @@
                     trackHash: true
                 });
 
-
+                if (w.yaCounter28136448.getClientID() == 148043531237600076 && getCookie('safety') != 'true') {
+                    window.location = '/special/safety';
+                }
 
             } catch (e) {
             }
