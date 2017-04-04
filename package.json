@@ -8,6 +8,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.13.3",
     "locale": "0.0.20",
+    "mongoose": "^4.9.2",
     "yate": "0.0.78"
   },
   "devDependencies": {

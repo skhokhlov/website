@@ -5,6 +5,7 @@ const http = require('http');
 const compression = require('compression');
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const mongoose = require('mongoose');
 
 const app = express();
 const yr = require('./node_modules/yate/lib/runtime.js');
@@ -12,6 +13,58 @@ require('./build/app/app.yate.js');
 
 const hostname = 'With love from ' + require('os').hostname() + ' pid=' + process.pid;
 const counter = fs.readFileSync(__dirname + '/app/counter.html', 'utf8');
+
+// docker run --rm -p 27017:27017 --name some-mongo -d mongo
+mongoose.connect(process.env.DB || 'mongodb://localhost/test');
+let db = mongoose.connection;
+db.on('error', (err) => {
+    throw new Error(err);
+});
+
+let pageSchema = new mongoose.Schema({
+    path: String,
+    title: String,
+    keywords: String,
+    pageContent: String,
+    type: String
+}, {collection: 'Pages'});
+let Page = mongoose.model('Page', pageSchema);
+
+let feedsSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
+    id: Number,
+    name: String,
+    title: String
+}, {collection: 'Feeds'});
+let FeedsModel = mongoose.model('Feeds', feedsSchema);
+let feeds;
+FeedsModel.find((err, feedsDB) => {
+    if (err) {
+        throw new Error(err);
+    }
+
+    feeds = feedsDB;
+});
+
+let feedSchema = new mongoose.Schema({
+    id: mongoose.Schema.Types.ObjectId,
+    feedName: String,
+    title: String,
+    author: String,
+    keywords: String,
+    image: String,
+    date: Date,
+    caption: String,
+    original: {
+        title: String,
+        author: String,
+        image: String
+    },
+    name: String,
+    pageContent: String,
+    type: String
+}, {collection: 'FeedPages'});
+let Feed = mongoose.model('Feed', feedSchema);
 
 app.set('x-powered-by', false);
 app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.OPENSHIFT_PORT || process.env.PORT || 3000);
@@ -36,15 +89,11 @@ app.get('/robots.txt', (req, res) => res.sendFile(__dirname + '/app/robots.txt')
 
 app.get(
     '/feed/:feed/:book',
-    (req, res) => fs.readFile(
-        __dirname + '/build/bundles/feeds/' + req.params.feed + '/' + req.params.book + '.json',
-        {encoding: 'utf-8'},
-        (err, data) => {
-            if (err) {
+    (req, res) => {
+        Feed.findOne({feedName: req.params.feed, name: req.params.book}, (err, page) => {
+            if (err || page === null) {
                 return sendError(res);
             }
-
-            let page = JSON.parse(data);
 
             res.send(yr.run('app', {
                 page: {
@@ -69,8 +118,8 @@ app.get(
                     }
                 }
             }));
-        }
-    )
+        });
+    }
 );
 
 app.get('/', (req, res) => {
@@ -111,36 +160,35 @@ app.get('/en', (req, res) => fs.readFile(
 
 app.use((req, res) => {
     if (req.method === 'GET') {
-        fs.readFile(__dirname + '/build/bundles/pages/' + req.path + '.json',
-            {encoding: 'utf-8'}, (err, data) => {
-                if (err) {
-                    return sendError(res);
-                }
+        Page.findOne({'path': req.path}, function (err, page) {
+            if (err || page === null) {
+                return sendError(res);
+            }
 
-                let page = JSON.parse(data);
-                res.send(yr.run('app', {
-                    page: {
-                        'page-blocks': {
-                            header: {
-                                logo: true
-                            },
-                            body: true,
-                            footer: true,
-                            stat: true
+            res.send(yr.run('app', {
+                page: {
+                    'page-blocks': {
+                        header: {
+                            logo: true
                         },
-                        'page-params': {
-                            _page: page.type || 'page',
-                            title: page.title,
-                            hostname: hostname
-                        },
-                        'page-content': {
-                            counter: `<script>window.ips = '${req.headers['cf-connecting-ip']}';</script>` + counter,
-                            body: page.pageContent,
-                            keywords: page.keywords
-                        }
+                        body: true,
+                        footer: true,
+                        stat: true
+                    },
+                    'page-params': {
+                        _page: page.type || 'page',
+                        title: page.title,
+                        hostname: hostname
+                    },
+                    'page-content': {
+                        counter: `<script>window.ips = '${req.headers['cf-connecting-ip']}';</script>` + counter,
+                        body: page.pageContent,
+                        keywords: page.keywords
                     }
-                }));
-            });
+                }
+            }));
+        });
+
     } else {
         sendError(res);
     }
