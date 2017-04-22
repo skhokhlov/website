@@ -27,15 +27,15 @@ describe('router', function () {
             var cb = after(3, done);
 
             request
-                .get('/contacts')
+                .get('/around-me')
                 .expect(200, cb);
 
             request
-                .delete('/contacts')
+                .delete('/around-me')
                 .expect(404, cb);
 
             request
-                .post('/contacts')
+                .post('/around-me')
                 .expect(404, cb);
         });
 
