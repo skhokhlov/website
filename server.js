@@ -10,8 +10,8 @@ const app = express();
 const yr = require('./node_modules/yate/lib/runtime.js');
 require('./build/app/app.yate.js');
 
-const hostname = 'With love from ' + require('os').hostname() + ' pid=' + process.pid;
-const counter = fs.readFileSync(__dirname + '/app/counter.html', 'utf8');
+const hostname = `With love from ${require('os').hostname()} pid=${process.pid}`;
+const counter = fs.readFileSync(`${__dirname}/app/counter.html`, 'utf8');
 
 app.set('x-powered-by', false);
 app.set('port', process.env.PORT || 3000);
@@ -19,25 +19,24 @@ app.set('port', process.env.PORT || 3000);
 app.use(cookieParser());
 app.use(compression());
 
-app.use('/public', express.static(__dirname + '/build/app', {
-    index: false,
-    // maxAge: ((process.env.DEBUG === 'false') ? 15552000000 : 15000)
+app.use('/public', express.static(`${__dirname}/build/app`, {
+    index: false
 }));
 
-app.use('/images', express.static(__dirname + '/images', {
+app.use('/images', express.static(`${__dirname}/images`, {
     index: false,
-    maxAge: ((process.env.DEBUG === 'false') ? 60480000 : 180000)
+    maxAge: ((process.env.NODE_ENV === 'production') ? 60480000 : 180000)
 }));
 
-app.use('/api/bundles/feed', express.static(__dirname + '/build/bundles/feeds'));
-app.use('/api/bundles/pages', express.static(__dirname + '/build/bundles/pages'));
+app.use('/api/bundles/feed', express.static(`${__dirname}/build/bundles/feeds`));
+app.use('/api/bundles/pages', express.static(`${__dirname}/build/bundles/pages`));
 
-app.get('/robots.txt', (req, res) => res.sendFile(__dirname + '/app/robots.txt'));
+app.get('/robots.txt', (req, res) => res.sendFile(`${__dirname}/app/robots.txt`));
 
 app.get(
     '/feed/:feed/:book',
     (req, res) => fs.readFile(
-        __dirname + '/build/bundles/feeds/' + req.params.feed + '/' + req.params.book + '.json',
+        `${__dirname}/build/bundles/feeds/${req.params.feed}/${req.params.book}.json`,
         {encoding: 'utf-8'},
         (err, data) => {
             if (err) {
@@ -77,14 +76,14 @@ app.get('/', (req, res) => {
     if (req.cookies.lang === 'en') {
         res.redirect('/en');
     } else {
-        res.sendFile(__dirname + '/build/bundles/special/index-2.html');
+        res.sendFile(`${__dirname}/build/bundles/special/index-2.html`);
     }
 });
 
 app.get(
     '/special/:project',
     (req, res) => fs.readFile(
-        __dirname + '/build/bundles/special/' + req.params.project + '.html',
+        `${__dirname}/build/bundles/special/${req.params.project}.html`,
         {encoding: 'utf-8'},
         (err, data) => {
             if (err) {
@@ -98,7 +97,7 @@ app.get(
 app.get('/plus', (req, res) => res.redirect('/special/plus'));
 
 app.get('/en', (req, res) => fs.readFile(
-    __dirname + '/build/bundles/special/index-en-2.html',
+    `${__dirname}/build/bundles/special/index-en-2.html`,
     {encoding: 'utf-8'},
     (err, data) => {
         if (err) {
@@ -111,7 +110,7 @@ app.get('/en', (req, res) => fs.readFile(
 
 app.use((req, res) => {
     if (req.method === 'GET') {
-        fs.readFile(__dirname + '/build/bundles/pages/' + req.path + '.json',
+        fs.readFile(`${__dirname}/build/bundles/pages/${req.path}.json`,
             {encoding: 'utf-8'}, (err, data) => {
                 if (err) {
                     return sendError(res);
@@ -148,13 +147,10 @@ app.use((req, res) => {
 });
 
 http.createServer(app).listen(app.get('port'), () => {
-    console.info(
-        'DEBUG environment is set to ' +
-        (Boolean((process.env.DEBUG === 'true') || (process.env.DEBUG === null)))
-    );
-    console.log('Server listening on port ' + app.get('port'));
+    console.info(`Debug environment is set to ${!Boolean(process.env.NODE_ENV === 'production')}`);
+    console.log(`Server listening on port ${app.get('port')}`);
 });
 
 function sendError(res) {
-    return res.status(404).sendFile(__dirname + '/build/bundles/special/404.html');
+    return res.status(404).sendFile(`${__dirname}/build/bundles/special/404.html`);
 }
