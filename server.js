@@ -14,7 +14,7 @@ const hostname = 'With love from ' + require('os').hostname() + ' pid=' + proces
 const counter = fs.readFileSync(__dirname + '/app/counter.html', 'utf8');
 
 app.set('x-powered-by', false);
-app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.OPENSHIFT_PORT || process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3000);
 
 app.use(cookieParser());
 app.use(compression());
