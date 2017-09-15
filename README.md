@@ -18,7 +18,7 @@ Low-level CMS with the templating and good search engine optimization using [BEM
     ```
 
 After you can check running the app by hitting the following URL: [http://localhost:3000/](http://localhost:3000/)
-# Tests [![Build Status](https://travis-ci.org/skhokhlov/website.svg?branch=dev)](https://travis-ci.org/skhokhlov/website)
+# Tests [![Build Status](https://api.travis-ci.org/skhokhlov/website.svg?branch=master)](https://travis-ci.org/skhokhlov/website)
 
 Testing using [mocha](https://github.com/mochajs/mocha)
 
