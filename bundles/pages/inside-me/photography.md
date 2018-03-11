@@ -89,7 +89,7 @@ title: Фотография
       <img class="image" src="/images/photo/26259004438_28c4e9f912_b.jpg" alt=""/>
       <img class="image" src="/images/photo/39233843865_d87e9145b8_b.jpg" alt=""/>
       <img class="image" src="/images/photo/36997340465_bae9c046ea_b.jpg" alt=""/>
-      <img class="image" src="/images/photo/29945167491_4a3c9d1534_b.jpg" alt=""/>
+      <img class="image" src="/images/photo/37066188351_b4fd6580db_b.jpg" alt=""/>
   </div>
   <div class="grid__column">
       <img class="image" src="/images/photo/25261048207_12e95614d7_b.jpg" alt=""/>
