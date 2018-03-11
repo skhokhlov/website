@@ -14,18 +14,21 @@ title: Фотография
       <img class="image" src="/images/photo/37047028151_775254f53f_b.jpg" alt=""/>
   </div>
   <div class="grid__column">
+      <img class="image" src="/images/photo/36352500724_250f9847e8_h.jpg" alt=""/>
+      <img class="image" src="/images/photo/36334617394_7f19b9405d_h.jpg" alt=""/>
+      <img class="image" src="/images/photo/35404250444_86a08affd9_h.jpg" alt=""/>
+      <img class="image" src="/images/photo/37555603560_a519acea86_h.jpg" alt=""/>
+      <img class="image" src="/images/photo/39526949314_a591c12c4a_b.jpg" alt=""/>
+    </div>
+  <div class="grid__column">
       <img class="image" src="/images/photo/31485073894_764c114c8c_h.jpg" alt=""/>
       <img class="image" src="/images/photo/31413124891_12b943da2c_h.jpg" alt=""/>
+      
+      <img class="image" src="/images/photo/35332816493_a524e73600_b.jpg" alt=""/>
       <img class="image" src="/images/photo/24515208358_e64e80c61d_h.jpg" alt=""/>
       <img class="image" src="/images/photo/37765387146_1deca47b35_h.jpg" alt=""/>
-      <img class="image" src="/images/photo/37555603560_a519acea86_h.jpg" alt=""/>
+      
   </div>
-  <div class="grid__column">
-    <img class="image" src="/images/photo/36352500724_250f9847e8_h.jpg" alt=""/>
-    <img class="image" src="/images/photo/36334617394_7f19b9405d_h.jpg" alt=""/>
-    <img class="image" src="/images/photo/35404250444_86a08affd9_h.jpg" alt=""/>
-    <img class="image" src="/images/photo/35332816493_a524e73600_b.jpg" alt=""/>
-    <img class="image" src="/images/photo/39526949314_a591c12c4a_b.jpg" alt=""/>
-  </div>
+  
   
 </div>
