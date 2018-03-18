@@ -74,7 +74,9 @@ gulp.task('feeds', ['yate'], () => {
 
         });
 
-        listOfPages = listOfPages.sort((a,b) => new Date(b.date) > new Date(a.date));
+        listOfPages = listOfPages.sort((a,b) => {
+            return new Date(b.date) > new Date(a.date);
+        });
 
         /**
          * Сохрание массива с параметрами страниц ленты
